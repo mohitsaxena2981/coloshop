@@ -1,0 +1,789 @@
+<!-- 
+<div class="dropdown">
+<mat-form-field appearance="fill">
+    <mat-label>Category</mat-label>
+    <mat-select (selectionChange)="changeClient($event.value)">
+      <mat-option value="All">All</mat-option>
+      <mat-option *ngFor="let category of categories" [value]="category?.name">{{category.name}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <form [formGroup]="searchForm">
+    <div class="search">
+        <mat-form-field appearance="fill">
+            <mat-label>Search</mat-label>
+            <input matInput placeholder="Items" formControlName="term">
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            <mat-hint>Already know what you're looking for ?</mat-hint>
+        </mat-form-field>
+        
+            <button style="margin:5px;" mat-raised-button color="accent" (click)="onSubmit()">Search</button>
+        
+    </div>
+  </form>
+</div>
+
+<div *ngIf="!searchLaunch">
+<div class="global">
+<div *ngFor="let item of items">
+    <div *ngIf="showList">
+<mat-card class="example-card">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>{{item.name}}</mat-card-title>
+    <mat-card-subtitle>{{item.price}}</mat-card-subtitle>
+    <mat-card-subtitle>{{item.category.name}} <mat-icon>{{item.category.categoryType}}</mat-icon></mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image [src]="item.image" style="max-height:250px" alt="image">
+  <mat-card-content>
+    <p>
+      {{item.description}}
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button (click)="forwardToSingleItem(item._id)">See Details</button>
+    <button mat-button>LIKE</button>
+  </mat-card-actions>
+</mat-card>
+</div>
+</div>
+</div>
+</div>
+
+<div *ngIf="!searchLaunch">
+<div class="global">
+    <div *ngFor="let item of items">
+        <div *ngIf="item.category.name === filter">
+    <mat-card class="example-card">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>{{item.name}}</mat-card-title>
+        <mat-card-subtitle>{{item.price}}</mat-card-subtitle>
+        <mat-card-subtitle>{{item.category.name}} <mat-icon>{{item.category.categoryType}}</mat-icon></mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image [src]="item.image" style="max-height:250px" alt="image">
+      <mat-card-content>
+        <p>
+          {{item.description}}
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button (click)="forwardToSingleItem(item._id)">See Details</button>
+        <button mat-button>LIKE</button>
+      </mat-card-actions>
+    </mat-card>
+    </div>
+    </div>
+</div>
+</div>
+
+<div *ngIf="searchLaunch">
+<div class="global">
+    <div *ngFor="let item of searchDataFiltered">
+    <mat-card class="example-card">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>{{item.name}}</mat-card-title>
+        <mat-card-subtitle>{{item.price}}</mat-card-subtitle>
+        <mat-card-subtitle>{{item.category.name}} <mat-icon>{{item.category.categoryType}}</mat-icon></mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image [src]="item.image" style="max-height:250px" alt="image">
+      <mat-card-content>
+        <p>
+          {{item.description}}
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button (click)="forwardToSingleItem(item._id)">See Details</button>
+        <button mat-button>LIKE</button>
+      </mat-card-actions>
+    </mat-card>
+    </div>
+    </div>
+</div> -->
+
+
+<!-- <div class="dropdown">
+  <mat-form-field appearance="fill">
+    <mat-label>Category</mat-label>
+    <mat-select (selectionChange)="changeClient($event.value)">
+      <mat-option value="All">All</mat-option>
+      <mat-option *ngFor="let category of categories" [value]="category?.name">{{category.name}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<form [formGroup]="searchForm">
+  <div class="search">
+    <mat-form-field appearance="fill">
+      <mat-label>Search</mat-label>
+      <input matInput placeholder="Items" formControlName="term">
+      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      <mat-hint>Already know what you're looking for?</mat-hint>
+    </mat-form-field>
+        
+    <button mat-raised-button color="accent" (click)="onSubmit()">Search</button>
+  </div>
+</form>
+
+<div class="card-container">
+  <ng-container *ngIf="!searchLaunch; else searchResults">
+    <div *ngFor="let item of pagedItems" class="card-wrapper">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>{{item.name}}</mat-card-title>
+          <mat-card-subtitle>{{item.price}}</mat-card-subtitle>
+          <mat-card-subtitle>
+            {{item.category?.name}}
+            <mat-icon>{{item.category?.categoryType}}</mat-icon>
+          </mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image [src]="item.image" alt="image">
+        <mat-card-content>
+          <p>{{item.description}}</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button color="primary" (click)="forwardToSingleItem(item._id)">See Details</button>
+          <button mat-button color="accent">LIKE</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </ng-container>
+  
+  <ng-template #searchResults>
+    <div *ngFor="let item of searchDataFiltered" class="card-wrapper">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>{{item.name}}</mat-card-title>
+          <mat-card-subtitle>{{item.price}}</mat-card-subtitle>
+          <mat-card-subtitle>
+            {{item.category?.name}}
+            <mat-icon>{{item.category?.categoryType}}</mat-icon>
+          </mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image [src]="item.image" alt="image">
+        <mat-card-content>
+          <p>{{item.description}}</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button color="primary" (click)="forwardToSingleItem(item._id)">See Details</button>
+          <button mat-button color="accent">LIKE</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </ng-template>
+</div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+<div class="dropdown">
+  <mat-form-field appearance="fill">
+    <mat-label>Category</mat-label>
+    <mat-select (selectionChange)="changeClient($event.value)">
+      <mat-option value="All">All</mat-option>
+      <mat-option *ngFor="let category of categories" [value]="category?.name">{{category.name}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<form [formGroup]="searchForm" class="search-form">
+  <div class="search-input">
+    <mat-form-field appearance="fill">
+      <mat-label>Search</mat-label>
+      <input matInput placeholder="Items" formControlName="term">
+      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      <mat-hint>Already know what you're looking for?</mat-hint>
+    </mat-form-field>
+        
+    <button mat-raised-button color="accent" (click)="onSubmit()">Search</button>
+  </div>
+</form>
+
+<div class="card-container">
+  <ng-container *ngIf="!searchLaunch; else searchResults">
+    <div *ngFor="let item of pagedItems" class="card-wrapper">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>{{item.name}}</mat-card-title>
+          <mat-card-subtitle>{{item.price}}</mat-card-subtitle>
+          <mat-card-subtitle>
+            {{item.category?.name}}
+            <mat-icon>{{item.category?.categoryType}}</mat-icon>
+          </mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image [src]="item.image" alt="image">
+        <mat-card-content>
+          <p>{{item.description}}</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button color="primary" (click)="forwardToSingleItem(item._id)">See Details</button>
+          <button mat-button color="accent">LIKE</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </ng-container>
+  
+  <ng-template #searchResults>
+    <div *ngFor="let item of searchDataFiltered" class="card-wrapper">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>{{item.name}}</mat-card-title>
+          <mat-card-subtitle>{{item.price}}</mat-card-subtitle>
+          <mat-card-subtitle>
+            {{item.category?.name}}
+            <mat-icon>{{item.category?.categoryType}}</mat-icon>
+          </mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image [src]="item.image" alt="image">
+        <mat-card-content>
+          <p>{{item.description}}</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button color="primary" (click)="forwardToSingleItem(item._id)">See Details</button>
+          <button mat-button color="accent">LIKE</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </ng-template>
+</div> -->
+
+
+
+
+
+
+
+
+<!-- 
+<div class="dropdown">
+  <mat-form-field appearance="fill">
+    <mat-label>Category</mat-label>
+    <mat-select (selectionChange)="changeClient($event.value)">
+      <mat-option value="All">All</mat-option>
+      <mat-option *ngFor="let category of categories" [value]="category?.name">{{category.name}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<form [formGroup]="searchForm" class="search-form">
+  <div class="search-input">
+    <mat-form-field appearance="fill">
+      <mat-label>Search</mat-label>
+      <input matInput placeholder="Items" formControlName="term">
+      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      <mat-hint>Already know what you're looking for?</mat-hint>
+    </mat-form-field>
+        
+    <button mat-raised-button color="accent" (click)="onSubmit()">Search</button>
+  </div>
+</form>
+
+<div class="card-container">
+  <div *ngFor="let item of pagedItems" class="card-wrapper">
+    <mat-card class="example-card">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>{{item.name}}</mat-card-title>
+        <mat-card-subtitle>{{item.price}}</mat-card-subtitle>
+        <mat-card-subtitle>
+          {{item.category?.name}}
+          <mat-icon>{{item.category?.categoryType}}</mat-icon>
+        </mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image [src]="item.image" alt="image">
+      <mat-card-content>
+        <p>{{item.description}}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button color="primary" (click)="forwardToSingleItem(item._id)">See Details</button>
+        <button mat-button color="accent">LIKE</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
+
+<mat-paginator
+  [length]="searchLaunch ? searchDataFiltered.length : items.length"
+  [pageSize]="pageSize"
+  [pageSizeOptions]="[4, 8, 12, 16]"
+  (page)="onPageChange($event)"
+></mat-paginator>
+
+ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+ <div class="dropdown">
+  <mat-form-field appearance="fill">
+    <mat-label>Category</mat-label>
+    <mat-select (selectionChange)="changeClient($event.value)">
+      <mat-option value="All">All</mat-option>
+      <mat-option *ngFor="let category of categories" [value]="category?.name">{{ category.name }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<form [formGroup]="searchForm" class="search-form">
+  <div class="search-input">
+    <mat-form-field appearance="fill">
+      <mat-label>Search</mat-label>
+      <input matInput placeholder="Items" formControlName="term">
+      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      <mat-hint>Already know what you're looking for?</mat-hint>
+    </mat-form-field>
+        
+    <button mat-raised-button color="accent" (click)="onSubmit()">Search</button>
+  </div>
+</form>
+
+<div class="card-container">
+  <div *ngFor="let item of pagedItems" class="card-wrapper">
+    <div *ngIf="showList">
+    <mat-card class="example-card">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>{{item.name}}</mat-card-title>
+        <mat-card-subtitle>{{item.price}}</mat-card-subtitle>
+        <mat-card-subtitle>
+          {{item.category?.name}}
+          <mat-icon>{{item.category?.categoryType}}</mat-icon>
+        </mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image [src]="item.image" alt="image">
+      <mat-card-content>
+        <p>{{item.description}}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button color="primary" (click)="forwardToSingleItem(item._id)">See Details</button>
+        <button mat-button color="accent">LIKE</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
+</div>
+
+<div class="card-container">
+  <div *ngFor="let item of pagedItems" class="card-wrapper">
+    <div *ngIf="item.category.name === filter">
+    <mat-card class="example-card">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>{{item.name}}</mat-card-title>
+        <mat-card-subtitle>{{item.price}}</mat-card-subtitle>
+        <mat-card-subtitle>
+          {{item.category?.name}}
+          <mat-icon>{{item.category?.categoryType}}</mat-icon>
+        </mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image [src]="item.image" alt="image">
+      <mat-card-content>
+        <p>{{item.description}}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button color="primary" (click)="forwardToSingleItem(item._id)">See Details</button>
+        <button mat-button color="accent">LIKE</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
+</div>
+<mat-paginator
+  *ngIf="searchLaunch ? searchDataFiltered?.length : items?.length"
+  [length]="searchLaunch ? searchDataFiltered.length : items.length"
+  [pageSize]="pageSize"
+  [pageSizeOptions]="[4, 8, 12, 16]"
+  (page)="onPageChange($event)"
+></mat-paginator> -->
+
+
+
+
+<!-- 
+<div class="dropdown">
+  <mat-form-field appearance="fill">
+    <mat-label>Category</mat-label>
+    <mat-select (selectionChange)="changeClient($event.value)">
+      <mat-option value="All">All</mat-option>
+      <mat-option *ngFor="let category of categories" [value]="category?.name">{{ category.name }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<form [formGroup]="searchForm" class="search-form">
+  <div class="search-input">
+    <mat-form-field appearance="fill">
+      <mat-label>Search</mat-label>
+      <input matInput placeholder="Items" formControlName="term">
+      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      <mat-hint>Already know what you're looking for?</mat-hint>
+    </mat-form-field>
+        
+    <button mat-raised-button color="accent" (click)="onSubmit()">Search</button>
+  </div>
+</form>
+
+<div class="card-container">
+  <ng-container *ngIf="showList; else filteredItems">
+    <div *ngFor="let item of pagedItems" class="card-wrapper">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>{{item.name}}</mat-card-title>
+          <mat-card-subtitle>{{item.price}}</mat-card-subtitle>
+          <mat-card-subtitle>
+            {{item.category?.name}}
+            <mat-icon>{{item.category?.categoryType}}</mat-icon>
+          </mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image [src]="item.image" alt="image">
+        <mat-card-content>
+          <p>{{item.description}}</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button color="primary" (click)="forwardToSingleItem(item._id)">See Details</button>
+          <button mat-button color="accent">LIKE</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </ng-container>
+  
+  <ng-template #filteredItems>
+    <div *ngFor="let item of pagedItems" class="card-wrapper" [hidden]="item.category?.name !== filter">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>{{item.name}}</mat-card-title>
+          <mat-card-subtitle>{{item.price}}</mat-card-subtitle>
+          <mat-card-subtitle>
+            {{item.category?.name}}
+            <mat-icon>{{item.category?.categoryType}}</mat-icon>
+          </mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image [src]="item.image" alt="image">
+        <mat-card-content>
+          <p>{{item.description}}</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button color="primary" (click)="forwardToSingleItem(item._id)">See Details</button>
+          <button mat-button color="accent">LIKE</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </ng-template>
+</div>
+
+<mat-paginator
+  *ngIf="searchLaunch ? searchDataFiltered?.length : items?.length"
+  [length]="searchLaunch ? searchDataFiltered.length : items.length"
+  [pageSize]="pageSize"
+  [pageSizeOptions]="[4, 8, 12, 16]"
+  (page)="onPageChange($event)"
+></mat-paginator>
+ -->
+
+
+
+
+<!-- 
+ <div class="dropdown">
+  <mat-form-field appearance="fill">
+    <mat-label>Category</mat-label>
+    <mat-select (selectionChange)="changeClient($event.value)">
+      <mat-option value="All">All</mat-option>
+      <mat-option *ngFor="let category of categories" [value]="category?.name">{{ category.name }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<form [formGroup]="searchForm" class="search-form">
+  <div class="search-input">
+    <mat-form-field appearance="fill">
+      <mat-label>Search</mat-label>
+      <input matInput placeholder="Items" formControlName="term">
+      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      <mat-hint>Already know what you're looking for?</mat-hint>
+    </mat-form-field>
+        
+    <button mat-raised-button color="accent" (click)="onSubmit()">Search</button>
+  </div>
+</form>
+
+<div class="card-container">
+  <ng-container *ngIf="showList; else filteredItems" #filteredItems>
+    <div *ngFor="let item of pagedItems" class="card-wrapper">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>{{item.name}}</mat-card-title>
+          <mat-card-subtitle>{{item.price}}</mat-card-subtitle>
+          <mat-card-subtitle>
+            {{item.category?.name}}
+            <mat-icon>{{item.category?.categoryType}}</mat-icon>
+          </mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image [src]="item.image" alt="image">
+        <mat-card-content>
+          <p>{{item.description}}</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button color="primary" (click)="forwardToSingleItem(item._id)">See Details</button>
+          <button mat-button color="accent">LIKE</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </ng-container>
+  
+  <ng-template #filteredItems>
+    <div *ngFor="let item of pagedItems" class="card-wrapper" [hidden]="item.category?.name !== filter">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>{{item.name}}</mat-card-title>
+          <mat-card-subtitle>{{item.price}}</mat-card-subtitle>
+          <mat-card-subtitle>
+            {{item.category?.name}}
+            <mat-icon>{{item.category?.categoryType}}</mat-icon>
+          </mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image [src]="item.image" alt="image">
+        <mat-card-content>
+          <p>{{item.description}}</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button color="primary" (click)="forwardToSingleItem(item._id)">See Details</button>
+          <button mat-button color="accent">LIKE</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </ng-template>
+</div>
+
+<mat-paginator
+  *ngIf="searchLaunch ? searchDataFiltered?.length : items?.length"
+  [length]="searchLaunch ? searchDataFiltered.length : items.length"
+  [pageSize]="pageSize"
+  [pageSizeOptions]="[4, 8, 12, 16]"
+  (page)="onPageChange($event)"
+></mat-paginator>
+
+
+
+ -->
+
+
+
+
+
+
+
+
+ <!-- <div class="container">
+  <div class="category">
+    <mat-form-field appearance="fill" class="category-class">
+      <mat-label>Category</mat-label>
+      <mat-select (selectionChange)="changeClient($event.value)">
+        <mat-option value="All" class="mat-option">All</mat-option>
+        <mat-option *ngFor="let category of categories" [value]="category?.name">{{ category.name }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="search-form">
+    <form [formGroup]="searchForm" class="search-input">
+      <mat-form-field appearance="fill">
+        <mat-label>Search</mat-label>
+        <input matInput placeholder="Items" formControlName="term">
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        <mat-hint>Already know what you're looking for?</mat-hint>
+      </mat-form-field>
+
+      <button mat-raised-button color="accent" (click)="onSubmit()" class="search-btn">Search</button>
+    </form>
+  </div>
+</div>
+
+<div class="card-container">
+  <ng-container *ngIf="showList; else filteredItems" #filteredItems>
+    <div *ngFor="let item of pagedItems" class="card-wrapper">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>{{item.name}}</mat-card-title>
+          <mat-card-subtitle>{{item.price}}</mat-card-subtitle>
+          <mat-card-subtitle>
+            {{item.category?.name}}
+            <mat-icon>{{item.category?.categoryType}}</mat-icon>
+          </mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image [src]="item.image" alt="image">
+        <mat-card-content>
+          <p>{{item.description}}</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button color="primary" (click)="forwardToSingleItem(item._id)">See Details</button>
+          <button mat-button color="accent">LIKE</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </ng-container>
+  
+  <ng-template #filteredItems>
+    <div *ngFor="let item of pagedItems" class="card-wrapper" [hidden]="item.category?.name !== filter">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>{{item.name}}</mat-card-title>
+          <mat-card-subtitle>{{item.price}}</mat-card-subtitle>
+          <mat-card-subtitle>
+            {{item.category?.name}}
+            <mat-icon>{{item.category?.categoryType}}</mat-icon>
+          </mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image [src]="item.image" alt="image">
+        <mat-card-content>
+          <p>{{item.description}}</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button color="primary" (click)="forwardToSingleItem(item._id)">See Details</button>
+          <button mat-button color="accent">LIKE</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </ng-template>
+</div>
+
+<mat-paginator
+  *ngIf="searchLaunch ? searchDataFiltered?.length : items?.length"
+  [length]="searchLaunch ? searchDataFiltered.length : items.length"
+  [pageSize]="pageSize"
+  [pageSizeOptions]="[4, 8, 12, 16]"
+  (page)="onPageChange($event)"
+></mat-paginator> -->
+
+
+
+
+
+
+
+<div class="banner">
+  <!-- <h1>Welcome to the Item Search</h1>
+  <p>Discover a wide range of items</p> -->
+</div>
+
+<div class="container">
+  <!-- <div class="category"> -->
+    <mat-form-field appearance="fill" class="category-class">
+      <mat-label>Category</mat-label>
+      <mat-select (selectionChange)="changeClient($event.value)" panelClass="custom-dropdown">
+        <mat-option value="All">All</mat-option>
+        <mat-option *ngFor="let category of categories" [value]="category?.name">
+          {{ category.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  <!-- </div> -->
+
+  <!-- <div class="search-form"> -->
+    <form [formGroup]="searchForm" class="search-input">
+      <mat-form-field appearance="fill">
+        <mat-label>Search</mat-label>
+        <input matInput placeholder="Items" formControlName="term">
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        <mat-hint>Already know what you're looking for?</mat-hint>
+      </mat-form-field>
+
+      <button mat-raised-button color="accent" (click)="onSubmit()" class="search-btn">Search</button>
+    </form>
+  </div>
+<!-- </div> -->
+
+
+<div class="card-container">
+  <ng-container *ngIf="showList; else filteredItems" #filteredItems>
+    <div *ngFor="let item of pagedItems" class="card-wrapper">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>{{item.name}}</mat-card-title>
+          <mat-card-subtitle>{{item.price}}</mat-card-subtitle>
+          <mat-card-subtitle>
+            {{item.category?.name}}
+            <mat-icon>{{item.category?.categoryType}}</mat-icon>
+          </mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image [src]="item.image" alt="image">
+        <!-- <mat-card-content>
+          <p>{{item.description}}</p>
+        </mat-card-content> -->
+        <mat-card-actions>
+          <button mat-button color="primary" (click)="forwardToSingleItem(item._id)">See Details</button>
+          <button mat-button color="accent">LIKE</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </ng-container>
+  
+  <ng-template #filteredItems>
+    <div *ngFor="let item of pagedItems" class="card-wrapper" [hidden]="item.category?.name !== filter">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>{{item.name}}</mat-card-title>
+          <mat-card-subtitle>{{item.price}}</mat-card-subtitle>
+          <mat-card-subtitle>
+            {{item.category?.name}}
+            <mat-icon>{{item.category?.categoryType}}</mat-icon>
+          </mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image [src]="item.image" alt="image">
+        <!-- <mat-card-content>
+          <p>{{item.description}}</p>
+        </mat-card-content> -->
+        <mat-card-actions>
+          <button mat-button color="primary" (click)="forwardToSingleItem(item._id)">See Details</button>
+          <button mat-button color="accent">LIKE</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </ng-template>
+</div>
+
+<mat-paginator
+  *ngIf="searchLaunch ? searchDataFiltered?.length : items?.length"
+  [length]="searchLaunch ? searchDataFiltered.length : items.length"
+  [pageSize]="pageSize"
+  [pageSizeOptions]="[4, 8, 12, 16]"
+  (page)="onPageChange($event)"
+></mat-paginator>
+
+
+
