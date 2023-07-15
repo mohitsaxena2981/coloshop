@@ -781,7 +781,7 @@
   *ngIf="searchLaunch ? searchDataFiltered?.length : items?.length"
   [length]="searchLaunch ? searchDataFiltered.length : items.length"
   [pageSize]="pageSize"
-  [pageSizeOptions]="[4, 8, 12, 16]"
+  [pageSizeOptions]="[8,16]"
   (page)="onPageChange($event)"
 ></mat-paginator>
 

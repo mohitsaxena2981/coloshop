@@ -334,7 +334,7 @@ export class ItemListComponent implements OnInit {
   searchDataFiltered!: Item[];
   searchForm!: FormGroup;
 
-  pageSize = 8;
+  pageSize = 16;
   pagedItems: Item[] = [];
   currentPage = 0;
 
