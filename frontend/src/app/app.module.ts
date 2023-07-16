@@ -45,6 +45,7 @@ import { CarousalComponent } from './Shared/carousal/carousal.component';
 import { MatStepperModule } from '@angular/material/stepper';
 import { AboutComponent } from './About/about/about.component';
 import { ContactComponent } from './About/contact/contact.component';
+import { NewArrivalComponent } from './items/new-arrival/new-arrival.component';
 const material = [
   MatIconModule,
   MatButtonModule,
@@ -75,6 +76,7 @@ const routes: Routes = [
       //Items
       { path: '', component: ItemListComponent },
       { path: 'items/list', component: ItemsListAdminComponent },
+      {path: 'new-arrival',component:NewArrivalComponent},
       {
         path: 'items/form',
         component: ItemFormComponent,
@@ -130,7 +132,8 @@ const routes: Routes = [
     ForgotPasswordComponent,
     CarousalComponent,
     AboutComponent,
-    ContactComponent
+    ContactComponent,
+    NewArrivalComponent
   ],
   imports: [
     ...material,

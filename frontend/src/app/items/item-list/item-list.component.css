@@ -1,41 +1,4 @@
-/* .example-card {
-    max-width: 400px;
-    margin:10px;
-  }
-.example-header-image {
-    background-image: url('../../../assets/images/logo.png');
-    background-size: cover;
-  }
 
-.global {
-    display:flex;
-    flex-direction:row;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.dropdown{
-    display:flex;
-    justify-content: center;
-    margin:5px;
-}
-
-.search {
-    position:absolute;
-    right:100px;
-}
-
-
-     */
-
-     .card-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-      margin-top: 20px;
-    }
-    
     .card-wrapper {
       flex: 0 0 calc(33.33% - 20px); /* Adjust the percentage based on the desired number of cards per row */
       max-width: calc(33.33% - 20px); /* Adjust the percentage based on the desired number of cards per row */
@@ -53,12 +16,6 @@
       box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
     }
     
-    .example-header-image {
-      /* background-image: url('assets/images/placeholder-avatar.png'); */
-      background-size: cover;
-      height: 100px;
-    }
-    
     .mat-card-image {
       height: 200px;
       object-fit: cover;
@@ -69,54 +26,6 @@
       word-wrap: break-word;
       margin-bottom: 5px;
     }
-    
-    .card-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-      margin-top: 20px;
-    }
-    
-    .card-wrapper {
-      flex: 0 0 calc(50% - 20px); /* Adjust the percentage based on the desired number of cards per row */
-      max-width: calc(50% - 20px); /* Adjust the percentage based on the desired number of cards per row */
-      margin-bottom: 20px;
-    }
-    
-    @media (max-width: 767px) {
-      .card-wrapper {
-        flex: 0 0 100%;
-        max-width: 100%;
-      }
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     .card-container {
       display: flex;
@@ -125,77 +34,16 @@
       gap: 20px;
       margin-top: 20px;
     }
-    
+
+
     .card-wrapper {
       flex: 0 0 calc(25% - 20px); /* Show 4 cards in a row */
       max-width: calc(25% - 20px); /* Show 4 cards in a row */
       margin-bottom: 20px;
     }
-    
-    @media (max-width: 1023px) {
-      .card-wrapper {
-        flex: 0 0 calc(33.33% - 20px); /* Show 3 cards in a row */
-        max-width: calc(33.33% - 20px); /* Show 3 cards in a row */
-      }
-    }
-    
-    @media (max-width: 767px) {
-      .card-wrapper {
-        flex: 0 0 calc(50% - 20px); /* Show 2 cards in a row */
-        max-width: calc(50% - 20px); /* Show 2 cards in a row */
-      }
-    }
-    
-    @media (max-width: 479px) {
-      .card-wrapper {
-        flex: 0 0 100%; /* Show 1 card in a row */
-        max-width: 100%; /* Show 1 card in a row */
-      }
-    }
 
 
-
-
-    
-    
-
-
-
-    .card-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      /* gap: 10px; */
-      margin-top: 20px;
-    }
-    
-    .card-wrapper {
-      flex: 0 0 calc(25% - 20px); /* Show 4 cards in a row */
-      max-width: calc(25% - 20px); /* Show 4 cards in a row */
-      margin-bottom: 20px;
-    }
-    
-    @media (max-width: 1023px) {
-      .card-wrapper {
-        flex: 0 0 calc(33.33% - 20px); /* Show 3 cards in a row */
-        max-width: calc(33.33% - 20px); /* Show 3 cards in a row */
-      }
-    }
-    
-    @media (max-width: 767px) {
-      .card-wrapper {
-        flex: 0 0 calc(50% - 20px); /* Show 2 cards in a row */
-        max-width: calc(50% - 20px); /* Show 2 cards in a row */
-      }
-    }
-    
-    @media (max-width: 479px) {
-      .card-wrapper {
-        flex: 0 0 100%; /* Show 1 card in a row */
-        max-width: 100%; /* Show 1 card in a row */
-      }
-    }
-    
+        
     .card-wrapper .mat-card {
       width: 85%; /* Set card width to 100% */
       padding: 20px;
@@ -210,7 +58,7 @@
     }
     
 
-
+    
 
 
     .dropdown {
@@ -243,17 +91,6 @@
       justify-content: center;
       margin-top: 20px;
     }
-    .container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background-color: #f8f8f8;
-      padding: 20px;
-      border-radius: 4px;
-      /* margin-top: 50px; */
-      margin-bottom: 50px;
-    }
-
 
   .mat-option{
     padding: 15px;
@@ -273,29 +110,8 @@
     margin-top:40px;
 
   }
-@media (max-width:768px){
-  /* .dropdown {
-    margin-top: 150px;
-  } */
-  .container{
-    /* margin-top: 50px; */
-    margin-bottom: 50px;
-  }
-  .container {
-    flex-direction: column;
-  }
 
-  .category, .search-form {
-    flex: none;
-    width: 100%;
-    margin-bottom: 10px;
-  }
-
-  .category-class{
-    margin-left: 1%;
-  }
-}
-
+  
 .mat-focus-indicator{
   margin-top: -25px;
 }
@@ -317,31 +133,6 @@
 button {
   margin-left: 10px;
 }
-
-@media(max-width:600px){
-  .container {
-    margin:20px;
-    /* margin-top: 50px; */
-    margin-bottom: 50px;
-  }
-}
-
-
-
-
-@media screen and (max-width: 350px) {
-  
-  .container{
-    margin:5px;
-    /* margin-top: 150px; */
-    margin-bottom: 50px;
-    }
-}
-
-
-
-
-
 
 
 
@@ -391,37 +182,6 @@ button {
   margin:5px;
 }
 
-
-
-
-/* 
-.banner {
-  background-image: url('../../../assets/images/banner.jpg');
-  background-size: cover;
-  background-position: center;
-  height: 600px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  color: #ffffff;
-  text-align: center;
-  margin-top: 60px
-}
-
-.banner h1 {
-  font-size: 32px;
-  font-weight: bold;
-  margin-bottom: 16px;
-}
-
-.banner p {
-  font-size: 18px;
-}
- */
-
-
-
 .banner {
   background-image: url('../../../assets/images/banner.jpg');
   background-size: cover;
@@ -446,7 +206,59 @@ button {
   font-size: 20px;
 }
 
-/* Responsive styles */
+
+  
+    @media (max-width: 1023px) {
+      .card-wrapper {
+        flex: 0 0 calc(33.33% - 20px); /* Show 3 cards in a row */
+        max-width: calc(33.33% - 20px); /* Show 3 cards in a row */
+      }
+    }
+    
+    @media (max-width: 767px) {
+      .card-wrapper {
+        flex: 0 0 calc(50% - 20px); /* Show 2 cards in a row */
+        max-width: calc(50% - 20px); /* Show 2 cards in a row */
+      }
+      .container{
+        margin-bottom: 50px;
+        flex-direction: column;
+      }
+    
+      .category, .search-form {
+        flex: none;
+        width: 100%;
+        margin-bottom: 10px;
+      }
+    
+      .category-class{
+        margin-left: 1%;
+      }
+    }
+
+    @media(max-width:600px){
+      .container {
+        margin:20px;
+        margin-bottom: 50px;
+      }
+    }
+    
+    
+    @media (max-width: 479px) {
+      .card-wrapper {
+        flex: 0 0 100%; /* Show 1 card in a row */
+        max-width: 100%; /* Show 1 card in a row */
+      }
+    }
+
+@media screen and (max-width: 350px) {
+  
+  .container{
+    margin:5px;
+    margin-bottom: 50px;
+    }
+}
+
 
 
 
@@ -482,7 +294,6 @@ button {
   }
 
 }
-
 
 
 
