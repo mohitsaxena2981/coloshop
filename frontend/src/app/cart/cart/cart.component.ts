@@ -1,333 +1,152 @@
-// import { Component, OnInit } from '@angular/core';
-// import { MatSnackBar } from '@angular/material/snack-bar';
-// import { Cart, CartItem } from 'src/app/models/cart';
-// import { CartService } from 'src/app/services/cart.service';
-// import { ItemsService } from 'src/app/services/items.service';
-
-// @Component({
-//   selector: 'app-cart',
-//   templateUrl: './cart.component.html',
-//   styleUrls: ['./cart.component.css']
-// })
-// export class CartComponent implements OnInit {
-
-//   cartItemDetailed : CartItem[] = [];
-//   respCart : Cart;
-//   totalPrice : number;
-
-//   constructor(private cartService : CartService,
-//     private itemService : ItemsService,
-//     private snackBar : MatSnackBar) { }
-
-//   ngOnInit(): void {
-//     this.getItemDetails();
-//   }
-
-//   getItemDetails(){
-//     this.cartService.cart$.pipe().subscribe(
-//       (respCart)=>{
-//         this.cartItemDetailed = [];
-//         this.respCart = respCart;
-//         respCart.cartItems.forEach(
-//           (cartItem)=>{
-//             this.itemService.getOneItem(cartItem.item._id).subscribe(
-//               (item)=>{
-//                 this.totalPrice = item.price * cartItem.quantity;
-//                 this.cartItemDetailed.push({
-//                   item:item,
-//                   quantity:cartItem.quantity
-//                 })
-//               }
-//             )
-//           }
-//         )
-//       }
-//     )
-//   }
-
-//   removeItem(index:number, cartItem:CartItem){
-//     this.cartService.removeItem(index);
-
-//     this.snackBar.open("You deleted "+cartItem.item.name+" from the cart", "OK", {
-//       duration:2000,
-//       horizontalPosition:'right',
-//       verticalPosition:'top'
-//     })
-//   }
-
-// }
-
-
-
-
-
-// import { Component, OnInit } from '@angular/core';
-// import { MatSnackBar } from '@angular/material/snack-bar';
-// import { Cart, CartItem } from 'src/app/models/cart';
-// import { CartService } from 'src/app/services/cart.service';
-// import { ItemsService } from 'src/app/services/items.service';
-
-// @Component({
-//   selector: 'app-cart',
-//   templateUrl: './cart.component.html',
-//   styleUrls: ['./cart.component.css']
-// })
-// export class CartComponent implements OnInit {
-
-//   cartItemDetailed: CartItem[] = [];
-//   respCart: Cart;
-//   totalPrice: number;
-
-//   constructor(
-//     private cartService: CartService,
-//     private itemService: ItemsService,
-//     private snackBar: MatSnackBar
-//   ) {}
-
-//   ngOnInit(): void {
-//     this.getItemDetails();
-//   }
-
-//   getItemDetails() {
-//     this.cartService.cart$.pipe().subscribe((respCart) => {
-//       this.cartItemDetailed = [];
-//       this.respCart = respCart;
-//       respCart.cartItems.forEach((cartItem) => {
-//         this.itemService.getOneItem(cartItem.item._id).subscribe((item) => {
-//           this.totalPrice = item.price * cartItem.quantity;
-//           this.cartItemDetailed.push({
-//             item: item,
-//             quantity: cartItem.quantity
-//           });
-//         });
-//       });
-//     });
-//   }
-
-//   removeItem(index: number, cartItem: CartItem) {
-//     this.cartService.removeItem(index);
-
-//     this.snackBar.open("You deleted " + cartItem.item.name + " from the cart", "OK", {
-//       duration: 2000,
-//       horizontalPosition: 'right',
-//       verticalPosition: 'top'
-//     });
-//   }
-
-//   proceedToPayment() {
-//     // Send the cart items to the backend API for payment processing
-//     // Here, you can make an HTTP request to your backend API with the cart items
-//     // and handle the payment logic on the server side.
-
-//     // Once the payment is successful, you can empty the cart by resetting it.
-    
-//     this.cartService.resetCart();
-
-//     // Show a success message to the user
-//     this.snackBar.open("Payment successful!", "OK", {
-//       duration: 2000,
-//       horizontalPosition: 'right',
-//       verticalPosition: 'top'
-//     });
-//   }
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import { Component, OnInit } from '@angular/core';
-// import { MatSnackBar } from '@angular/material/snack-bar';
-// import { Cart, CartItem } from 'src/app/models/cart';
-// import { CartService } from 'src/app/services/cart.service';
-// import { ItemsService } from 'src/app/services/items.service';
-
-// @Component({
-//   selector: 'app-cart',
-//   templateUrl: './cart.component.html',
-//   styleUrls: ['./cart.component.css']
-// })
-// export class CartComponent implements OnInit {
-
-//   cartItemDetailed: CartItem[] = [];
-//   respCart: Cart;
-//   totalPrice: number;
-
-//   constructor(
-//     private cartService: CartService,
-//     private itemService: ItemsService,
-//     private snackBar: MatSnackBar
-//   ) {}
-
-//   ngOnInit(): void {
-//     this.getItemDetails();
-//   }
-
-//   getItemDetails() {
-//     this.cartService.cart$.pipe().subscribe((respCart) => {
-//       this.cartItemDetailed = [];
-//       this.respCart = respCart;
-//       respCart.cartItems.forEach((cartItem) => {
-//         this.itemService.getOneItem(cartItem.item._id).subscribe((item) => {
-//           this.totalPrice = item.price * cartItem.quantity;
-//           this.cartItemDetailed.push({
-//             item: item,
-//             quantity: cartItem.quantity
-//           });
-//         });
-//       });
-//     });
-//   }
-
-//   removeItem(index: number, cartItem: CartItem) {
-//     this.cartService.removeItem(index);
-
-//     this.snackBar.open("You deleted " + cartItem.item.name + " from the cart", "OK", {
-//       duration: 2000,
-//       horizontalPosition: 'right',
-//       verticalPosition: 'top'
-//     });
-//   }
-//   proceedToPayment() {
-//     const cartItems = this.cartService.getCartItems();
-  
-//     if (cartItems.length === 0) {
-//       this.snackBar.open("Cart is empty. Please add items to the cart.", "OK", {
-//         duration: 2000,
-//         horizontalPosition: 'right',
-//         verticalPosition: 'top'
-//       });
-//       return;
-//     }
-  
-//     // Send the cart items to the backend API for payment processing
-//     // Here, you can make an HTTP request to your backend API with the cart items
-//     // and handle the payment logic on the server side.
-  
-//     // Once the payment is successful, you can empty the cart by resetting it.
-//     this.cartService.resetCart();
-  
-//     // Show a success message to the user
-//     this.snackBar.open("Payment successful!", "OK", {
-//       duration: 2000,
-//       horizontalPosition: 'right',
-//       verticalPosition: 'top'
-//     });
-//   }
-//   getUsername(): string {
-//     return localStorage.getItem('user') || '';
-//   }
-  
-  
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Cart, CartItem } from 'src/app/models/cart';
 import { CartService } from 'src/app/services/cart.service';
 import { ItemsService } from 'src/app/services/items.service';
 import { UserServiceService } from '../../services/user-service.service';
+
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.css']
+  styleUrls: ['./cart.component.css'],
 })
 export class CartComponent implements OnInit {
-
   cartItemDetailed: CartItem[] = [];
   respCart: Cart;
   totalPrice: number;
   userName: string;
+  previousOrders: Cart[] = [];
 
   constructor(
     private cartService: CartService,
     private itemService: ItemsService,
     private snackBar: MatSnackBar,
-    private userService: UserServiceService,
+    private userService: UserServiceService
   ) {}
 
   ngOnInit(): void {
     this.getItemDetails();
     this.getUserName();
+    this.getPreviousOrders();
   }
 
   getItemDetails() {
-    this.cartService.cart$.pipe().subscribe((respCart) => {
+    this.cartService.cart$.subscribe((respCart) => {
       this.cartItemDetailed = [];
       this.respCart = respCart;
+      let totalPrice = 0;
+
       respCart.cartItems.forEach((cartItem) => {
         this.itemService.getOneItem(cartItem.item._id).subscribe((item) => {
-          this.totalPrice = item.price * cartItem.quantity;
+          const itemTotalPrice = item.price * cartItem.quantity;
+          totalPrice += itemTotalPrice;
+
           this.cartItemDetailed.push({
             item: item,
-            quantity: cartItem.quantity
+            quantity: cartItem.quantity,
           });
+
+          this.totalPrice = totalPrice;
         });
       });
     });
   }
 
+  getPreviousOrders() {
+    const userId = localStorage.getItem('user');
+    if (userId) {
+      this.cartService.getPreviousOrders(userId).subscribe(
+        (previousOrders) => {
+          this.previousOrders = previousOrders;
+          console.log(this.previousOrders);
+        },
+        (error) => {
+          console.error(error);
+          // Handle the error condition, e.g., display an error message
+        }
+      );
+    }
+  }
+
   removeItem(index: number, cartItem: CartItem) {
     this.cartService.removeItem(index);
 
-    this.snackBar.open("You deleted " + cartItem.item.name + " from the cart", "OK", {
-      duration: 2000,
-      horizontalPosition: 'right',
-      verticalPosition: 'top'
-    });
-  }
-  proceedToPayment() {
-    const cartItems = this.cartService.getCartItems();
-  
-    if (cartItems.length === 0) {
-      this.snackBar.open("Cart is empty. Please add items to the cart.", "OK", {
+    this.snackBar.open(
+      'You deleted ' + cartItem.item.name + ' from the cart',
+      'OK',
+      {
         duration: 2000,
         horizontalPosition: 'right',
-        verticalPosition: 'top'
-      });
+        verticalPosition: 'top',
+      }
+    );
+  }
+
+  proceedToPayment() {
+    const cart: Cart = this.cartService.getCart();
+    const userId = this.getUserId();
+
+    if (!userId || userId === 'guest') {
+      this.snackBar.open(
+        'You need to log in to proceed with the payment.',
+        'OK',
+        {
+          duration: 2000,
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+        }
+      );
       return;
     }
-  
-    // Send the cart items to the backend API for payment processing
-    // Here, you can make an HTTP request to your backend API with the cart items
-    // and handle the payment logic on the server side.
-  
-    // Once the payment is successful, you can empty the cart by resetting it.
-    this.cartService.resetCart();
-  
-    // Show a success message to the user
-    this.snackBar.open("Payment successful!", "OK", {
-      duration: 2000,
-      horizontalPosition: 'right',
-      verticalPosition: 'top'
-    });
+
+    if (cart.cartItems.length === 0) {
+      this.snackBar.open(
+        'Your cart is empty. Please add items to proceed with the payment.',
+        'OK',
+        {
+          duration: 2000,
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+        }
+      );
+      return;
+    }
+
+    cart.user = userId; // Assign the user ID to the cart's user field
+
+    this.cartService.saveCartToServer(cart).subscribe(
+      (response) => {
+        // Handle successful response
+        console.log('Cart saved to the server:', response);
+
+        // Reset the cart
+        this.cartService.resetCart();
+
+        // Display success message to the user
+        this.snackBar.open(
+          'Order Successful, Thanks for Shopping with us!',
+          'OK',
+          {
+            duration: 2000,
+            horizontalPosition: 'right',
+            verticalPosition: 'top',
+          }
+        );
+      },
+      (error) => {
+        // Handle error response
+        console.error('Error saving cart data:', error);
+
+        // Display error message to the user
+        this.snackBar.open('Error occurred while saving cart data!', 'OK', {
+          duration: 2000,
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+        });
+      }
+    );
   }
+
   getUserName(): void {
     const userId = localStorage.getItem('user');
     if (userId) {
@@ -339,20 +158,12 @@ export class CartComponent implements OnInit {
           console.log('Error retrieving user name:', error);
         }
       );
-    }
-    else{
-      this.userName='guest';
+    } else {
+      this.userName = 'guest';
     }
   }
-  
-  
+
+  getUserId(): string {
+    return localStorage.getItem('user');
+  }
 }
-
-
-
-
-
-
-
-
-

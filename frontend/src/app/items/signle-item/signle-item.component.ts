@@ -9,69 +9,58 @@ import { ItemsService } from 'src/app/services/items.service';
 @Component({
   selector: 'app-signle-item',
   templateUrl: './signle-item.component.html',
-  styleUrls: ['./signle-item.component.css']
+  styleUrls: ['./signle-item.component.css'],
 })
 export class SignleItemComponent implements OnInit {
+  item!: Item;
 
-  item!:Item;
-
-  constructor(private route : ActivatedRoute,
-    private itemService : ItemsService,
-    private router : Router,
-    private cartService : CartService,
-    private _snackBar : MatSnackBar) { }
+  constructor(
+    private route: ActivatedRoute,
+    private itemService: ItemsService,
+    private router: Router,
+    private cartService: CartService,
+    private _snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
     this.getOneItem();
   }
-
-  // expandedDescription = false;
-  // expandBtnText = 'Read More';
-
-  // toggleDescription(): void {
-  //   this.expandedDescription = !this.expandedDescription;
-  //   this.expandBtnText = this.expandedDescription ? 'Show Less' : 'Read More';
-  // }
-
   isDescriptionExpanded = false;
 
   toggleDescription() {
     this.isDescriptionExpanded = !this.isDescriptionExpanded;
   }
 
-  getOneItem(){
-    this.route.params.subscribe(
-      (params)=>{
-        const id = params['id'];
-        this.itemService.getOneItem(id).subscribe(
-          (item)=>{
-            this.item = item;
-          }
-        )
-      }
-    )
-  }
-
-
-
-  backToShop(){
-    this.router.navigateByUrl('/')
-  }
-
-  addToCart(){
-    const cartItem : CartItem = {
-      //_id:this.item._id,
-      item:this.item,
-      quantity:1
-    }
-
-    this.cartService.setCartItem(cartItem);
-
-    this._snackBar.open('You added '+cartItem.item.name+' to the cart', 'OK', {
-      horizontalPosition: 'right',
-      verticalPosition: 'top',
-      duration:4000
+  getOneItem() {
+    this.route.params.subscribe((params) => {
+      const id = params['id'];
+      this.itemService.getOneItem(id).subscribe((item) => {
+        this.item = item;
+      });
     });
   }
 
+  backToShop() {
+    this.router.navigateByUrl('/');
+  }
+
+  addToCart() {
+    const cartItem: CartItem = {
+      //_id:this.item._id,
+      item: this.item,
+      quantity: 1,
+    };
+
+    this.cartService.setCartItem(cartItem);
+
+    this._snackBar.open(
+      'You added ' + cartItem.item.name + ' to the cart',
+      'OK',
+      {
+        horizontalPosition: 'right',
+        verticalPosition: 'top',
+        duration: 4000,
+      }
+    );
+  }
 }

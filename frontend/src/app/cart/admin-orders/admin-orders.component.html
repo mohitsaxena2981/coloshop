@@ -1,0 +1,33 @@
+<div class="order-container">
+  <div class="order" *ngFor="let order of previousOrders">
+    <p class="order-info">User: {{ order.user.name }}</p>
+    <p class="order-info">Order ID: {{ order._id }}</p>
+    <div class="order-items">
+      <div class="cart-item" *ngFor="let cartItem of order.cartItems">
+        <mat-card class="example-card">
+          <mat-card-title-group>
+            <mat-card-subtitle class="item-name">{{
+              cartItem.item.name
+            }}</mat-card-subtitle>
+            <mat-card-subtitle class="item-price"
+              >Unit Price: ₹{{ cartItem.item.price }}</mat-card-subtitle
+            >
+            <mat-card-subtitle class="item-total-price"
+              >Total Price: ₹{{
+                cartItem.quantity * cartItem.item.price
+              }}</mat-card-subtitle
+            >
+            <mat-card-subtitle class="item-quantity"
+              >Quantity: {{ cartItem.quantity }}</mat-card-subtitle
+            >
+            <img
+              class="item-image"
+              mat-card-lg-image
+              [src]="cartItem.item.image"
+            />
+          </mat-card-title-group>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>

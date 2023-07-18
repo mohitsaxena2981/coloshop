@@ -1,138 +1,85 @@
-// const CartItem = require('../models/cartItem');
-// const Cart = require('../models/cart');
-// const express = require('express');
-// const router = express.Router();
-
-// router.get('/', async (req,res)=>{
-//     const cartList = await Cart.find().populate('user');
-
-//     if(!cartList){
-//         return res.status(400).send("No carts available :/");
-//     }
-
-//     res.send(cartList);
-// })
-
-// router.get('/:id', async (req,res)=>{
-//     const cart = await Cart.findById(req.params.id)
-//     .populate({path:'cartItem', populate:{path:'item', populate:'category'}});
-
-//     if(!cart){
-//         return res.status(400).send("Cannot display cart :/");
-//     }
-
-//     res.send(cart);
-// })
-
-// router.post('/', async (req,res)=>{
-
-//     const cartItemsIds = await Promise.all(req.body.cartItems.map(async (cartItem)=>{
-//         let newCartItem = new CartItem({
-//             item:cartItem.item,
-//             quantity:cartItem.quantity
-//         })
-
-//         newCartItem = await newCartItem.save();
-
-//         return newCartItem._id;
-//     }))
-
-//     const cartItemsIdsResolved = await cartItemsIds;
-
-//     const totalPrices = await Promise.all(cartItemsIdsResolved.map(async (cartItemId)=>{
-//         const cartItem = await CartItem.findById(cartItemId).populate('item', 'price');
-//         const totalPrice = cartItem.item.price * cartItem.quantity;
-//         return totalPrice
-//     }))
-
-//     const totalPrice = totalPrices.reduce((a,b)=>a+b, 0);
-
-//     let cart = new Cart({
-//         cartItem:cartItemsIdsResolved,
-//         user:req.body.user,
-//         totalPrice:req.body.totalPrice
-//     })
-
-//     cart = await cart.save();
-
-//     if(!cart){
-//         return res.status(400).send("Cart cannot be created :/");
-//     }
-
-//     res.send(cart);
-
-// })
-
-
-// module.exports = router;
-
-
-
-
-
-const express = require('express');
+const Cart = require("../models/cart");
+const express = require("express");
 const router = express.Router();
-const Cart = require('../models/cart');
-const CartItem = require('../models/cartItem');
 
-router.get('/', async (req, res) => {
+router.get("/", async (req, res) => {
+  const cartList = await Cart.find().populate("user");
+
+  if (!cartList) {
+    return res.status(400).send("No carts available :/");
+  }
+
+  res.send(cartList);
+});
+
+router.get("/:id", async (req, res) => {
+  const cart = await Cart.findById(req.params.id)
+    .populate({ path: "cartItems", populate: { path: "item" } })
+    .populate("user");
+
+  if (!cart) {
+    return res.status(400).send("Cannot display cart :/");
+  }
+
+  res.send(cart);
+});
+
+router.get("/admin/orders", async (req, res) => {
   try {
-    const cartList = await Cart.find().populate('user');
+    const cartList = await Cart.find()
+      .populate({ path: "cartItems", populate: { path: "item" } })
+      .populate("user");
+
     if (!cartList) {
       return res.status(400).send("No carts available :/");
     }
+
     res.send(cartList);
   } catch (error) {
     console.error(error);
-    res.status(500).send('Internal Server Error');
+    res.status(500).send("Failed to fetch admin orders.");
   }
 });
 
-router.get('/:id', async (req, res) => {
+router.get("/previous-orders/:userId", async (req, res) => {
+  const { userId } = req.params;
+
   try {
-    const cart = await Cart.findById(req.params.id)
-      .populate({ path: 'cartItems', populate: { path: 'item', populate: 'category' } });
-    if (!cart) {
-      return res.status(400).send("Cannot display cart :/");
-    }
-    res.send(cart);
+    const previousOrders = await Cart.find({ user: userId }).populate({
+      path: "cartItems",
+      populate: { path: "item" },
+    });
+    res.send(previousOrders);
   } catch (error) {
     console.error(error);
-    res.status(500).send('Internal Server Error');
+    res.status(500).send("Failed to fetch previous orders.");
   }
 });
 
-router.post('/', async (req, res) => {
+router.post("/", async (req, res) => {
+  const { cartItems, user } = req.body;
+
   try {
-    const cartItemsIds = await Promise.all(req.body.cartItems.map(async (cartItem) => {
-      let newCartItem = new CartItem({
-        item: cartItem.item,
-        quantity: cartItem.quantity
-      });
-      newCartItem = await newCartItem.save();
-      return newCartItem._id;
-    }));
+    const totalPrices = await Promise.all(
+      cartItems.map(async (cartItem) => {
+        const totalPrice = cartItem.item.price * cartItem.quantity;
+        return totalPrice;
+      })
+    );
 
-    const totalPrices = await Promise.all(cartItemsIds.map(async (cartItemId) => {
-      const cartItem = await CartItem.findById(cartItemId).populate('item', 'price');
-      const totalPrice = cartItem.item.price * cartItem.quantity;
-      return totalPrice;
-    }));
-
-    const totalPrice = totalPrices.reduce((a, b) => a + b, 0);
-
-    let cart = new Cart({
-      cartItems: cartItemsIds,
-      user: req.body.user,
-      totalPrice: totalPrice
+    const cart = new Cart({
+      // Cart Object
+      cartItems: cartItems,
+      user: user,
+      totalPrice: totalPrices.reduce((a, b) => a + b, 0),
     });
 
-    cart = await cart.save();
+    const savedCart = await cart.save();
 
-    res.status(201).json(cart);
+    res.send(savedCart);
   } catch (error) {
     console.error(error);
-    res.status(500).send('Internal Server Error');
+    res.status(400).send("Cart cannot be created :/");
   }
 });
 

@@ -1,199 +1,17 @@
-// import { Injectable } from '@angular/core';
-// import { BehaviorSubject } from 'rxjs';
-// import { Cart, CartItem } from '../models/cart';
-
-// const CART = 'cart';
-// @Injectable({
-//   providedIn: 'root'
-// })
-// export class CartService {
-
-//   cart$ : BehaviorSubject<Cart> = new BehaviorSubject(this.getCart());
-
-//   constructor() { 
-//     this.initCartLocalStorage();
-//   }
-
-//     initCartLocalStorage(){
-//       const cart : Cart = this.getCart();
-
-//     if(!cart){
-//       const initialCart = {
-//           cartItems: [],
-//           user:{}
-//         };
-//     const initialCartJson = JSON.stringify(initialCart);
-//     localStorage.setItem(CART, initialCartJson);
-//       }
-  
-//     }
-
-//     getCart():Cart{
-    
-//       const cartJsonString : string = localStorage.getItem(CART);
-//       const cart : Cart = JSON.parse(cartJsonString);
-
-//       return cart;
-//     }
-
-//     setCartItem(cartItem:CartItem) {
-
-//       const cart = this.getCart();
-
-//       const cartItemExist = cart.cartItems.find(item => item.item._id === cartItem.item._id);
-      
-//       if(cartItemExist){
-//         cart.cartItems.map((item)=>{
-//           if(item.item._id === cartItem.item._id){
-//             item.quantity = item.quantity + cartItem.quantity;
-//           }
-//         });
-//       }else{
-//         const user = localStorage.getItem('user');
-//         cart.cartItems.push(cartItem);
-//         cart.user = user;
-//         console.log(cart);
-//         this.cart$.next(cart);
-//       }
-    
-//       const cartJson = JSON.stringify(cart);
-//       localStorage.setItem(CART, cartJson);
-//       this.cart$.next(cart);
-//       console.log(cart)
-//       return cart;
-      
-//     }
-
-//     removeItem(index:number){
-//       const cart = this.getCart();
-//       cart.cartItems.splice(index, 1);
-//       const cartJson = JSON.stringify(cart);
-//       localStorage.setItem(CART, cartJson);
-//       this.cart$.next(cart);
-//     }
-//     resetCart() {
-//       const initialCart: Cart = {
-//         _id: '',
-//         cartItems: [],
-//         user: '',
-//         totalPrice: 0
-//       };
-//       const initialCartJson = JSON.stringify(initialCart);
-//       localStorage.setItem(CART, initialCartJson);
-//       this.cart$.next(initialCart);
-//     }
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import { Injectable } from '@angular/core';
-// import { BehaviorSubject } from 'rxjs';
-// import { Cart, CartItem } from '../models/cart';
-
-// const CART = 'cart';
-
-// @Injectable({
-//   providedIn: 'root'
-// })
-// export class CartService {
-
-//   cart$: BehaviorSubject<Cart> = new BehaviorSubject(this.getCart());
-
-//   constructor() { 
-//     this.initCartLocalStorage();
-//   }
-
-//   initCartLocalStorage() {
-//     const cart: Cart = this.getCart();
-
-//     if (!cart) {
-//       const initialCart: Cart = {
-//         _id: '',
-//         cartItems: [],
-//         user: '',
-//         totalPrice: 0
-//       };
-//       const initialCartJson = JSON.stringify(initialCart);
-//       localStorage.setItem(CART, initialCartJson);
-//     }
-//   }
-
-//   getCart(): Cart {
-//     const cartJsonString: string | null = localStorage.getItem(CART);
-//     const cart: Cart = cartJsonString ? JSON.parse(cartJsonString) : { cartItems: [], user: '', totalPrice: 0 };
-//     return cart;
-//   }
-
-//   setCartItem(cartItem: CartItem) {
-//     const cart = this.getCart();
-
-//     const cartItemExist = cart.cartItems.find(item => item.item._id === cartItem.item._id);
-    
-//     if (cartItemExist) {
-//       cart.cartItems.map((item) => {
-//         if (item.item._id === cartItem.item._id) {
-//           item.quantity = item.quantity + cartItem.quantity;
-//         }
-//       });
-//     } else {
-//       const user = localStorage.getItem('user');
-//       cart.cartItems.push(cartItem);
-//       cart.user = user || '';
-//     }
-
-//     const cartJson = JSON.stringify(cart);
-//     localStorage.setItem(CART, cartJson);
-//     this.cart$.next(cart);
-//     return cart;
-//   }
-
-//   removeItem(index: number) {
-//     const cart = this.getCart();
-//     cart.cartItems.splice(index, 1);
-//     const cartJson = JSON.stringify(cart);
-//     localStorage.setItem(CART, cartJson);
-//     this.cart$.next(cart);
-//   }
-
-//   resetCart() {
-//     const initialCart: Cart = {
-//       _id: '',
-//       cartItems: [],
-//       user: '',
-//       totalPrice: 0
-//     };
-//     const initialCartJson = JSON.stringify(initialCart);
-//     localStorage.setItem(CART, initialCartJson);
-//     this.cart$.next(initialCart);
-//   }
-// }
-
-
-
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 import { Cart, CartItem } from '../models/cart';
-
-const CART = 'cart';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
+  private apiUrl = 'http://localhost:3000/fox/api/cart'; // Update the URL with your API endpoint
+
   cart$: BehaviorSubject<Cart> = new BehaviorSubject(this.getCart());
 
-  constructor() {
+  constructor(private http: HttpClient) {
     this.initCartLocalStorage();
   }
 
@@ -201,50 +19,55 @@ export class CartService {
     const cart: Cart = this.getCart();
 
     if (!cart) {
-      const initialCart: Cart = {
-        _id: '',
+      const initialCart = {
         cartItems: [],
-        user: '',
-        totalPrice: 0
+        user: {}
       };
       const initialCartJson = JSON.stringify(initialCart);
-      localStorage.setItem(CART, initialCartJson);
+      localStorage.setItem('cart', initialCartJson);
     }
   }
 
   getCart(): Cart {
-    const cartJsonString: string | null = localStorage.getItem(CART);
-    const cart: Cart = cartJsonString ? JSON.parse(cartJsonString) : { cartItems: [], user: '' };
+    const cartJsonString: string = localStorage.getItem('cart');
+    const cart: Cart = JSON.parse(cartJsonString);
+
     return cart;
   }
 
   setCartItem(cartItem: CartItem) {
     const cart = this.getCart();
 
-    const cartItemExist = cart.cartItems.find((item) => item.item._id === cartItem.item._id);
+    const cartItemExist = cart.cartItems.find(
+      item => item.item._id === cartItem.item._id
+    );
 
     if (cartItemExist) {
-      cart.cartItems.map((item) => {
+      cart.cartItems.map(item => {
         if (item.item._id === cartItem.item._id) {
-          item.quantity += cartItem.quantity;
+          item.quantity = item.quantity + cartItem.quantity;
         }
       });
     } else {
       const user = localStorage.getItem('user');
       cart.cartItems.push(cartItem);
-      cart.user = user || '';
+      cart.user = user;
+      console.log(cart);
+      this.cart$.next(cart);
     }
 
     const cartJson = JSON.stringify(cart);
-    localStorage.setItem(CART, cartJson);
+    localStorage.setItem('cart', cartJson);
     this.cart$.next(cart);
+    console.log(cart);
+    return cart;
   }
 
   removeItem(index: number) {
     const cart = this.getCart();
     cart.cartItems.splice(index, 1);
     const cartJson = JSON.stringify(cart);
-    localStorage.setItem(CART, cartJson);
+    localStorage.setItem('cart', cartJson);
     this.cart$.next(cart);
   }
 
@@ -256,12 +79,18 @@ export class CartService {
       totalPrice: 0
     };
     const initialCartJson = JSON.stringify(initialCart);
-    localStorage.setItem(CART, initialCartJson);
+    localStorage.setItem('cart', initialCartJson);
     this.cart$.next(initialCart);
   }
 
-  getCartItems(): CartItem[] {
-    const cart = this.getCart();
-    return cart.cartItems;
+  getCartFromServer():Observable<Cart[]>  {
+    return this.http.get<Cart[]>(`${this.apiUrl}/admin/orders`);
+  }
+  saveCartToServer(cart: Cart) {
+    return this.http.post<Cart>(`${this.apiUrl}`, cart);
+  }
+
+  getPreviousOrders(userId: string): Observable<Cart[]> {
+    return this.http.get<Cart[]>(`${this.apiUrl}/previous-orders/${userId}`);
   }
 }

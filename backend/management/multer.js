@@ -25,6 +25,6 @@ const storage = multer.diskStorage({
     }
 })
 
-uploads = multer({storage: storage});
+uploads = multer({storage: storage}); //uploads variable is assigned the multer middleware instance, configured with the defined storage settings.
 
-module.exports = uploads;
+module.exports = uploads; // uploads middleware instance is exported to be used in other parts of the application for handling file uploads.

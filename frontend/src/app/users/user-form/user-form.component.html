@@ -1,160 +1,53 @@
-<!-- <div class="global">
-  <div class="center">
-    <div class="form">
-      <form [formGroup]="userForm">
-        <div>
-          <span
-            style="color: red"
-            *ngIf="
-              isSubmitted &&
-              (userForm.get('email').invalid || userForm.get('email').invalid)
-            "
-            >Email and Password are required</span
-          >
-        </div>
-        <div>
-          <mat-form-field class="example-full-width" appearance="fill">
-            <mat-label>Name</mat-label>
-            <input
-              type="text"
-              formControlName="name"
-              placeholder="Ex. Mohit"
-              matInput
-            />
-          </mat-form-field>
-        </div>
-
-        <div>
-          <mat-form-field class="example-full-width" appearance="fill">
-            <mat-label>Email</mat-label>
-            <input
-              type="email"
-              formControlName="email"
-              placeholder="Ex. mohit@example.com"
-              matInput
-            />
-          </mat-form-field>
-        </div>
-
-        <div>
-          <mat-form-field class="example-full-width" appearance="fill">
-            <mat-label>Password</mat-label>
-            <input type="password" formControlName="password" matInput />
-          </mat-form-field>
-        </div>
-        <div>
-          <mat-form-field class="example-full-width" appearance="fill">
-            <mat-label>Address</mat-label>
-            <input type="text" formControlName="address" placeholder="Ex. Jhansi" matInput />
-          </mat-form-field>
-        </div>
-
-
-
-
-        <div>
-          <button
-            type="button"
-            mat-raised-button
-            (click)="onSubmit()"
-            color="accent"
-          >
-            Submit
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div> -->
-
-
-
-
 <div class="global">
   <div class="center">
     <div class="form">
-      <form [formGroup]="userForm">
+      <form [formGroup]="signupForm">
+        <h1>User✏️</h1>
         <div>
-          <span
-            style="color: red"
-            *ngIf="
-              isSubmitted &&
-              (userForm.get('email').invalid ||
-                userForm.get('password').invalid ||
-                userForm.get('name').invalid ||
-                userForm.get('address').invalid)
-            "
-            >Name, Email, Password, and Address are required</span
-          >
-        </div>
-        <div>
-          <mat-form-field class="example-full-width" appearance="fill">
+          <mat-form-field class="example-form-field" appearance="fill">
             <mat-label>Name</mat-label>
-            <input
-              type="text"
-              formControlName="name"
-              placeholder="Ex. Mohit"
-              matInput
-            />
+            <input matInput type="text" formControlName="name" required />
           </mat-form-field>
         </div>
-
         <div>
-          <mat-form-field class="example-full-width" appearance="fill">
+          <mat-form-field class="example-form-field" appearance="fill">
             <mat-label>Email</mat-label>
-            <input
-              type="email"
-              formControlName="email"
-              placeholder="Ex. mohit@example.com"
-              matInput
-            />
+            <input matInput type="text" formControlName="email" required />
           </mat-form-field>
         </div>
-
         <div>
-          <mat-form-field class="example-full-width" appearance="fill">
+          <mat-form-field class="example-form-field" appearance="fill">
             <mat-label>Password</mat-label>
-            <input type="password" formControlName="password" matInput />
+            <input
+              matInput
+              [type]="hide ? 'password' : 'text'"
+              formControlName="password"
+              required
+            />
+            <button
+              mat-icon-button
+              matSuffix
+              (click)="hide = !hide"
+              [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hide"
+            >
+              <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+            </button>
           </mat-form-field>
+          <!-- <mat-form-field class="example-form-field" appearance="fill">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" formControlName="password" required>
+          </mat-form-field> -->
         </div>
         <div>
-          <mat-form-field class="example-full-width" appearance="fill">
+          <mat-form-field class="example-form-field" appearance="fill">
             <mat-label>Address</mat-label>
-            <input
-              type="text"
-              formControlName="address"
-              placeholder="Ex. Jhansi"
-              matInput
-            />
+            <input matInput type="text" formControlName="address" required />
           </mat-form-field>
         </div>
 
-        <div>
-          <mat-form-field class="example-full-width" appearance="fill">
-            <mat-label>Answer</mat-label>
-            <input
-              type="text"
-              formControlName="answer"
-              placeholder="Ex. Blue"
-              matInput
-            />
-          </mat-form-field>
-        </div>
-
-        <!-- <mat-slide-toggle
-          class="example-margin"
-          color="primary"
-          formControlName="isAdmin"
-          >Is Admin ?</mat-slide-toggle
-        > -->
-
-        <div>
-          <button
-            type="button"
-            mat-raised-button
-            (click)="onSubmit()"
-            color="accent"
-          >
+        <div class="btn">
+          <button mat-raised-button color="accent" (click)="onSubmit()">
             Submit
           </button>
         </div>

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './Shared/header/header.component';
 import { FooterComponent } from './Shared/footer/footer.component';
@@ -40,12 +39,14 @@ import { UserFormComponent } from './users/user-form/user-form.component';
 import { ItemDialogComponent } from './dialogs/item-dialog/item-dialog.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { UserInfoDialogComponent } from './dialogs/user-info-dialog/user-info-dialog.component';
-import { ForgotPasswordComponent } from './users/forgot-password/forgot-password.component';
 import { CarousalComponent } from './Shared/carousal/carousal.component';
 import { MatStepperModule } from '@angular/material/stepper';
 import { AboutComponent } from './About/about/about.component';
 import { ContactComponent } from './About/contact/contact.component';
 import { NewArrivalComponent } from './items/new-arrival/new-arrival.component';
+import { UserProfileUpdateComponent } from './users/user-profile-update/user-profile-update.component';
+import { AdminOrdersComponent } from './cart/admin-orders/admin-orders.component';
+import { UsersProfileUpdateComponent } from './users/users-profile-update/users-profile-update.component';
 const material = [
   MatIconModule,
   MatButtonModule,
@@ -76,12 +77,12 @@ const routes: Routes = [
       //Items
       { path: '', component: ItemListComponent },
       { path: 'items/list', component: ItemsListAdminComponent },
-      {path: 'new-arrival',component:NewArrivalComponent},
       {
         path: 'items/form',
         component: ItemFormComponent,
         canActivate: [GuardService],
       },
+      {path: 'new-arrival',component:NewArrivalComponent},
       {
         path: 'items/form/:id',
         component: ItemFormComponent,
@@ -95,10 +96,14 @@ const routes: Routes = [
       { path: 'users/list', component: UsersListComponent},
       { path: 'users/form', component:UserFormComponent},
       { path: 'users/form/:id', component:UserFormComponent},
-      { path: 'users/forgot-password', component: ForgotPasswordComponent },
+      {path: 'user/profile-edit',component: UserProfileUpdateComponent},
+      {path: 'user/profile-edit/:id',component: UserProfileUpdateComponent},
+      {path: 'users/profile-edit',component: UsersProfileUpdateComponent},
+      {path: 'users/profile-edit/:id',component:UsersProfileUpdateComponent},
 
       //Cart
       {path:'cart', component:CartComponent},
+      {path:'cart/admin',component:AdminOrdersComponent},
 
       // About
       {path:'about',component:AboutComponent},
@@ -129,11 +134,13 @@ const routes: Routes = [
     UserFormComponent,
     ItemDialogComponent,
     UserInfoDialogComponent,
-    ForgotPasswordComponent,
     CarousalComponent,
     AboutComponent,
     ContactComponent,
-    NewArrivalComponent
+    NewArrivalComponent,
+    UserProfileUpdateComponent,
+    AdminOrdersComponent,
+    UsersProfileUpdateComponent
   ],
   imports: [
     ...material,
@@ -146,7 +153,7 @@ const routes: Routes = [
   ],
   providers: [
     SearchPipe,
-    { provide: HTTP_INTERCEPTORS, useClass: InterInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: InterInterceptor, multi: true },// The InterInterceptor service is provided as an HTTP interceptor using the HTTP_INTERCEPTORS token. It allows intercepting and modifying HTTP requests and responses.
   ],
   bootstrap: [AppComponent],
 })

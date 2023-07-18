@@ -1,38 +1,4 @@
-// import { Component, OnInit } from '@angular/core';
-// import { Item } from 'src/app/models/item';
-// import { ItemsService } from 'src/app/services/items.service';
-
-// @Component({
-//   selector: 'app-new-arrival',
-//   templateUrl: './new-arrival.component.html',
-//   styleUrls: ['./new-arrival.component.css']
-// })
-// export class NewArrivalComponent implements OnInit {
-//   newArrivalItems: Item[] = [];
-
-//   constructor(private itemsService: ItemsService) {}
-
-//   ngOnInit(): void {
-//     this.getNewArrivalItems();
-//   }
-
-//   getNewArrivalItems(): void {
-//     this.itemsService.getAllItems().subscribe(
-//       (items) => {
-//         this.newArrivalItems = items.filter((item) => item.newArrival === true);
-//       },
-//       (error) => {
-//         console.error(error);
-//       }
-//     );
-//   }
-// }
-
-
-
-
-
-import { Component, OnInit ,ViewChild, AfterViewInit} from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Category } from 'src/app/models/category';
@@ -46,7 +12,7 @@ import { MatSelect } from '@angular/material/select';
 @Component({
   selector: 'app-new-arrival',
   templateUrl: './new-arrival.component.html',
-  styleUrls: ['./new-arrival.component.css']
+  styleUrls: ['./new-arrival.component.css'],
 })
 export class NewArrivalComponent implements OnInit {
   newArrivalItems!: Item[];
@@ -67,37 +33,27 @@ export class NewArrivalComponent implements OnInit {
     private formBuilder: FormBuilder,
     private searchPipe: SearchPipe,
     private router: Router
-    ) {}
+  ) {}
 
   ngOnInit(): void {
     this.getNewArrivalItems();
     this.getCategories();
     this.searchForm = this.formBuilder.group({
-      term: ['']
-  });
-  this.searchDataFiltered = [];
-  this.newArrivalItems = [];
-  
-}
+      term: [''],
+    });
+    this.searchDataFiltered = [];
+    this.newArrivalItems = [];
+  }
 
-@ViewChild('categorySelect') categorySelect: MatSelect;
-
-// ngAfterViewInit() {
-//   const optionsLength = this.categorySelect.options.length;
-//   if (optionsLength > 3) {
-//     this.categorySelect.panelClass = 'scrollable-dropdown';
-//   }
-// }
-
-ngAfterViewInit() {
-  if (this.categorySelect && this.categorySelect.options) {
-    const optionsLength = this.categorySelect.options.length;
-    if (optionsLength > 3) {
-      this.categorySelect.panelClass = 'scrollable-dropdown';
+  @ViewChild('categorySelect') categorySelect: MatSelect;
+  ngAfterViewInit() {
+    if (this.categorySelect && this.categorySelect.options) {
+      const optionsLength = this.categorySelect.options.length;
+      if (optionsLength > 3) {
+        this.categorySelect.panelClass = 'scrollable-dropdown';
+      }
     }
   }
-}
-
 
   getNewArrivalItems(): void {
     this.itemsService.getAllItems().subscribe(
@@ -115,16 +71,17 @@ ngAfterViewInit() {
     this.searchLaunch = true;
 
     const term = this.searchForm.get('term')?.value;
-    this.searchDataFiltered = this.searchPipe.transform(this.newArrivalItems, term);
+    this.searchDataFiltered = this.searchPipe.transform(
+      this.newArrivalItems,
+      term
+    );
     this.paginateItems();
   }
 
   getCategories() {
-    this.categoryService.getCategories().subscribe(
-      (categories) => {
-        this.categories = categories;
-      }
-    );
+    this.categoryService.getCategories().subscribe((categories) => {
+      this.categories = categories;
+    });
   }
 
   forwardToSingleItem(itemId: string) {
@@ -136,7 +93,6 @@ ngAfterViewInit() {
     this.pageSize = event.pageSize;
     this.paginateItems();
   }
-
 
   changeClient(value: string) {
     this.searchLaunch = false;
@@ -154,7 +110,9 @@ ngAfterViewInit() {
       this.paginateItems();
     } else {
       this.showList = false;
-      this.searchDataFiltered = this.newArrivalItems.filter(item => item.category?.name === this.filter);
+      this.searchDataFiltered = this.newArrivalItems.filter(
+        (item) => item.category?.name === this.filter
+      );
       this.paginateItems();
     }
   }

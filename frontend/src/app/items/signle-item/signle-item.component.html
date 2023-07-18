@@ -1,193 +1,43 @@
-<!-- <button class="back" mat-raised-button color="primary" (click)="backToShop()"><mat-icon>keyboard_return</mat-icon>Back To Shop</button>
+<button class="back" mat-raised-button color="primary" (click)="backToShop()">
+  <mat-icon>keyboard_return</mat-icon>Back To Shop
+</button>
 
 <div class="global">
-    <div>
-    <img [src]="item?.image" style="max-height:450px; max-width:450px">
-</div>
+  <div class="image-container">
+    <img [src]="item?.image" class="item-image" />
+  </div>
 
-<div class="column">
-    <div>
-        <table class="table">
-            <tr>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Price</th>
-                <th>Category</th>
-                <th>Icon</th>
-            </tr>
-            <tr>
-                <td>{{item?.name}}</td>
-                <td>{{item?.description}}</td>
-                <td>{{item?.price}}</td>
-                <td>{{item?.category.name}}</td>
-                <td><mat-icon>{{item?.category.categoryType}}</mat-icon></td>
-            </tr>
-        </table>
-    </div>
-    <div>
-        <button mat-flat-button color="accent" (click)="addToCart()">Add To Cart</button>
-    </div>
-</div>
-
-<div class="fox-head">
-    <img src="assets/images/fighting-head-fox-logo.png" width="400px" height="400px">
-</div>
-</div> -->
-
-
-
-
-
-<!-- <button class="back" mat-raised-button color="primary" (click)="backToShop()">
-    <mat-icon>keyboard_return</mat-icon>Back To Shop
-  </button>
-  
-  <div class="global">
-    <div class="image-container">
-      <img [src]="item?.image" class="item-image">
-    </div>
-  
-    <div class="column">
-      <div class="table-container">
-        <table class="table">
-          <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Price</th>
-            <th>Category</th>
-            <th>CateGory Type</th>
-          </tr>
-          <tr>
-            <td>{{item?.name}}</td>
-            <td>{{item?.description}}</td>
-            <td>{{item?.price}}</td>
-            <td>{{item?.category.name}}</td>
-            <td>{{item?.category.categoryType}}</td>
-          </tr>
-        </table>
+  <div class="column">
+    <div class="product-info">
+      <h2><strong>Name:</strong> {{ item?.name }}</h2>
+      <div class="description-container">
+        <div class="description" [class.expand]="isDescriptionExpanded">
+          {{
+            isDescriptionExpanded
+              ? item?.description
+              : item?.description.slice(0, 80)
+          }}
+        </div>
+        <button
+          class="read-more-btn"
+          *ngIf="item?.description.length > 20"
+          (click)="toggleDescription()"
+        >
+          {{ isDescriptionExpanded ? "Read Less" : "Read More" }}
+        </button>
       </div>
-      <div class="button-container">
-        <button mat-flat-button color="accent" (click)="addToCart()">Add To Cart</button>
-      </div>
+      <p class="price"><strong>Price: ₹</strong> {{ item?.price }}</p>
+      <p class="category">
+        <strong>Category:</strong> {{ item?.category.name }}
+      </p>
+      <p class="category-type">
+        <strong>Category Type:</strong> {{ item?.category.categoryType }}
+      </p>
     </div>
-  </div> -->
-
-
-
-
-
-<!-- 
-  <button class="back" mat-raised-button color="primary" (click)="backToShop()">
-    <mat-icon>keyboard_return</mat-icon>Back To Shop
-  </button>
-  
-  <div class="global">
-    <div class="image-container">
-      <img [src]="item?.image" class="item-image">
-    </div>
-  
-    <div class="column">
-      <div class="product-info">
-        <h2><strong>Name:</strong> {{item?.name}}</h2>
-        <div class="product-info">
-          <div class="description">
-          </div>
-          <div class="expand-btn" (click)="toggleDescription()">{{item?.description}}</div>
-        </div>        
-        
-        <p class="description"><strong>Description:</strong> {{item?.description}}</p>
-        <p class="price"><strong>Price:</strong> {{item?.price}}</p>
-        <p class="category">
-          <strong>Category:</strong> {{item?.category.name}}
-        </p>
-        <p class="category-type">
-          <strong>Category Type:</strong> {{item?.category.categoryType}}
-        </p>
-      </div>
-      <div class="button-container">
-        <button mat-flat-button color="accent" (click)="addToCart()">Add To Cart</button>
-      </div>
+    <div class="button-container">
+      <button mat-flat-button color="accent" (click)="addToCart()">
+        Add To Cart
+      </button>
     </div>
   </div>
-   -->
-
-
-
-
-   <!-- <button class="back" mat-raised-button color="primary" (click)="backToShop()">
-    <mat-icon>keyboard_return</mat-icon>Back To Shop
-  </button>
-  
-  <div class="global">
-    <div class="image-container">
-      <img [src]="item?.image" class="item-image">
-    </div>
-  
-    <div class="column">
-      <div class="product-info">
-        <h2><strong>Name:</strong> {{item?.name}}</h2>
-        <div class="description-container">
-          <div class="description" [class.expand]="expandedDescription">
-            {{item?.description | slice:0:30}}{{expandedDescription ? item?.description.slice(20) : '...'}}
-          </div>
-          <button class="read-more-btn" (click)="toggleDescription()">
-            {{expandedDescription ? 'Show Less' : 'Read More'}}
-          </button>
-        </div>
-        <p class="price"><strong>Price:</strong> {{item?.price}}</p>
-        <p class="category">
-          <strong>Category:</strong> {{item?.category.name}}
-        </p>
-        <p class="category-type">
-          <strong>Category Type:</strong> {{item?.category.categoryType}}
-        </p>
-      </div>
-      <div class="button-container">
-        <button mat-flat-button color="accent" (click)="addToCart()">Add To Cart</button>
-      </div>
-    </div>
-  </div> -->
-  
-
-
-
-
-
-  <button class="back" mat-raised-button color="primary" (click)="backToShop()">
-    <mat-icon>keyboard_return</mat-icon>Back To Shop
-  </button>
-  
-  <div class="global">
-    <div class="image-container">
-      <img [src]="item?.image" class="item-image">
-    </div>
-  
-    <div class="column">
-      <div class="product-info">
-        <h2><strong>Name:</strong> {{item?.name}}</h2>
-        <div class="description-container">
-          <div class="description" [class.expand]="isDescriptionExpanded">
-            {{isDescriptionExpanded ? item?.description : item?.description.slice(0, 80)}}
-          </div>
-          <button class="read-more-btn" *ngIf="item?.description.length > 20" (click)="toggleDescription()">
-            {{isDescriptionExpanded ? 'Read Less' : 'Read More'}}
-          </button>
-        </div>
-        <p class="price"><strong>Price:</strong> {{item?.price}}</p>
-        <p class="category">
-          <strong>Category:</strong> {{item?.category.name}}
-        </p>
-        <p class="category-type">
-          <strong>Category Type:</strong> {{item?.category.categoryType}}
-        </p>
-      </div>
-      <div class="button-container">
-        <button mat-flat-button color="accent" (click)="addToCart()">Add To Cart</button>
-      </div>
-    </div>
-  </div>
-  
-  
-
-
-
+</div>

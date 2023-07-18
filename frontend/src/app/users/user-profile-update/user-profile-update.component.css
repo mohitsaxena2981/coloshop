@@ -5,8 +5,11 @@
     align-items: center;
     height: 100vh;
     background-color: #fff; /* Set background color to white */
+    margin-top: 50px;
   }
-  
+  a{
+    text-decoration: none;
+  }
   /* Center content */
   .center {
     display: flex;
@@ -20,6 +23,10 @@
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
   }
+  
+
+  
+
   
   /* Form container */
   .form {
@@ -44,26 +51,15 @@
     margin-top: 10px;
   }
   
-  /* Error message */
-  .error-message {
-    text-align: center;
-    color: red;
-    margin-bottom: 10px;
-  }
-  a{
-    text-decoration: none;
-  }
-  
   /* Media query for small screens */
   @media (max-width: 767px) {
     .center {
       flex-direction: column;
     }
+    .global{
+        margin-top: 70px;
+    }
   
-  }
-  
-  .error-message {
-    color: red;
-    display: block;
+
   }
   

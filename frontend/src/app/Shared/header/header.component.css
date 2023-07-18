@@ -441,6 +441,10 @@ mat-label {
     position: relative;
     z-index: 1001; /* Ensure the toggle button appears on top of other elements */
   }
+  li a{
+    font-size: 12px;
+  }
+
 
   .navbar-toggle-label {
     display: inline-block;

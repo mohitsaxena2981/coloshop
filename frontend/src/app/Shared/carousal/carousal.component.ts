@@ -1,32 +1,3 @@
-// import { Component } from '@angular/core';
-
-// @Component({
-//   selector: 'app-carousal',
-//   templateUrl: './carousal.component.html',
-//   styleUrls: ['./carousal.component.css']
-// })
-// export class CarousalComponent {
-//   images = [
-//     'assets/images/diwali.jpg',
-//     'assets/images/holi.jpg',
-//     'assets/images/christmas.jpg',
-//     // Add more image URLs here
-//   ];
-//   currentImageIndex = 0;
-
-//   showNextImage(): void {
-//     this.currentImageIndex = (this.currentImageIndex + 1) % this.images.length;
-//   }
-
-//   showPrevImage(): void {
-//     this.currentImageIndex = (this.currentImageIndex - 1 + this.images.length) % this.images.length;
-//   }
-// }
-
-
-
-
-
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
 @Component({

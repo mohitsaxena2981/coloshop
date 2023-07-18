@@ -34,7 +34,7 @@ export class UsersListComponent implements OnInit {
   }
 
   forwardToForm(id:string){
-    this.router.navigate(['/users/form/'+id])
+    this.router.navigate(['/users/profile-edit/'+id])
   }
 
   deleteModal(user:User){

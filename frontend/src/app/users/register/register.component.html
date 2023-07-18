@@ -1,102 +1,8 @@
-<!-- <div class="global">
-    <div class="center">
-<div class="form">
-    <form [formGroup]="signupForm">
-
-        <div *ngIf="isSubmitted && authError">
-            <span style="color:red">Invalid email or password</span>
-        </div>
-
-        <div>
-            <mat-form-field class="example-form-field" appearance="fill">
-                <mat-label>Email</mat-label>
-                <input matInput type="text" formControlName="email">
-            </mat-form-field> 
-        </div>
-
-        <div>
-            <mat-form-field class="example-form-field" appearance="fill">
-                <mat-label>Password</mat-label>
-                <input matInput type="password" formControlName="password">
-            </mat-form-field> 
-        </div>
-
-        <div class="btn">
-            <button mat-raised-button color="accent" (click)="onSubmit()">Sign Up</button>
-        </div>
-
-        <div class="links">
-            <a routerLink="/users/login">Already registered ? Sign In here !</a>
-        </div>
-
-    </form>
-</div>
-</div>
-
-
-<div class="image-right">
-    <img src="assets/images/signup-logo.png">
-</div>
-</div> -->
-
-
-<!-- <div class="global">
-    <div class="center">
-      <div class="form">
-        <form [formGroup]="signupForm">
-  
-          <div *ngIf="isSubmitted && authError" class="error-message">
-            <span>Invalid email or password</span>
-          </div>
-          <div>
-            <mat-form-field class="example-form-field" appearance="fill">
-              <mat-label>Name</mat-label>
-              <input matInput type="text" formControlName="name">
-            </mat-form-field> 
-          </div>
-  
-          <div>
-            <mat-form-field class="example-form-field" appearance="fill">
-              <mat-label>Email</mat-label>
-              <input matInput type="text" formControlName="email">
-            </mat-form-field> 
-          </div>
-  
-          <div>
-            <mat-form-field class="example-form-field" appearance="fill">
-              <mat-label>Password</mat-label>
-              <input matInput type="password" formControlName="password">
-            </mat-form-field> 
-          </div>
-
-          <div>
-            <mat-form-field class="example-form-field" appearance="fill">
-              <mat-label>Address</mat-label>
-              <input matInput type="text" formControlName="address">
-            </mat-form-field> 
-          </div>
-  
-          <div class="btn">
-            <button mat-raised-button color="accent" (click)="onSubmit()">Sign Up</button>
-          </div>
-  
-          <div class="links">
-            <a routerLink="/users/login">Already registered? Sign In here!</a>
-          </div>
-  
-        </form>
-      </div>
-    </div>
-  </div>
-   -->
-
-
-
-
    <div class="global">
     <div class="center">
       <div class="form">
         <form [formGroup]="signupForm">
+          <h1>Register🖊️</h1>
           <div>
             <mat-form-field class="example-form-field" appearance="fill">
               <mat-label>Name</mat-label>
@@ -112,19 +18,20 @@
           <div>
             <mat-form-field class="example-form-field" appearance="fill">
               <mat-label>Password</mat-label>
-              <input matInput type="password" formControlName="password" required>
+              <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" required>
+              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
             </mat-form-field>
+            <!-- <mat-form-field class="example-form-field" appearance="fill">
+              <mat-label>Password</mat-label>
+              <input matInput type="password" formControlName="password" required>
+            </mat-form-field> -->
           </div>
           <div>
             <mat-form-field class="example-form-field" appearance="fill">
               <mat-label>Address</mat-label>
               <input matInput type="text" formControlName="address" required>
-            </mat-form-field>
-          </div>
-          <div>
-            <mat-form-field class="example-form-field" appearance="fill">
-              <mat-label>Your Favourite Film?</mat-label>
-              <input matInput type="text" formControlName="answer" required>
             </mat-form-field>
           </div>
   

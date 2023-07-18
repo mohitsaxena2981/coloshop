@@ -5,6 +5,7 @@
     align-items: center;
     height: 100vh;
     background-color: #fff; /* Set background color to white */
+    margin-top: 50px;
   }
   
   /* Center content */
@@ -58,6 +59,9 @@
   @media (max-width: 767px) {
     .center {
       flex-direction: column;
+    }
+    .global{
+      margin-top: 100px;
     }
   
   }
