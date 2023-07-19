@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Cart, CartItem } from '../models/cart';
-
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
-  private apiUrl = 'http://localhost:3000/fox/api/cart'; // Update the URL with your API endpoint
+  private apiUrl = environment.apiURL+'cart'; 
 
   cart$: BehaviorSubject<Cart> = new BehaviorSubject(this.getCart());
 

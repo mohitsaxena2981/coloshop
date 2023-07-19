@@ -62,7 +62,6 @@ export class CartComponent implements OnInit {
         },
         (error) => {
           console.error(error);
-          // Handle the error condition, e.g., display an error message
         }
       );
     }
