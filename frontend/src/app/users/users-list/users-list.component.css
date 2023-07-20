@@ -2,13 +2,15 @@
   display: flex;
   justify-content: center;
   margin-bottom: 20px;
-  margin-top: 100px;
+  margin-top: 120px;
 }
 
 .table-container {
   max-width: 800px;
   margin: 0 auto;
   overflow-x: auto;
+  margin-top: 50px;
+  margin-bottom: 50px;
 }
 
 table {

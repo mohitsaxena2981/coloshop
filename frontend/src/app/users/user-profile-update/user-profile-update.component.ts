@@ -51,12 +51,7 @@ export class UserProfileUpdateComponent implements OnInit {
           this.userForm.get('isAdmin').setValue(user.isAdmin);
           this.userForm.get('password').setValue(user.password);
         });
-      } else if (params['forgotPassword']) {
-        this.isForgotPassword = true;
-        this.userForm.removeControl('name');
-        this.userForm.removeControl('address');
-        this.userForm.removeControl('isAdmin');
-      }
+      } 
     });
   }
 

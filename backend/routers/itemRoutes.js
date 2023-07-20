@@ -124,6 +124,7 @@ router.delete("/:id", async (req, res) => {
         return res.status(400).send("Item not found :/");
       }
     })
+
     .catch((err) => {
       return res.status(500).json({
         success: false,
@@ -133,3 +134,8 @@ router.delete("/:id", async (req, res) => {
 });
 
 module.exports = router;
+
+
+
+
+

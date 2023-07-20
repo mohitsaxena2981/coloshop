@@ -47,6 +47,9 @@ import { NewArrivalComponent } from './items/new-arrival/new-arrival.component';
 import { UserProfileUpdateComponent } from './users/user-profile-update/user-profile-update.component';
 import { AdminOrdersComponent } from './cart/admin-orders/admin-orders.component';
 import { UsersProfileUpdateComponent } from './users/users-profile-update/users-profile-update.component';
+import { MatSliderModule } from '@angular/material/slider';
+import { UserProfileComponent } from './users/user-profile/user-profile.component';
+import { UserOrdersComponent } from './cart/user-orders/user-orders.component';
 const material = [
   MatIconModule,
   MatButtonModule,
@@ -61,7 +64,8 @@ const material = [
   MatBadgeModule,
   MatSlideToggleModule,
   MatPaginatorModule,
-  MatStepperModule
+  MatStepperModule,
+  MatSliderModule,
 ];
 
 const routes: Routes = [
@@ -70,19 +74,27 @@ const routes: Routes = [
     component: GroundZeroComponent,
     children: [
       //Categories
-      { path: 'categories/list', component: CategoryListComponent },
-      { path: 'categories/form', component: CategoryFormComponent },
-      { path: 'categories/form/:id', component: CategoryFormComponent },
+      { path: 'categories/list', component: CategoryListComponent,canActivate: [GuardService] },
+      {
+        path: 'categories/form',
+        component: CategoryFormComponent,
+        canActivate: [GuardService],
+      },
+      {
+        path: 'categories/form/:id',
+        component: CategoryFormComponent,
+        canActivate: [GuardService],
+      },
 
       //Items
       { path: '', component: ItemListComponent },
-      { path: 'items/list', component: ItemsListAdminComponent },
+      { path: 'items/list', component: ItemsListAdminComponent,canActivate: [GuardService]},
       {
         path: 'items/form',
         component: ItemFormComponent,
         canActivate: [GuardService],
       },
-      {path: 'new-arrival',component:NewArrivalComponent},
+      { path: 'new-arrival', component: NewArrivalComponent },
       {
         path: 'items/form/:id',
         component: ItemFormComponent,
@@ -93,21 +105,46 @@ const routes: Routes = [
       //Users
       { path: 'users/login', component: LoginComponent },
       { path: 'users/register', component: RegisterComponent },
-      { path: 'users/list', component: UsersListComponent},
-      { path: 'users/form', component:UserFormComponent},
-      { path: 'users/form/:id', component:UserFormComponent},
-      {path: 'user/profile-edit',component: UserProfileUpdateComponent},
-      {path: 'user/profile-edit/:id',component: UserProfileUpdateComponent},
-      {path: 'users/profile-edit',component: UsersProfileUpdateComponent},
-      {path: 'users/profile-edit/:id',component:UsersProfileUpdateComponent},
+      { path: 'users/list', component: UsersListComponent,canActivate: [GuardService] },
+      { path: 'users/form', component: UserFormComponent,canActivate: [GuardService] },
+      {
+        path: 'users/form/:id',
+        component: UserFormComponent,
+        canActivate: [GuardService],
+      },
+      { path: 'user/profile-edit', component: UserProfileUpdateComponent },
+      {
+        path: 'user/profile-edit/:id',
+        component: UserProfileUpdateComponent,
+      },
+      { path: 'users/profile-edit', component: UsersProfileUpdateComponent },
+      {
+        path: 'users/profile-edit/:id',
+        component: UsersProfileUpdateComponent,
+        canActivate: [GuardService],
+      },
+      { path: 'user/profile', component: UserProfileComponent },
+      {
+        path: 'user/profile/:id',
+        component: UserProfileComponent,
+        canActivate: [GuardService],
+      },
 
       //Cart
-      {path:'cart', component:CartComponent},
-      {path:'cart/admin',component:AdminOrdersComponent},
+      { path: 'cart', component: CartComponent },
+      {
+        path: 'cart/admin',
+        component: AdminOrdersComponent,
+        canActivate: [GuardService],
+      },
+      {
+        path: 'cart/user',
+        component: UserOrdersComponent,
+      },
 
       // About
-      {path:'about',component:AboutComponent},
-      {path:'contact',component:ContactComponent}
+      { path: 'about', component: AboutComponent },
+      { path: 'contact', component: ContactComponent },
     ],
   },
 ];
@@ -140,7 +177,9 @@ const routes: Routes = [
     NewArrivalComponent,
     UserProfileUpdateComponent,
     AdminOrdersComponent,
-    UsersProfileUpdateComponent
+    UsersProfileUpdateComponent,
+    UserProfileComponent,
+    UserOrdersComponent,
   ],
   imports: [
     ...material,
@@ -153,7 +192,7 @@ const routes: Routes = [
   ],
   providers: [
     SearchPipe,
-    { provide: HTTP_INTERCEPTORS, useClass: InterInterceptor, multi: true },// The InterInterceptor service is provided as an HTTP interceptor using the HTTP_INTERCEPTORS token. It allows intercepting and modifying HTTP requests and responses.
+    { provide: HTTP_INTERCEPTORS, useClass: InterInterceptor, multi: true }, // The InterInterceptor service is provided as an HTTP interceptor using the HTTP_INTERCEPTORS token. It allows intercepting and modifying HTTP requests and responses.
   ],
   bootstrap: [AppComponent],
 })

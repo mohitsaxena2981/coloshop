@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Cart } from 'src/app/models/cart';
 import { CartService } from '../../services/cart.service';
 import { UserServiceService } from '../../services/user-service.service';
@@ -27,7 +27,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   constructor(
     private cartService: CartService,
     private userService: UserServiceService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -97,6 +98,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   logout(): void {
     this.userService.logout();
+    localStorage.removeItem('jwt-token');
+    this.clearUserData();
+    this.router.navigate(['/']);
   }
 
   clearUserData(): void {
@@ -107,18 +111,21 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   openUserProfileModal(): void {
-    const dialogRef = this.dialog.open(UserInfoDialogComponent, {
-      width: '300px',
-      data: {
-        name: this.userName,
-        email: this.userEmail,
-        address: this.userAddress,
-        _id: this.id
-      }
-    });
+    // const dialogRef = this.dialog.open(UserInfoDialogComponent, {
+    //   width: '300px',
+    //   data: {
+    //     name: this.userName,
+    //     email: this.userEmail,
+    //     address: this.userAddress,
+    //     _id: this.id
+    //   }
+    // });
 
-    dialogRef.afterClosed().subscribe((result: boolean) => {
-      // Handle any actions after the modal is closed
-    });
+    // dialogRef.afterClosed().subscribe((result: boolean) => {
+    //   // Handle any actions after the modal is closed
+    // });
+    setTimeout(() => {
+      this.router.navigate(['/user/profile']);
+    }, 2000);
   }
 }

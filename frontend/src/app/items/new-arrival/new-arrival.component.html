@@ -1,9 +1,11 @@
 <div class="banner"></div>
 
 <div class="container">
+
   <mat-form-field appearance="fill" class="category-class">
-    <mat-label>Category</mat-label>
+    <mat-label for="categorySelect">Category</mat-label>
     <mat-select
+      id="categorySelect"
       (selectionChange)="changeClient($event.value)"
       panelClass="custom-dropdown"
     >
@@ -13,20 +15,32 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
+  
+  <form [formGroup]="priceFilterForm" class="price-filter">
+    
+    <mat-slider
+      formControlName="maxPrice"
+      [min]="0"
+      [max]="getMaxPrice()"
+      [step]="500"
+      thumbLabel
+      tickInterval="auto"
+    ></mat-slider>
+
+    <button mat-raised-button color="accent" (click)="applyPriceFilter()">Apply</button>
+    <span><h4>Price Filter</h4></span>
+  </form>
+
   <form [formGroup]="searchForm" class="search-input">
     <mat-form-field appearance="fill">
-      <mat-label>Search</mat-label>
-      <input matInput placeholder="Items" formControlName="term" />
+      <mat-label for="searchTerm">Search</mat-label>
+      <input matInput placeholder="Items" formControlName="term" id="searchTerm" />
       <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
       <mat-hint>Already know what you're looking for?</mat-hint>
     </mat-form-field>
+    
 
-    <button
-      mat-raised-button
-      color="accent"
-      (click)="onSubmit()"
-      class="search-btn"
-    >
+    <button mat-raised-button color="accent" (click)="onSubmit()" class="search-btn">
       Search
     </button>
   </form>
@@ -38,17 +52,21 @@
         <mat-card-header>
           <div mat-card-avatar class="example-header-image"></div>
           <mat-card-title>{{ item.name }}</mat-card-title>
-          <mat-card-subtitle>₹ {{ item.price }}</mat-card-subtitle>
           <mat-card-subtitle>
             {{ item.category?.name }}
             <mat-icon>{{ item.category?.categoryType }}</mat-icon>
           </mat-card-subtitle>
         </mat-card-header>
         <img mat-card-image [src]="item.image" alt="image" />
+        <mat-card-header>
+          <mat-card-title>₹ {{ item.price }}</mat-card-title>
+        </mat-card-header>
+
         <mat-card-actions>
           <button
-            mat-button
-            color="primary"
+          class="btn"
+            mat-raised-button
+            color="accent"
             (click)="forwardToSingleItem(item._id)"
           >
             See Details
@@ -68,17 +86,20 @@
         <mat-card-header>
           <div mat-card-avatar class="example-header-image"></div>
           <mat-card-title>{{ item.name }}</mat-card-title>
-          <mat-card-subtitle>{{ item.price }}</mat-card-subtitle>
           <mat-card-subtitle>
             {{ item.category?.name }}
             <mat-icon>{{ item.category?.categoryType }}</mat-icon>
           </mat-card-subtitle>
         </mat-card-header>
         <img mat-card-image [src]="item.image" alt="image" />
+        <mat-card-header>
+          <mat-card-title>₹ {{ item.price }}</mat-card-title>
+        </mat-card-header>
         <mat-card-actions>
           <button
-            mat-button
-            color="primary"
+          class="btn"
+            mat-raised-button
+            color="accent"
             (click)="forwardToSingleItem(item._id)"
           >
             See Details
@@ -87,13 +108,13 @@
       </mat-card>
     </div>
   </ng-template>
-</div>
-
+  </div>
 <mat-paginator
-  *ngIf="searchLaunch ? searchDataFiltered?.length : newArrivalItems.length"
+  *ngIf="searchLaunch ? searchDataFiltered?.length : newArrivalItems?.length"
   [length]="searchLaunch ? searchDataFiltered.length : newArrivalItems.length"
   [pageSize]="pageSize"
   [pageSizeOptions]="[8, 16]"
   (page)="onPageChange($event)"
 ></mat-paginator>
-<app-carousal></app-carousal>
+
+<app-carousal></app-carousal> 

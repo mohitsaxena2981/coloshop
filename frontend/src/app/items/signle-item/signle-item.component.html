@@ -18,8 +18,9 @@
               : item?.description.slice(0, 80)
           }}
         </div>
+
         <button
-          class="read-more-btn"
+          mat-raised-button 
           *ngIf="item?.description.length > 20"
           (click)="toggleDescription()"
         >
@@ -35,7 +36,7 @@
       </p>
     </div>
     <div class="button-container">
-      <button mat-flat-button color="accent" (click)="addToCart()">
+      <button mat-raised-button color="accent" (click)="addToCart()">
         Add To Cart
       </button>
     </div>

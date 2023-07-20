@@ -65,44 +65,6 @@ export class ItemFormComponent implements OnInit {
       fileReader.readAsDataURL(file);
     }
   }
-
-  // checkEditMode(): void {
-  //   this.route.params.subscribe((params) => {
-  //     if (params['id']) {
-  //       this.editMode = true;
-  //       this.currentItemId = params['id'];
-  //       this.itemService.getOneItem(params['id']).subscribe((item) => {
-  //         this.itemForm.get('name').setValue(item.name);
-  //         this.itemForm.get('description').setValue(item.description);
-  //         this.itemForm.get('price').setValue(item.price);
-  //         this.imageDisplay = item.image;
-  //         this.itemForm.get('category').setValue(item.category);
-  //       });
-  //     }
-  //   });
-  // }
-
-
-  // checkEditMode(): void {
-  //   this.route.params.subscribe((params) => {
-  //     if (params['id']) {
-  //       this.editMode = true;
-  //       this.currentItemId = params['id'];
-  //       this.itemService.getOneItem(params['id']).subscribe((item) => {
-  //         this.itemForm.patchValue({
-  //           name: item.name,
-  //           description: item.description,
-  //           price: item.price,
-  //           image: null, // Set to null as the image is not retrieved from the database
-  //           category: item.category,
-  //           newArrival: item.newArrival
-  //         });
-  //         this.imageDisplay = item.image;
-  //       });
-  //     }
-  //   });
-  // }
-
   checkEditMode(): void {
     this.route.params.subscribe((params) => {
       if (params['id']) {
@@ -134,53 +96,6 @@ export class ItemFormComponent implements OnInit {
       });
     });
   }
-
-  // addItem(item: FormData): void {
-  //   const isNewArrival = this.itemForm.get('newArrival')?.value;
-  
-  //   if (isNewArrival) {
-  //     // Remove the category field from the form data
-  //     item.delete('category');
-  
-  //     this.itemService.createItem(item).subscribe(
-  //       (item) => {
-  //         this.snackBar.open(
-  //           'You added ' + this.itemForm.get('name').value + ' as a new arrival item',
-  //           'OK',
-  //           {
-  //             horizontalPosition: 'right',
-  //             verticalPosition: 'top',
-  //             duration: 4000,
-  //           }
-  //         );
-  //       },
-  //       (error) => {
-  //         console.error('Error adding new arrival item:', error);
-  //       }
-  //     );
-  //   } else {
-  //     // Proceed with creating the item as usual, including the category field
-  //     this.itemService.createItem(item).subscribe(
-  //       (item) => {
-  //         this.snackBar.open(
-  //           'You added ' +
-  //             this.itemForm.get('name').value +
-  //             ' as a new item in the selected category',
-  //           'OK',
-  //           {
-  //             horizontalPosition: 'right',
-  //             verticalPosition: 'top',
-  //             duration: 4000,
-  //           }
-  //         );
-  //       },
-  //       (error) => {
-  //         console.error('Error adding item:', error);
-  //       }
-  //     );
-  //   }
-  // }
-  
 
   updateItem(item: FormData): void {
     this.itemService.updateItem(item, this.currentItemId).subscribe((item) => {

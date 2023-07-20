@@ -27,7 +27,6 @@ export class CartComponent implements OnInit {
   ngOnInit(): void {
     this.getItemDetails();
     this.getUserName();
-    this.getPreviousOrders();
   }
 
   getItemDetails() {
@@ -50,21 +49,6 @@ export class CartComponent implements OnInit {
         });
       });
     });
-  }
-
-  getPreviousOrders() {
-    const userId = localStorage.getItem('user');
-    if (userId) {
-      this.cartService.getPreviousOrders(userId).subscribe(
-        (previousOrders) => {
-          this.previousOrders = previousOrders;
-          console.log(this.previousOrders);
-        },
-        (error) => {
-          console.error(error);
-        }
-      );
-    }
   }
 
   removeItem(index: number, cartItem: CartItem) {

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Category } from 'src/app/models/category';
@@ -8,19 +8,22 @@ import { CategoryService } from 'src/app/services/category.service';
 import { ItemsService } from 'src/app/services/items.service';
 import { PageEvent } from '@angular/material/paginator';
 import { MatSelect } from '@angular/material/select';
+import { MatSliderChange } from '@angular/material/slider';
+
 @Component({
   selector: 'app-item-list',
   templateUrl: './item-list.component.html',
   styleUrls: ['./item-list.component.css'],
 })
 export class ItemListComponent implements OnInit {
-  items!: Item[];
-  categories!: Category[];
-  filter!: string;
+  items: Item[] = [];
+  categories: Category[] = [];
+  filter: string;
   showList = true;
   searchLaunch = false;
-  searchDataFiltered!: Item[];
-  searchForm!: FormGroup;
+  searchDataFiltered: Item[] = [];
+  searchForm: FormGroup;
+  priceFilterForm: FormGroup;
 
   pageSize = 16;
   pagedItems: Item[] = [];
@@ -32,28 +35,22 @@ export class ItemListComponent implements OnInit {
     private formBuilder: FormBuilder,
     private searchPipe: SearchPipe,
     private router: Router
-  ) {}
+  ) {
+    this.filter = 'All';
+    this.searchForm = this.formBuilder.group({
+      term: [''],
+    });
+    this.priceFilterForm = this.formBuilder.group({
+      maxPrice: [''],
+    });
+  }
 
   ngOnInit(): void {
     this.getItems();
     this.getCategories();
-
-    this.searchForm = this.formBuilder.group({
-      term: [''],
-    });
-
-    this.searchDataFiltered = [];
-    this.items = [];
   }
 
   @ViewChild('categorySelect') categorySelect: MatSelect;
-
-  ngAfterViewInit() {
-    const optionsLength = this.categorySelect.options.length;
-    if (optionsLength > 3) {
-      this.categorySelect.panelClass = 'scrollable-dropdown';
-    }
-  }
 
   getItems() {
     this.itemService.getAllItems().subscribe((items) => {
@@ -71,29 +68,36 @@ export class ItemListComponent implements OnInit {
   changeClient(value: string) {
     this.searchLaunch = false;
     this.filter = value;
-    this.showList = false;
-    if (this.filter === 'All') {
-      this.showList = true;
-    }
+    this.showList = this.filter === 'All';
+    this.priceFilterForm.reset(); // Reset the price filter form
     this.filterItems();
   }
-
+  
+  applyPriceFilter() {
+    const maxPrice = this.priceFilterForm.get('maxPrice')?.value;
+    if (maxPrice !== null) {
+      this.searchDataFiltered = this.items.filter((item) => item.price <= maxPrice);
+      this.searchLaunch = true;
+      this.filterItems(); // Call filterItems() after applying the price filter
+    }
+  }
+  
   filterItems() {
-    if (!this.filter || this.filter === 'All') {
+    if (this.filter === 'All') {
       this.showList = true;
       this.paginateItems();
     } else {
       this.showList = false;
-      this.searchDataFiltered = this.items.filter(
+      this.searchDataFiltered = this.searchDataFiltered.filter(
         (item) => item.category?.name === this.filter
       );
       this.paginateItems();
     }
   }
+    
 
   onSubmit() {
     this.searchLaunch = true;
-
     const term = this.searchForm.get('term')?.value;
     this.searchDataFiltered = this.searchPipe.transform(this.items, term);
     this.paginateItems();
@@ -118,11 +122,12 @@ export class ItemListComponent implements OnInit {
       this.pagedItems = this.searchDataFiltered.slice(startIndex, endIndex);
     }
   }
+  
 
-  getNewArrivalItems() {
-    this.itemService.getNewArrivalItems().subscribe((items) => {
-      this.items = items;
-      this.paginateItems();
-    });
+  // Add the function to get the max price for the slider
+  getMaxPrice(): number {
+    const maxPrice = Math.max(...this.items.map((item) => item.price));
+    return maxPrice;
   }
 }
+

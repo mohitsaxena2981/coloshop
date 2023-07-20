@@ -27,6 +27,10 @@
       margin-bottom: 5px;
     }
 
+
+    .btn{
+      background-color: #ffd740;
+    }
     .card-container {
       display: flex;
       flex-wrap: wrap;
@@ -215,7 +219,7 @@ button {
       }
     }
     
-    @media (max-width: 767px) {
+    @media (max-width: 1000px) {
       .card-wrapper {
         flex: 0 0 calc(50% - 20px); /* Show 2 cards in a row */
         max-width: calc(50% - 20px); /* Show 2 cards in a row */
@@ -336,3 +340,10 @@ button {
   align-items: center;
   padding: 20px;
 }
+
+
+.mat-slider{
+  margin-top: 5px;
+}
+
+

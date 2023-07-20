@@ -50,9 +50,6 @@ export class UserServiceService {
     return this.http.post<User>(`${this.apiURLUsers}/register`, user);
   }
 
-  // updateUser(user: User, userId: string): Observable<User> {
-  //   return this.http.put<User>(`${this.apiURLUsers}/${userId}`, user);
-  // }
   updateUser(user: User, userId: string): Observable<User> {
     return this.http.put<User>(`${this.apiURLUsers}/${userId}`, user)
       .pipe(

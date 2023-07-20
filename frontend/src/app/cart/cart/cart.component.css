@@ -40,6 +40,12 @@
 
   .cart-item{
     padding-right: 10px;
+    /* font-weight: 200; */
+    color: black;
+
+  }
+  .cart-item span{
+    font-weight: bolder;
   }
 
   .example-card span{
@@ -52,6 +58,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-bottom: 20px;
   }
   
   /* Cart items container */
@@ -60,6 +67,7 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    background-color: #ccc;
     
   }
   

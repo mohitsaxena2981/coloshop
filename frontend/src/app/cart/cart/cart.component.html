@@ -22,22 +22,22 @@
       <mat-card class="example-card">
         <mat-card-title-group>
           <mat-card-subtitle class="cart-item"
-            ><span>Name: </span>{{ cartItem.item.name }}</mat-card-subtitle
+            ><span>Name : </span>{{ cartItem.item.name }}</mat-card-subtitle
           >
           <mat-card-subtitle class="cart-item"
-            ><span>Category: </span
+            ><span>Category : </span
             >{{ cartItem.item.category.name }}</mat-card-subtitle
           >
           <mat-card-subtitle class="cart-item"
-            ><span>Unit Price: </span
+            ><span>Unit Price : ₹</span
             >{{ cartItem.item.price }}</mat-card-subtitle
           >
           <mat-card-subtitle class="cart-item"
-            ><span>Total Price: </span
+            ><span>Total Price : ₹</span
             >{{ cartItem.quantity * cartItem.item.price }}</mat-card-subtitle
           >
           <mat-card-subtitle class="cart-item"
-            ><span>Quantity: </span>{{ cartItem.quantity }}</mat-card-subtitle
+            ><span>Quantity : </span>{{ cartItem.quantity }}</mat-card-subtitle
           >
           <img mat-card-lg-image [src]="cartItem.item.image" />
         </mat-card-title-group>
@@ -54,7 +54,7 @@
     </button>
   </div>
 
-  <div class="previous-orders previous-orders-container">
+  <!-- <div class="previous-orders previous-orders-container">
     <h2>Previous Orders</h2>
     <div *ngIf="previousOrders.length === 0">No previous orders</div>
     <div *ngFor="let order of previousOrders" class="order">
@@ -82,4 +82,4 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->

@@ -22,7 +22,7 @@ export class NewArrivalComponent implements OnInit {
   searchLaunch = false;
   searchDataFiltered!: Item[];
   searchForm!: FormGroup;
-
+  priceFilterForm: FormGroup;
   pageSize = 16;
   pagedItems: Item[] = [];
   currentPage = 0;
@@ -33,27 +33,22 @@ export class NewArrivalComponent implements OnInit {
     private formBuilder: FormBuilder,
     private searchPipe: SearchPipe,
     private router: Router
-  ) {}
+  ) {
+    this.filter = 'All';
+    this.searchForm = this.formBuilder.group({
+      term: [''],
+    });
+    this.priceFilterForm = this.formBuilder.group({
+      maxPrice: [''],
+    });
+  }
 
   ngOnInit(): void {
     this.getNewArrivalItems();
     this.getCategories();
-    this.searchForm = this.formBuilder.group({
-      term: [''],
-    });
-    this.searchDataFiltered = [];
-    this.newArrivalItems = [];
   }
 
   @ViewChild('categorySelect') categorySelect: MatSelect;
-  ngAfterViewInit() {
-    if (this.categorySelect && this.categorySelect.options) {
-      const optionsLength = this.categorySelect.options.length;
-      if (optionsLength > 3) {
-        this.categorySelect.panelClass = 'scrollable-dropdown';
-      }
-    }
-  }
 
   getNewArrivalItems(): void {
     this.itemsService.getAllItems().subscribe(
@@ -66,23 +61,51 @@ export class NewArrivalComponent implements OnInit {
       }
     );
   }
-
-  onSubmit() {
-    this.searchLaunch = true;
-
-    const term = this.searchForm.get('term')?.value;
-    this.searchDataFiltered = this.searchPipe.transform(
-      this.newArrivalItems,
-      term
-    );
-    this.paginateItems();
-  }
-
   getCategories() {
     this.categoryService.getCategories().subscribe((categories) => {
       this.categories = categories;
     });
   }
+
+  changeClient(value: string) {
+    this.searchLaunch = false;
+    this.filter = value;
+    this.showList = this.filter === 'All';
+    this.priceFilterForm.reset(); // Reset the price filter form
+    this.filterItems();
+  }
+  applyPriceFilter() {
+    const maxPrice = this.priceFilterForm.get('maxPrice')?.value;
+    if (maxPrice !== null) {
+      this.searchDataFiltered = this.newArrivalItems.filter((item) => item.price <= maxPrice);
+      this.searchLaunch = true;
+      this.filterItems(); // Call filterItems() after applying the price filter
+    }
+  }
+
+    
+  filterItems() {
+    if (this.filter === 'All') {
+      this.showList = true;
+      this.paginateItems();
+    } else {
+      this.showList = false;
+      this.searchDataFiltered = this.searchDataFiltered.filter(
+        (item) => item.category?.name === this.filter
+      );
+      this.paginateItems();
+    }
+  }
+
+
+
+  onSubmit() {
+    this.searchLaunch = true;
+    const term = this.searchForm.get('term')?.value;
+    this.searchDataFiltered = this.searchPipe.transform(this.newArrivalItems, term);
+    this.paginateItems();
+  }
+
 
   forwardToSingleItem(itemId: string) {
     this.router.navigate(['/items/single-item/' + itemId]);
@@ -94,28 +117,7 @@ export class NewArrivalComponent implements OnInit {
     this.paginateItems();
   }
 
-  changeClient(value: string) {
-    this.searchLaunch = false;
-    this.filter = value;
-    this.showList = false;
-    if (this.filter === 'All') {
-      this.showList = true;
-    }
-    this.filterItems();
-  }
 
-  filterItems() {
-    if (!this.filter || this.filter === 'All') {
-      this.showList = true;
-      this.paginateItems();
-    } else {
-      this.showList = false;
-      this.searchDataFiltered = this.newArrivalItems.filter(
-        (item) => item.category?.name === this.filter
-      );
-      this.paginateItems();
-    }
-  }
 
   paginateItems() {
     const startIndex = this.currentPage * this.pageSize;
@@ -126,4 +128,11 @@ export class NewArrivalComponent implements OnInit {
       this.pagedItems = this.searchDataFiltered.slice(startIndex, endIndex);
     }
   }
+    // Add the function to get the max price for the slider
+    getMaxPrice(): number {
+      const maxPrice = Math.max(...this.newArrivalItems.map((item) => item.price));
+      return maxPrice;
+    }
+
+
 }

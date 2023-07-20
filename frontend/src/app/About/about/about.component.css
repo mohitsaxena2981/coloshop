@@ -18,14 +18,18 @@
 
 
 .content{
-    margin-top: 100px;
+    margin-top: 20px;
 
 }
 
+.back{
+  margin-top: 100px;
+}
    .container {
     max-width: 960px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0px 20px;
+
     background-color: #f8f8f8;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
@@ -48,19 +52,23 @@
   
   @media (max-width: 767px) {
     .container {
-      padding: 0 10px;
+      padding: 10px 10px;
+    }
+    .back{
+      margin-top: 180px;
     }
   }
   
   @media (min-width: 768px) and (max-width: 991px) {
     .container {
-      padding: 0 20px;
+      padding: 20px 20px;
     }
   }
   
   @media (min-width: 992px) {
     .container {
-      padding: 0 30px;
+      padding: 30px 30px;
+      margin-bottom: 20px;
     }
   }
   
