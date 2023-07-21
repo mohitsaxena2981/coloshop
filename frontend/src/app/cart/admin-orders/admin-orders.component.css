@@ -1,139 +1,129 @@
 /* Button style */
+
+.back {
+  margin-top: 100px;
+  background: linear-gradient(45deg, #007bff, #00c6ff);
+}
 .under {
-    margin-bottom: 20px;
-    margin-top: 100px;
-  }
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
 
-  .cart-item{
-    padding-right: 10px;
-  }
+.cart-item {
+  padding-right: 10px;
+}
 
-  .example-card span{
-    font-weight: bolder;
-  }
-  
-  /* Global container */
-  .global {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  /* Cart items container */
-  .cart-items {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  /* Cart item card style */
+.example-card span {
+  font-weight: bolder;
+}
+
+/* Global container */
+.global {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Cart items container */
+.cart-items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Cart item card style */
+.example-card {
+  max-width: 400px;
+  margin: 10px;
+}
+
+/* Shipping banner */
+.shipping-banner {
+  background-color: #f8f8f8;
+  padding: 20px;
+  text-align: center;
+}
+
+/* Centered text */
+.centered {
+  text-align: center;
+}
+
+/* Button container */
+.btn-valid {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.previous-orders-container {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.previous-orders-container h2 {
+  text-align: center;
+}
+
+.order-container {
+  margin-top: 100px;
+}
+
+.order {
+  padding: 10px;
+  border: 1px solid #ccc;
+  background-color: #f8f8f8;
+  margin-top: 20px;
+}
+
+
+.order-info {
+  font-weight: bold;
+}
+
+.order-items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.cart-item {
+  margin: 10px;
+}
+
+.example-card {
+  max-width: 400px;
+}
+
+.item-name {
+  font-weight: bold;
+}
+
+.item-category,
+.item-price,
+.item-total-price,
+.item-quantity {
+  margin-top: 5px;
+}
+
+.item-image {
+  width: 200px;
+  height: 200px;
+}
+
+/* Media query for small screens */
+@media (max-width: 767px) {
   .example-card {
-    max-width: 400px;
-    margin: 10px;
+    max-width: 90%;
   }
-  
-  /* Shipping banner */
-  .shipping-banner {
-    background-color: #f8f8f8;
-    padding: 20px;
-    text-align: center;
+  .back {
+    margin-top: 180px;
   }
-  
-  /* Centered text */
-  .centered {
-    text-align: center;
+  .order-container {
+    margin-top: 180px;
   }
-  
-
-  
-  /* Button container */
-  .btn-valid {
-    text-align: center;
-    margin-top: 20px;
-  }
-
-  
-  .previous-orders-container {
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .previous-orders-container h2 {
-    text-align: center;
-  }
-  
-  .order-container{
-    margin-top: 100px;
-  }
-  
-  .order {
-    padding: 10px;
-    border: 1px solid #ccc;
-    background-color: #f8f8f8;
-    margin-top: 20px;
-  }
-  
-  /* Rest of the CSS styles remain the same */
-  
-  
-  /* Rest of your existing CSS styles */
-  
-
-  
-  .order-info {
-    font-weight: bold;
-  }
-  
-  .order-items {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .cart-item {
-    margin: 10px;
-  }
-  
-  .example-card {
-    max-width: 400px;
-  }
-  
-  .item-name {
-    font-weight: bold;
-  }
-  
-  .item-category,
-  .item-price,
-  .item-total-price,
-  .item-quantity {
-    margin-top: 5px;
-  }
-  
-  .item-image {
-    width: 200px;
-    height: 200px;
-  }
-  
-  
-  /* Media query for small screens */
-  @media (max-width: 767px) {
-    .example-card {
-      max-width: 90%;
-    }
-    .under{
-      margin-top: 180px;
-    }
-    .order-container{
-        margin-top: 180px;
-      }
-  }
-  
-
-
-
-
+}

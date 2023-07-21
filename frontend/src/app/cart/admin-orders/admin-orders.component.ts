@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Cart,CartItem } from 'src/app/models/cart';
+import { Cart, CartItem } from 'src/app/models/cart';
 import { CartService } from 'src/app/services/cart.service';
 import { ItemsService } from 'src/app/services/items.service';
 import { UserServiceService } from '../../services/user-service.service';
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-admin-orders',
   templateUrl: './admin-orders.component.html',
-  styleUrls: ['./admin-orders.component.css']
+  styleUrls: ['./admin-orders.component.css'],
 })
 export class AdminOrdersComponent implements OnInit {
   previousOrders: Cart[] = [];
@@ -15,9 +16,12 @@ export class AdminOrdersComponent implements OnInit {
   totalPrice: number;
   userName: string;
 
-  constructor(private cartService: CartService,
+  constructor(
+    private cartService: CartService,
     private itemService: ItemsService,
-    private userService: UserServiceService,) {}
+    private userService: UserServiceService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.getItemDetails();
@@ -37,7 +41,7 @@ export class AdminOrdersComponent implements OnInit {
 
           this.cartItemDetailed.push({
             item: item,
-            quantity: cartItem.quantity
+            quantity: cartItem.quantity,
           });
 
           this.totalPrice = totalPrice;
@@ -46,26 +50,19 @@ export class AdminOrdersComponent implements OnInit {
     });
   }
 
-  
-
   getPreviousOrders() {
     this.cartService.getCartFromServer().subscribe(
       (previousOrders) => {
         this.previousOrders = previousOrders;
         console.log(this.previousOrders);
-        
       },
       (error) => {
         console.error(error);
-        // Handle the error condition, e.g., display an error message
       }
     );
   }
-  
- 
-  
+
+  backToShop() {
+    this.router.navigateByUrl('/');
+  }
 }
-
-
-
-

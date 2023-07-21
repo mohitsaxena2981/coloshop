@@ -4,10 +4,11 @@ import { Cart, CartItem } from 'src/app/models/cart';
 import { CartService } from 'src/app/services/cart.service';
 import { ItemsService } from 'src/app/services/items.service';
 import { UserServiceService } from '../../services/user-service.service';
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-user-orders',
   templateUrl: './user-orders.component.html',
-  styleUrls: ['./user-orders.component.css']
+  styleUrls: ['./user-orders.component.css'],
 })
 export class UserOrdersComponent implements OnInit {
   userName: string;
@@ -16,15 +17,15 @@ export class UserOrdersComponent implements OnInit {
     private cartService: CartService,
     private itemService: ItemsService,
     private snackBar: MatSnackBar,
-    private userService: UserServiceService
-  ) { }
+    private userService: UserServiceService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     // this.getItemDetails();
     this.getUserName();
     this.getPreviousOrders();
   }
-
 
   getPreviousOrders() {
     const userId = localStorage.getItem('user');
@@ -57,4 +58,7 @@ export class UserOrdersComponent implements OnInit {
     }
   }
 
+  backToShop() {
+    this.router.navigateByUrl('/user/profile');
+  }
 }

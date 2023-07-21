@@ -6,13 +6,18 @@ table {
 #center {
     display:flex;
     justify-content: center;
+    margin-top: 40px;
+    margin-bottom: 80px;
 }
 
 .btn {
     margin:10px;
-    margin-top: 100px;
     text-align: center;
-    margin-top: 100px;
+    margin-top: 120px;
+}
+
+button{
+    background: linear-gradient(45deg, #007bff, #00c6ff);
 }
 
 @media (max-width:767px){

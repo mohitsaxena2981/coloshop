@@ -3,17 +3,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
-  styleUrls: ['./contact.component.css']
+  styleUrls: ['./contact.component.css'],
 })
 export class ContactComponent implements OnInit {
+  constructor(private router: Router) {}
 
-  constructor(private router: Router) { }
-
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   backToShop() {
     this.router.navigateByUrl('/');
   }
-
 }

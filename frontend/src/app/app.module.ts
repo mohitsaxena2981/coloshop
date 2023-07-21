@@ -38,7 +38,6 @@ import { UserDialogComponent } from './dialogs/user-dialog/user-dialog.component
 import { UserFormComponent } from './users/user-form/user-form.component';
 import { ItemDialogComponent } from './dialogs/item-dialog/item-dialog.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { UserInfoDialogComponent } from './dialogs/user-info-dialog/user-info-dialog.component';
 import { CarousalComponent } from './Shared/carousal/carousal.component';
 import { MatStepperModule } from '@angular/material/stepper';
 import { AboutComponent } from './About/about/about.component';
@@ -74,7 +73,11 @@ const routes: Routes = [
     component: GroundZeroComponent,
     children: [
       //Categories
-      { path: 'categories/list', component: CategoryListComponent,canActivate: [GuardService] },
+      {
+        path: 'categories/list',
+        component: CategoryListComponent,
+        canActivate: [GuardService],
+      },
       {
         path: 'categories/form',
         component: CategoryFormComponent,
@@ -88,7 +91,11 @@ const routes: Routes = [
 
       //Items
       { path: '', component: ItemListComponent },
-      { path: 'items/list', component: ItemsListAdminComponent,canActivate: [GuardService]},
+      {
+        path: 'items/list',
+        component: ItemsListAdminComponent,
+        canActivate: [GuardService],
+      },
       {
         path: 'items/form',
         component: ItemFormComponent,
@@ -105,8 +112,16 @@ const routes: Routes = [
       //Users
       { path: 'users/login', component: LoginComponent },
       { path: 'users/register', component: RegisterComponent },
-      { path: 'users/list', component: UsersListComponent,canActivate: [GuardService] },
-      { path: 'users/form', component: UserFormComponent,canActivate: [GuardService] },
+      {
+        path: 'users/list',
+        component: UsersListComponent,
+        canActivate: [GuardService],
+      },
+      {
+        path: 'users/form',
+        component: UserFormComponent,
+        canActivate: [GuardService],
+      },
       {
         path: 'users/form/:id',
         component: UserFormComponent,
@@ -170,7 +185,6 @@ const routes: Routes = [
     UserDialogComponent,
     UserFormComponent,
     ItemDialogComponent,
-    UserInfoDialogComponent,
     CarousalComponent,
     AboutComponent,
     ContactComponent,

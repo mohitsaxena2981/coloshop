@@ -1,39 +1,50 @@
-   <div class="global">
-    <div class="center">
-      <div class="form">
-        <form [formGroup]="loginForm">
-          <h1>Login🖊️</h1>
-          <div *ngIf="isSubmitted && authError">
-            <span style="color:red">{{ authError }}</span>
-          </div>
-  
-          <div>
-            <mat-form-field class="example-form-field" appearance="fill">
-              <mat-label>Email</mat-label>
-              <input matInput type="text" formControlName="email">
-            </mat-form-field>
-          </div>
-  
-          <div>
-            <mat-form-field class="example-form-field" appearance="fill">
-              <mat-label>Password</mat-label>
-              <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" required>
-              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-              </button>
-            </mat-form-field>
-          </div>
-  
-          <div class="btn">
-            <button mat-raised-button color="accent" (click)="onSubmit()">Sign In</button>
-          </div>
-  
-          <div class="links">
-            <a routerLink="/users/register">No account? Create one here!</a>
-          </div>
-  
-        </form>
-      </div>
+<div class="global">
+  <div class="center">
+    <div class="form">
+      <form [formGroup]="loginForm">
+        <h1>Login🖊️</h1>
+        <div *ngIf="isSubmitted && authError">
+          <span style="color: red">{{ authError }}</span>
+        </div>
+
+        <div>
+          <mat-form-field class="example-form-field" appearance="fill">
+            <mat-label>Email</mat-label>
+            <input matInput type="text" formControlName="email" />
+          </mat-form-field>
+        </div>
+
+        <div>
+          <mat-form-field class="example-form-field" appearance="fill">
+            <mat-label>Password</mat-label>
+            <input
+              matInput
+              [type]="hide ? 'password' : 'text'"
+              formControlName="password"
+              required
+            />
+            <button
+              mat-icon-button
+              matSuffix
+              (click)="hide = !hide"
+              [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hide"
+            >
+              <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+
+        <div class="btn">
+          <button mat-raised-button color="accent" (click)="onSubmit()">
+            Sign In
+          </button>
+        </div>
+
+        <div class="links">
+          <a routerLink="/users/register">No account? Create one here!</a>
+        </div>
+      </form>
     </div>
   </div>
-  
+</div>

@@ -1,3 +1,6 @@
+<button class="back" mat-raised-button color="primary" (click)="backToShop()">
+  <mat-icon>keyboard_return</mat-icon>Back To Shop
+</button>
 <div class="order-container">
   <div class="order" *ngFor="let order of previousOrders">
     <p class="order-info">User: {{ order.user.name }}</p>

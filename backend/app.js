@@ -4,7 +4,6 @@ const mongoose = require("mongoose");
 const app = express();
 const cors = require("cors");
 const path = require("path");
-//const jwtBlock = require('./management/jwt');
 
 require("dotenv/config");
 
@@ -16,7 +15,6 @@ app.use(express.json());
 app.use(cors());
 app.options("*", cors());
 app.use("/public", express.static(path.join("public")));
-//app.use(jwtBlock());
 
 //Routers
 const itemsRouter = require("./routers/itemRoutes");
@@ -43,6 +41,6 @@ mongoose
     console.log("Connection to database failed :/");
   });
 
-app.listen(3000, "0.0.0.0", () => {
+app.listen(process.env.PORT, "0.0.0.0", () => {
   console.log("Express is running on port " + process.env.PORT);
 });

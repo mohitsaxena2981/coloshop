@@ -66,7 +66,7 @@ export class UsersProfileUpdateComponent implements OnInit {
         verticalPosition: 'top',
         duration: 4000,
       });
-      this.navigateToListPage(); // Navigate to home page after form submission
+      this.navigateToListPage();
     });
   }
   onSubmit() {

@@ -1,7 +1,5 @@
-<div class="banner"></div>
-
+<app-carousal></app-carousal>
 <div class="container">
-
   <mat-form-field appearance="fill" class="category-class">
     <mat-label for="categorySelect">Category</mat-label>
     <mat-select
@@ -15,9 +13,8 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
-  
+
   <form [formGroup]="priceFilterForm" class="price-filter">
-    
     <mat-slider
       formControlName="maxPrice"
       [min]="0"
@@ -38,13 +35,13 @@
       <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
       <mat-hint>Already know what you're looking for?</mat-hint>
     </mat-form-field>
-    
 
     <button mat-raised-button color="accent" (click)="onSubmit()" class="search-btn">
       Search
     </button>
   </form>
 </div>
+
 <div class="card-container">
   <ng-container *ngIf="showList; else filteredItems" #filteredItems>
     <div *ngFor="let item of pagedItems" class="card-wrapper">
@@ -59,12 +56,15 @@
         </mat-card-header>
         <img mat-card-image [src]="item.image" alt="image" />
         <mat-card-header>
-          <mat-card-title>₹ {{ item.price }}</mat-card-title>
+          <div class="price-container">
+            <div class="example-header-text">Huge Discount!</div>
+            <div class="original-price">₹ {{ getHikedPrice(item.price) }}</div>
+            <div class="discounted-price">₹ {{ item.price }}</div>
+          </div>
         </mat-card-header>
-
         <mat-card-actions>
           <button
-          class="btn"
+            class="btn"
             mat-raised-button
             color="accent"
             (click)="forwardToSingleItem(item._id)"
@@ -72,6 +72,7 @@
             See Details
           </button>
         </mat-card-actions>
+        
       </mat-card>
     </div>
   </ng-container>
@@ -93,11 +94,15 @@
         </mat-card-header>
         <img mat-card-image [src]="item.image" alt="image" />
         <mat-card-header>
-          <mat-card-title>₹ {{ item.price }}</mat-card-title>
+          <div class="price-container">
+            <div class="example-header-text">Huge Discount!</div>
+            <div class="original-price">₹ {{ getHikedPrice(item.price) }}</div>
+            <div class="discounted-price">₹ {{ item.price }}</div>
+          </div>
         </mat-card-header>
         <mat-card-actions>
           <button
-          class="btn"
+            class="btn"
             mat-raised-button
             color="accent"
             (click)="forwardToSingleItem(item._id)"
@@ -108,7 +113,8 @@
       </mat-card>
     </div>
   </ng-template>
-  </div>
+</div>
+
 <mat-paginator
   *ngIf="searchLaunch ? searchDataFiltered?.length : items?.length"
   [length]="searchLaunch ? searchDataFiltered.length : items.length"
@@ -116,5 +122,3 @@
   [pageSizeOptions]="[8, 16]"
   (page)="onPageChange($event)"
 ></mat-paginator>
-
-<app-carousal></app-carousal>

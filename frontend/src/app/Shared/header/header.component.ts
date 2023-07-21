@@ -5,7 +5,6 @@ import { CartService } from '../../services/cart.service';
 import { UserServiceService } from '../../services/user-service.service';
 import { User } from 'src/app/models/user';
 import { MatDialog } from '@angular/material/dialog';
-import { UserInfoDialogComponent } from 'src/app/dialogs/user-info-dialog/user-info-dialog.component';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
@@ -99,6 +98,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   logout(): void {
     this.userService.logout();
     localStorage.removeItem('jwt-token');
+    this.cartService.resetCart();
     this.clearUserData();
     this.router.navigate(['/']);
   }
@@ -110,22 +110,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.id = '';
   }
 
-  openUserProfileModal(): void {
-    // const dialogRef = this.dialog.open(UserInfoDialogComponent, {
-    //   width: '300px',
-    //   data: {
-    //     name: this.userName,
-    //     email: this.userEmail,
-    //     address: this.userAddress,
-    //     _id: this.id
-    //   }
-    // });
-
-    // dialogRef.afterClosed().subscribe((result: boolean) => {
-    //   // Handle any actions after the modal is closed
-    // });
+  openUserProfile(): void {
     setTimeout(() => {
       this.router.navigate(['/user/profile']);
-    }, 2000);
+    }, 1000);
   }
 }

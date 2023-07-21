@@ -4,7 +4,7 @@ import { Cart, CartItem } from 'src/app/models/cart';
 import { CartService } from 'src/app/services/cart.service';
 import { ItemsService } from 'src/app/services/items.service';
 import { UserServiceService } from '../../services/user-service.service';
-
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
@@ -21,7 +21,8 @@ export class CartComponent implements OnInit {
     private cartService: CartService,
     private itemService: ItemsService,
     private snackBar: MatSnackBar,
-    private userService: UserServiceService
+    private userService: UserServiceService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -46,9 +47,17 @@ export class CartComponent implements OnInit {
           });
 
           this.totalPrice = totalPrice;
+
+          this.cartItemDetailed.sort((a, b) =>
+            a.item._id.localeCompare(b.item._id)
+          );
         });
       });
     });
+  }
+
+  trackCartItemBy(index: number, item: CartItem): string {
+    return item.item._id;
   }
 
   removeItem(index: number, cartItem: CartItem) {
@@ -65,13 +74,21 @@ export class CartComponent implements OnInit {
     );
   }
 
-  proceedToPayment() {
+  incrementQuantity(cartItem: CartItem) {
+    this.cartService.incrementQuantity(cartItem);
+  }
+
+  decrementQuantity(cartItem: CartItem) {
+    this.cartService.decrementQuantity(cartItem);
+  }
+
+  proceedToCheckOut() {
     const cart: Cart = this.cartService.getCart();
     const userId = this.getUserId();
 
     if (!userId || userId === 'guest') {
       this.snackBar.open(
-        'You need to log in to proceed with the payment.',
+        'You need to log in to buy products!.',
         'OK',
         {
           duration: 2000,
@@ -84,7 +101,7 @@ export class CartComponent implements OnInit {
 
     if (cart.cartItems.length === 0) {
       this.snackBar.open(
-        'Your cart is empty. Please add items to proceed with the payment.',
+        'Your cart is empty. Please add items to proceed with the checkout.',
         'OK',
         {
           duration: 2000,
@@ -95,19 +112,16 @@ export class CartComponent implements OnInit {
       return;
     }
 
-    cart.user = userId; // Assign the user ID to the cart's user field
+    cart.user = userId;
 
     this.cartService.saveCartToServer(cart).subscribe(
       (response) => {
-        // Handle successful response
         console.log('Cart saved to the server:', response);
 
-        // Reset the cart
         this.cartService.resetCart();
 
-        // Display success message to the user
         this.snackBar.open(
-          'Order Successful, Thanks for Shopping with us!',
+          'Order Successfull, Thanks for Shopping with us!',
           'OK',
           {
             duration: 2000,
@@ -117,10 +131,8 @@ export class CartComponent implements OnInit {
         );
       },
       (error) => {
-        // Handle error response
         console.error('Error saving cart data:', error);
 
-        // Display error message to the user
         this.snackBar.open('Error occurred while saving cart data!', 'OK', {
           duration: 2000,
           horizontalPosition: 'right',
@@ -128,6 +140,10 @@ export class CartComponent implements OnInit {
         });
       }
     );
+  }
+
+  backToShop() {
+    this.router.navigateByUrl('/');
   }
 
   getUserName(): void {
@@ -148,5 +164,18 @@ export class CartComponent implements OnInit {
 
   getUserId(): string {
     return localStorage.getItem('user');
+  }
+
+  updateCartItem(cartItem: CartItem) {
+    const cart = this.cartService.getCart();
+    const existingItem = cart.cartItems.find(
+      (item) => item.item._id === cartItem.item._id
+    );
+
+    if (existingItem) {
+      existingItem.quantity = cartItem.quantity;
+    }
+
+    this.cartService.setCartItem(cartItem);
   }
 }

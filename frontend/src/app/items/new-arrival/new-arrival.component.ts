@@ -50,6 +50,11 @@ export class NewArrivalComponent implements OnInit {
 
   @ViewChild('categorySelect') categorySelect: MatSelect;
 
+  getHikedPrice(originalPrice: number): number {
+    const discountedPrice = originalPrice * 1.2;
+    return Math.ceil(discountedPrice);
+  }
+
   getNewArrivalItems(): void {
     this.itemsService.getAllItems().subscribe(
       (items) => {
@@ -61,6 +66,7 @@ export class NewArrivalComponent implements OnInit {
       }
     );
   }
+
   getCategories() {
     this.categoryService.getCategories().subscribe((categories) => {
       this.categories = categories;
@@ -71,19 +77,20 @@ export class NewArrivalComponent implements OnInit {
     this.searchLaunch = false;
     this.filter = value;
     this.showList = this.filter === 'All';
-    this.priceFilterForm.reset(); // Reset the price filter form
+    this.priceFilterForm.reset();
     this.filterItems();
   }
   applyPriceFilter() {
     const maxPrice = this.priceFilterForm.get('maxPrice')?.value;
     if (maxPrice !== null) {
-      this.searchDataFiltered = this.newArrivalItems.filter((item) => item.price <= maxPrice);
+      this.searchDataFiltered = this.newArrivalItems.filter(
+        (item) => item.price <= maxPrice
+      );
       this.searchLaunch = true;
-      this.filterItems(); // Call filterItems() after applying the price filter
+      this.filterItems();
     }
   }
 
-    
   filterItems() {
     if (this.filter === 'All') {
       this.showList = true;
@@ -97,15 +104,15 @@ export class NewArrivalComponent implements OnInit {
     }
   }
 
-
-
   onSubmit() {
     this.searchLaunch = true;
     const term = this.searchForm.get('term')?.value;
-    this.searchDataFiltered = this.searchPipe.transform(this.newArrivalItems, term);
+    this.searchDataFiltered = this.searchPipe.transform(
+      this.newArrivalItems,
+      term
+    );
     this.paginateItems();
   }
-
 
   forwardToSingleItem(itemId: string) {
     this.router.navigate(['/items/single-item/' + itemId]);
@@ -117,8 +124,6 @@ export class NewArrivalComponent implements OnInit {
     this.paginateItems();
   }
 
-
-
   paginateItems() {
     const startIndex = this.currentPage * this.pageSize;
     const endIndex = startIndex + this.pageSize;
@@ -128,11 +133,11 @@ export class NewArrivalComponent implements OnInit {
       this.pagedItems = this.searchDataFiltered.slice(startIndex, endIndex);
     }
   }
-    // Add the function to get the max price for the slider
-    getMaxPrice(): number {
-      const maxPrice = Math.max(...this.newArrivalItems.map((item) => item.price));
-      return maxPrice;
-    }
 
-
+  getMaxPrice(): number {
+    const maxPrice = Math.max(
+      ...this.newArrivalItems.map((item) => item.price)
+    );
+    return maxPrice;
+  }
 }

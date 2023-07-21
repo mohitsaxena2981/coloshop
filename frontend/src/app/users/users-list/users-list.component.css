@@ -1,8 +1,19 @@
+.back {
+  background: linear-gradient(45deg, #007bff, #00c6ff);
+  margin-top: 100px;
+  margin-left: 10px;
+}
+
 .btn {
   display: flex;
   justify-content: center;
   margin-bottom: 20px;
-  margin-top: 120px;
+  margin-top: 20px;
+  margin-left: 10px;
+}
+
+.btn-icon {
+  background: linear-gradient(45deg, #007bff, #00c6ff);
 }
 
 .table-container {
@@ -37,7 +48,7 @@ tr:nth-child(even) {
   .table-container {
     overflow-x: scroll;
   }
-  .btn{
+  .btn {
     margin-top: 180px;
   }
 

@@ -3,14 +3,13 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 @Component({
   selector: 'app-carousal',
   templateUrl: './carousal.component.html',
-  styleUrls: ['./carousal.component.css']
+  styleUrls: ['./carousal.component.css'],
 })
 export class CarousalComponent implements OnInit, OnDestroy {
   images = [
-    'assets/images/diwali.jpg',
-    'assets/images/holi.jpg',
-    'assets/images/christmas.jpg',
-    // Add more image URLs here
+    'assets/images/banner.jpg',
+    'assets/images/banner1.jpg',
+    'assets/images/banner4.jpg',
   ];
   currentImageIndex = 0;
   intervalId: any;
@@ -26,7 +25,7 @@ export class CarousalComponent implements OnInit, OnDestroy {
   startAutoRotation(): void {
     this.intervalId = setInterval(() => {
       this.showNextImage();
-    }, 3000); // Set the interval duration (e.g., 3000ms = 3 seconds)
+    }, 3000);
   }
 
   stopAutoRotation(): void {
@@ -38,6 +37,7 @@ export class CarousalComponent implements OnInit, OnDestroy {
   }
 
   showPrevImage(): void {
-    this.currentImageIndex = (this.currentImageIndex - 1 + this.images.length) % this.images.length;
+    this.currentImageIndex =
+      (this.currentImageIndex - 1 + this.images.length) % this.images.length;
   }
 }

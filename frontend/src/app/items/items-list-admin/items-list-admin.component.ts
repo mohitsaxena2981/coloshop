@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ItemDialogComponent } from 'src/app/dialogs/item-dialog/item-dialog.component';
 import { Item } from 'src/app/models/item';
 import { ItemsService } from 'src/app/services/items.service';
-
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-items-list-admin',
   templateUrl: './items-list-admin.component.html',
@@ -13,7 +13,7 @@ export class ItemsListAdminComponent implements OnInit {
   items!: Item[];
   displayedColumns: string[] = ['name', 'image', 'category', 'edit', 'delete'];
 
-  constructor(private itemService: ItemsService, public dialog: MatDialog) {}
+  constructor(private itemService: ItemsService, public dialog: MatDialog, private router: Router) {}
 
   ngOnInit(): void {
     this.getItems();
@@ -39,5 +39,9 @@ export class ItemsListAdminComponent implements OnInit {
         });
       }
     });
+  }
+
+  backToShop() {
+    this.router.navigateByUrl('/');
   }
 }

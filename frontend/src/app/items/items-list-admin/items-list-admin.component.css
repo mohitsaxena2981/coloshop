@@ -1,77 +1,92 @@
-table{
-    width:75%;
-}
-img{
-    height: 150px;
-    width: 150px;
+table {
+  width: 75%;
 }
 
-#center{
-    display:flex;
-    justify-content: center;
-    margin-top: 100px;
+img {
+  height: 150px;
+  width: 150px;
 }
 
-.btn{
-    text-align:center;
-    margin:15px;
-    margin-top: 100px;
+#center {
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
 }
 
+.btn {
+  text-align: center;
+  margin: 15px;
+}
+
+button {
+  background: linear-gradient(45deg, #007bff, #00c6ff);
+}
+
+.back {
+  margin-top: 100px;
+  margin-left: 10px;
+  background: linear-gradient(45deg, #007bff, #00c6ff);
+}
 
 
 .mat-table-container {
-    max-width: 100%;
-    overflow-x: auto;
-    max-height: 400px; /* Set the maximum height as needed */
-    overflow-y: auto; /* Enable vertical scrolling */
-    margin-bottom: 40px;
+  max-width: 100%;
+  overflow-x: auto;
+  max-height: 400px;
+  overflow-y: auto;
+  margin-bottom: 40px;
+}
+
+
+.name-column {
+  width: 200px;
+}
+
+
+.category-column {
+  word-break: break-word;
+  width: 120px;
+}
+
+@media (max-width:767px) {
+  .back {
+    margin-top: 180px;
   }
 
+  img {
+    width: 100px;
+    height: 100px;
+  }
 
   .name-column {
-    width: 200px; /* Adjust the width as per your preference */
+    width: 60px;
   }
 
-  
   .category-column {
-    word-break: break-word;
-    width: 120px; /* Adjust the width as per your preference */
+    width: auto;
+  }
+}
+
+@media (max-width: 500px) {
+  .mat-table-container table {
+    width: 100%;
+    table-layout: fixed;
   }
 
-  
-
-
-
-  @media (max-width:767px){
-    .btn{
-        margin-top: 180px;
-    }
-    
-    .name-column {
-        width: 60px; /* Adjust the width as per your preference */
-      }
-      .category-column {
-        width: auto;
-      }
+  img {
+    height: 60px;
+    width: 60px;
   }
-  
-  @media (max-width: 600px) {
-    .mat-table-container table {
-      width: 100%;
-      table-layout: fixed;
-    }
-    img{
-        height: 80px;
-        width: 50px;
-    }
-    table{
-        font-size: 8px;
-    }
 
+  table {
+    font-size: 8px;
   }
-  
 
+}
 
-  
-  
+@media(max-width: 330px) {
+  img {
+    height: 40px;
+    width: 40px;
+  }
+}

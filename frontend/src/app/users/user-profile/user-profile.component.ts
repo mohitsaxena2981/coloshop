@@ -37,9 +37,13 @@ export class UserProfileComponent implements OnInit {
   }
 
   forwardToForm() {
-    this.router.navigate(['user/profile-edit', this.userId]); // Use the stored userId in the navigation
+    this.router.navigate(['user/profile-edit', this.userId]); 
   }
   forwardToOrder(){
     this.router.navigate(['cart/user']);
+  }
+
+  backToShop() {
+    this.router.navigateByUrl('/');
   }
 }

@@ -52,6 +52,11 @@ export class ItemListComponent implements OnInit {
 
   @ViewChild('categorySelect') categorySelect: MatSelect;
 
+  getHikedPrice(originalPrice: number): number {
+    const discountedPrice = originalPrice * 1.2;
+    return Math.ceil(discountedPrice);
+  }
+
   getItems() {
     this.itemService.getAllItems().subscribe((items) => {
       this.items = items;
@@ -69,19 +74,21 @@ export class ItemListComponent implements OnInit {
     this.searchLaunch = false;
     this.filter = value;
     this.showList = this.filter === 'All';
-    this.priceFilterForm.reset(); // Reset the price filter form
+    this.priceFilterForm.reset();
     this.filterItems();
   }
-  
+
   applyPriceFilter() {
     const maxPrice = this.priceFilterForm.get('maxPrice')?.value;
     if (maxPrice !== null) {
-      this.searchDataFiltered = this.items.filter((item) => item.price <= maxPrice);
+      this.searchDataFiltered = this.items.filter(
+        (item) => item.price <= maxPrice
+      );
       this.searchLaunch = true;
-      this.filterItems(); // Call filterItems() after applying the price filter
+      this.filterItems();
     }
   }
-  
+
   filterItems() {
     if (this.filter === 'All') {
       this.showList = true;
@@ -94,7 +101,6 @@ export class ItemListComponent implements OnInit {
       this.paginateItems();
     }
   }
-    
 
   onSubmit() {
     this.searchLaunch = true;
@@ -122,12 +128,9 @@ export class ItemListComponent implements OnInit {
       this.pagedItems = this.searchDataFiltered.slice(startIndex, endIndex);
     }
   }
-  
 
-  // Add the function to get the max price for the slider
   getMaxPrice(): number {
     const maxPrice = Math.max(...this.items.map((item) => item.price));
     return maxPrice;
   }
 }
-

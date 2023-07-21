@@ -66,7 +66,7 @@ export class UserProfileUpdateComponent implements OnInit {
           duration: 4000,
         }
       );
-      this.navigateToHomePage(); // Navigate to home page after form submission
+      this.navigateToHomePage();
     });
   }
   onSubmit() {

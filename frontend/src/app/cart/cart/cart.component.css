@@ -1,41 +1,7 @@
-/* .example-card {
-    max-width: 400px;
-    margin-bottom: 8px;
-  }
-
-.under{
-    margin:10px;
-}
-
-.global {
-    display:flex;
-    flex-direction: row;
-    justify-content: center;
-}
-
-.centered {
-    text-align: center;
-    color:rgb(142, 92, 188);
-    animation:shakeY;
-    animation-duration:3s;
-}
-
-.rightToLeft {
-    animation:slideInRight;
-    animation-duration: 4s;
-}
-
-.btn-valid {
-    text-align: center;
-    margin:15px;
-} */
-
-
-
-/* Button style */
-.under {
+.back {
     margin-bottom: 20px;
     margin-top: 100px;
+    background: linear-gradient(45deg, #007bff, #00c6ff);
   }
 
   .cart-item{
@@ -102,7 +68,7 @@
     .example-card {
       max-width: 90%;
     }
-    .under{
+    .back{
       margin-top: 180px;
     }
   
