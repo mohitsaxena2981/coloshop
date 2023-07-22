@@ -12,7 +12,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSelectModule } from '@angular/material/select';
-import { SearchPipe } from './Pipes/search-pipe/search-pipe.component';
 import { MatCardModule } from '@angular/material/card';
 import { ItemsListAdminComponent } from './items/items-list-admin/items-list-admin.component';
 import { CategoryListComponent } from './category/category-list/category-list.component';
@@ -170,7 +169,6 @@ const routes: Routes = [
     HeaderComponent,
     FooterComponent,
     GroundZeroComponent,
-    SearchPipe,
     ItemsListAdminComponent,
     CategoryListComponent,
     CategoryDialogComponent,
@@ -205,7 +203,6 @@ const routes: Routes = [
     ReactiveFormsModule,
   ],
   providers: [
-    SearchPipe,
     { provide: HTTP_INTERCEPTORS, useClass: InterInterceptor, multi: true }, // The InterInterceptor service is provided as an HTTP interceptor using the HTTP_INTERCEPTORS token. It allows intercepting and modifying HTTP requests and responses.
   ],
   bootstrap: [AppComponent],

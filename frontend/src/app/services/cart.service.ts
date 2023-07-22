@@ -35,7 +35,6 @@ export class CartService {
 
     return cart;
   }
-
   setCartItem(cartItem: CartItem) {
     const cart = this.getCart();
 
@@ -53,11 +52,13 @@ export class CartService {
       const user = localStorage.getItem('user');
       cart.cartItems.push(cartItem);
       cart.user = user;
+      cart.timestamp = new Date(); 
       this.updateLocalStorage(cart);
     }
 
     return cart;
   }
+
 
   removeItem(index: number) {
     const cart = this.getCart();

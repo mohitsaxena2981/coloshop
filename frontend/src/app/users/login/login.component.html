@@ -4,13 +4,15 @@
       <form [formGroup]="loginForm">
         <h1>Login🖊️</h1>
         <div *ngIf="isSubmitted && authError">
-          <span style="color: red">{{ authError }}</span>
+          <span class="err">{{ authError }}</span>
         </div>
 
         <div>
           <mat-form-field class="example-form-field" appearance="fill">
             <mat-label>Email</mat-label>
-            <input matInput type="text" formControlName="email" />
+            <input matInput type="text" formControlName="email" placeholder="*email@gmail.com" />
+            <mat-error *ngIf="loginForm.get('email').hasError('required')">Email is required</mat-error>
+            <mat-error *ngIf="loginForm.get('email').hasError('email')">Invalid email format</mat-error>
           </mat-form-field>
         </div>
 
@@ -21,7 +23,6 @@
               matInput
               [type]="hide ? 'password' : 'text'"
               formControlName="password"
-              required
             />
             <button
               mat-icon-button
@@ -32,11 +33,12 @@
             >
               <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
             </button>
+            <mat-error *ngIf="loginForm.get('password').hasError('required')">Password is required</mat-error>
           </mat-form-field>
         </div>
 
         <div class="btn">
-          <button mat-raised-button color="accent" (click)="onSubmit()">
+          <button mat-raised-button color="accent" (click)="onSubmit()" [disabled]="loginForm.invalid">
             Sign In
           </button>
         </div>

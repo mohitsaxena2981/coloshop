@@ -31,7 +31,7 @@ export class CategoryListComponent implements OnInit {
 
   onDeleteCategory(category: Category) {
     const dialogRef = this.dialog.open(CategoryDialogComponent, {
-      width: '300px',
+      width: '400px',
       data: { name: category.name },
     });
 

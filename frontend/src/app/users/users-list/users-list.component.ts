@@ -49,7 +49,7 @@ export class UsersListComponent implements OnInit {
 
   deleteModal(user: User) {
     const dialogRef = this.dialog.open(UserDialogComponent, {
-      width: '250px',
+      width: '400px',
       data: { name: user.email },
     });
 

@@ -4,7 +4,8 @@ export class Cart {
     _id:string;
     cartItems:CartItem[];
     user?:string;
-    totalPrice:number
+    totalPrice:number;
+    timestamp?: Date;
 }
 
 export class CartItem {

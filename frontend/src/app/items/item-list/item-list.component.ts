@@ -3,12 +3,10 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Category } from 'src/app/models/category';
 import { Item } from 'src/app/models/item';
-import { SearchPipe } from 'src/app/Pipes/search-pipe/search-pipe.component';
 import { CategoryService } from 'src/app/services/category.service';
 import { ItemsService } from 'src/app/services/items.service';
 import { PageEvent } from '@angular/material/paginator';
 import { MatSelect } from '@angular/material/select';
-import { MatSliderChange } from '@angular/material/slider';
 
 @Component({
   selector: 'app-item-list',
@@ -19,21 +17,18 @@ export class ItemListComponent implements OnInit {
   items: Item[] = [];
   categories: Category[] = [];
   filter: string;
-  showList = true;
-  searchLaunch = false;
-  searchDataFiltered: Item[] = [];
   searchForm: FormGroup;
   priceFilterForm: FormGroup;
 
   pageSize = 16;
   pagedItems: Item[] = [];
   currentPage = 0;
+  filteredItems: Item[] = []; 
 
   constructor(
     private itemService: ItemsService,
     private categoryService: CategoryService,
     private formBuilder: FormBuilder,
-    private searchPipe: SearchPipe,
     private router: Router
   ) {
     this.filter = 'All';
@@ -48,6 +43,7 @@ export class ItemListComponent implements OnInit {
   ngOnInit(): void {
     this.getItems();
     this.getCategories();
+    this.priceFilterForm.get('maxPrice')?.setValue(this.getMaxPrice());
   }
 
   @ViewChild('categorySelect') categorySelect: MatSelect;
@@ -56,14 +52,16 @@ export class ItemListComponent implements OnInit {
     const discountedPrice = originalPrice * 1.2;
     return Math.ceil(discountedPrice);
   }
-
   getItems() {
     this.itemService.getAllItems().subscribe((items) => {
       this.items = items;
+      this.priceFilterForm.get('maxPrice')?.setValue(this.getMaxPrice());
+      this.applyPriceFilter(); 
       this.paginateItems();
     });
   }
-
+  
+  
   getCategories() {
     this.categoryService.getCategories().subscribe((categories) => {
       this.categories = categories;
@@ -71,42 +69,17 @@ export class ItemListComponent implements OnInit {
   }
 
   changeClient(value: string) {
-    this.searchLaunch = false;
     this.filter = value;
-    this.showList = this.filter === 'All';
     this.priceFilterForm.reset();
     this.filterItems();
   }
 
   applyPriceFilter() {
-    const maxPrice = this.priceFilterForm.get('maxPrice')?.value;
-    if (maxPrice !== null) {
-      this.searchDataFiltered = this.items.filter(
-        (item) => item.price <= maxPrice
-      );
-      this.searchLaunch = true;
-      this.filterItems();
-    }
-  }
-
-  filterItems() {
-    if (this.filter === 'All') {
-      this.showList = true;
-      this.paginateItems();
-    } else {
-      this.showList = false;
-      this.searchDataFiltered = this.searchDataFiltered.filter(
-        (item) => item.category?.name === this.filter
-      );
-      this.paginateItems();
-    }
+    this.filterItems();
   }
 
   onSubmit() {
-    this.searchLaunch = true;
-    const term = this.searchForm.get('term')?.value;
-    this.searchDataFiltered = this.searchPipe.transform(this.items, term);
-    this.paginateItems();
+    this.filterItems();
   }
 
   forwardToSingleItem(itemId: string) {
@@ -122,15 +95,37 @@ export class ItemListComponent implements OnInit {
   paginateItems() {
     const startIndex = this.currentPage * this.pageSize;
     const endIndex = startIndex + this.pageSize;
-    if (!this.searchLaunch) {
-      this.pagedItems = this.items.slice(startIndex, endIndex);
-    } else {
-      this.pagedItems = this.searchDataFiltered.slice(startIndex, endIndex);
-    }
+    this.pagedItems = this.filteredItems.slice(startIndex, endIndex);
+  }
+
+  filterItems() {
+    this.filteredItems = this.items.slice();
+
+    const categoryFilter = this.filter !== 'All' ? this.filter : null;
+    const maxPrice = this.priceFilterForm.get('maxPrice')?.value;
+    const searchTerm = this.searchForm.get('term')?.value.toLowerCase();
+
+    this.filteredItems = this.filteredItems.filter((item) => {
+      const passCategoryFilter = !categoryFilter || item.category?.name === categoryFilter;
+      const passPriceFilter = maxPrice === null || item.price <= maxPrice;
+      const passSearchFilter = !searchTerm || item.name.toLowerCase().includes(searchTerm);
+
+      return passCategoryFilter && passPriceFilter && passSearchFilter;
+    });
+
+    this.paginateItems();
   }
 
   getMaxPrice(): number {
+    if (this.items.length === 0) {
+      return 0; 
+    }
     const maxPrice = Math.max(...this.items.map((item) => item.price));
     return maxPrice;
+  }
+  
+
+  get showList(): boolean {
+    return this.filteredItems.length > 0;
   }
 }

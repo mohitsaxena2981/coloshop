@@ -1,3 +1,9 @@
+.card-wrapper {
+  flex: 0 0 calc(33.33% - 20px);
+  max-width: calc(33.33% - 20px);
+  margin-bottom: 20px;
+}
+
 .example-card {
   width: 100%;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -38,7 +44,7 @@
 }
 
 .card-wrapper .mat-card {
-  width: 85%;
+  width: 88%;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -87,12 +93,15 @@
 .container {
   display: flex;
   justify-content: space-between;
+  max-width: 1200px;
   align-items: center;
   background-color: #f8f8f8;
   padding: 20px;
   border-radius: 4px;
   margin: 100px;
   margin-top: 40px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .mat-focus-indicator {
@@ -212,14 +221,23 @@ button {
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-@media (max-width: 1023px) {
+.no-items-text {
+  font-size: 1.2rem;
+  color: #000;
+  padding: 1rem;
+  text-align: center;
+  background-color: #f8f8f8;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 1123px) {
   .card-wrapper {
     flex: 0 0 calc(33.33% - 20px);
     max-width: calc(33.33% - 20px);
   }
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 800px) {
   .card-wrapper {
     flex: 0 0 calc(50% - 20px);
     max-width: calc(50% - 20px);
@@ -241,17 +259,28 @@ button {
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
   .container {
     margin: 20px;
     margin-bottom: 50px;
   }
+
 }
 
-@media (max-width: 479px) {
+@media (max-width: 650px) {
   .card-wrapper {
     flex: 0 0 100%;
     max-width: 100%;
+  }
+  .card-wrapper .mat-card {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
+
+@media (max-width: 450px){
+  .card-wrapper .mat-card{
+    width: 85%;
   }
 }
 
@@ -259,6 +288,9 @@ button {
   .container {
     margin: 5px;
     margin-bottom: 50px;
+  }
+  .card-wrapper .mat-card{
+    width: 82%;
   }
 }
 
@@ -280,6 +312,9 @@ button {
   .banner h1 {
     font-size: 28px;
   }
+  .card-wrapper .mat-card {
+    width: 90%;
+  }
 }
 
 @media screen and (min-width: 2000px) {
@@ -290,7 +325,20 @@ button {
   .banner h1 {
     font-size: 28px;
   }
+  .card-wrapper .mat-card {
+    width: 92%;
+  }
 }
+
+@media screen and (min-width: 2500px) {
+  .card-wrapper {
+    flex: 0 0 calc(20% - 20px);
+    max-width: calc(20% - 20px);
+  }
+
+}
+
+
 
 @media screen and (max-width: 768px) {
   .banner {
@@ -312,3 +360,6 @@ button {
     font-size: 28px;
   }
 }
+
+
+

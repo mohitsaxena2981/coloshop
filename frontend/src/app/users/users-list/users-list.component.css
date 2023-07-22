@@ -1,18 +1,18 @@
-.back {
-  background: linear-gradient(45deg, #007bff, #00c6ff);
-  margin-top: 100px;
-  margin-left: 10px;
-}
 
 .btn {
   display: flex;
   justify-content: center;
   margin-bottom: 20px;
-  margin-top: 20px;
+  margin-top: 100px;
   margin-left: 10px;
 }
 
 .btn-icon {
+
+  background: #f5f5f5;
+}
+
+.btn-new{
   background: linear-gradient(45deg, #007bff, #00c6ff);
 }
 
@@ -43,16 +43,30 @@ th {
 tr:nth-child(even) {
   background-color: #f9f9f9;
 }
+@media (min-width: 800px) {
+  th.mat-header-cell,
+  td.mat-cell {
+    height: 80px;
+  }
+}
+
+@media (min-width: 1200px) {
+  th.mat-header-cell,
+  td.mat-cell {
+    height: 120px;
+  }
+}
 
 @media (max-width: 767px) {
   .table-container {
     overflow-x: scroll;
   }
-  .btn {
-    margin-top: 180px;
-  }
 
   table {
     min-width: 600px;
+  }
+  .btn {
+    margin-top: 180px;
+
   }
 }

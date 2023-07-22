@@ -62,6 +62,11 @@ export class AdminOrdersComponent implements OnInit {
     );
   }
 
+  getOrderDate(timestamp: string): string {
+    const date = new Date(timestamp);
+    return date.toLocaleString(); 
+  }
+
   backToShop() {
     this.router.navigateByUrl('/');
   }

@@ -6,7 +6,6 @@ const jwt = require("jsonwebtoken");
 
 router.get("/", async (req, res) => {
   const users = await User.find();
-
   if (!users) {
     res.status(400).send("No users found :/");
   }
@@ -49,15 +48,11 @@ router.post("/register", async (req, res) => {
 });
 
 router.put("/:id", async (req, res) => {
-  const userInfo = await User.findById(req.params.id);
-
-  let newPassword;
-  if (req.body.password) {
-    newPassword = bcrypt.hashSync(req.body.password);
-  } else {
-    newPassword = userInfo.passwordHash;
+  const existingUser = await User.findOne({ email: req.body.email });
+  if(existingUser){
+    return res.status(409).send("User with this email already exists");
   }
-
+  let newPassword;
   const user = await User.findByIdAndUpdate(
     req.params.id,
     {

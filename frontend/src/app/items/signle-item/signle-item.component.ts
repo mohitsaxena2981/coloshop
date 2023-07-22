@@ -46,7 +46,6 @@ export class SignleItemComponent implements OnInit {
 
   addToCart() {
     const cartItem: CartItem = {
-      //_id:this.item._id,
       item: this.item,
       quantity: 1,
     };

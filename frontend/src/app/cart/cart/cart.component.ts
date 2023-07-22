@@ -87,15 +87,11 @@ export class CartComponent implements OnInit {
     const userId = this.getUserId();
 
     if (!userId || userId === 'guest') {
-      this.snackBar.open(
-        'You need to log in to buy products!.',
-        'OK',
-        {
-          duration: 2000,
-          horizontalPosition: 'right',
-          verticalPosition: 'top',
-        }
-      );
+      this.snackBar.open('You need to log in to buy products!.', 'OK', {
+        duration: 2000,
+        horizontalPosition: 'right',
+        verticalPosition: 'top',
+      });
       return;
     }
 
@@ -113,6 +109,7 @@ export class CartComponent implements OnInit {
     }
 
     cart.user = userId;
+    cart.timestamp = new Date(); // Set the current timestamp before saving the cart
 
     this.cartService.saveCartToServer(cart).subscribe(
       (response) => {

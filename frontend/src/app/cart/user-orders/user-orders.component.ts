@@ -57,6 +57,10 @@ export class UserOrdersComponent implements OnInit {
       this.userName = 'guest';
     }
   }
+  getOrderDate(timestamp: string): string {
+    const date = new Date(timestamp);
+    return date.toLocaleString();
+  }
 
   backToShop() {
     this.router.navigateByUrl('/user/profile');

@@ -68,10 +68,12 @@ router.post("/", async (req, res) => {
     );
 
     const cart = new Cart({
-      // Cart Object
       cartItems: cartItems,
       user: user,
       totalPrice: totalPrices.reduce((a, b) => a + b, 0),
+      timestamp: new Date().toLocaleString("en-US", {
+        timeZone: "Asia/Kolkata",
+      }), 
     });
 
     const savedCart = await cart.save();

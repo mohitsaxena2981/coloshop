@@ -9,7 +9,7 @@ export class CarousalComponent implements OnInit, OnDestroy {
   images = [
     'assets/images/banner.jpg',
     'assets/images/banner1.jpg',
-    'assets/images/banner4.jpg',
+    'assets/images/banner3.jpg',
   ];
   currentImageIndex = 0;
   intervalId: any;

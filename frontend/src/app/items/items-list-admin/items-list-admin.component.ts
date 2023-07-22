@@ -28,7 +28,7 @@ export class ItemsListAdminComponent implements OnInit {
 
   onDeleteItem(item: Item) {
     const dialogRef = this.dialog.open(ItemDialogComponent, {
-      width: '300px',
+      width: '400px',
       data: { name: item.name },
     });
 

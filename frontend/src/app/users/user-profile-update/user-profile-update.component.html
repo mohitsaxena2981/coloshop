@@ -12,8 +12,7 @@
                 userForm.get('name').invalid ||
                 userForm.get('address').invalid)
             "
-            >Name, Email, and Address are required</span
-          >
+          >Name, Email, and Address are required</span>
         </div>
         <div>
           <mat-form-field class="example-full-width" appearance="fill">
@@ -24,6 +23,7 @@
               placeholder="Ex. Mohit"
               matInput
             />
+            <mat-error *ngIf="userForm.get('name').invalid && userForm.get('name').dirty">Name is required</mat-error>
           </mat-form-field>
         </div>
 
@@ -36,6 +36,7 @@
               placeholder="Ex. mohit@example.com"
               matInput
             />
+            <mat-error *ngIf="userForm.get('email').invalid && userForm.get('email').dirty">Invalid email format</mat-error>
           </mat-form-field>
         </div>
 
@@ -48,6 +49,7 @@
               placeholder="Ex. Jhansi"
               matInput
             />
+            <mat-error *ngIf="userForm.get('address').invalid && userForm.get('address').dirty">Address is required</mat-error>
           </mat-form-field>
         </div>
         <div>
@@ -56,6 +58,7 @@
             mat-raised-button
             (click)="onSubmit()"
             color="accent"
+            [disabled]="userForm.invalid"
           >
             Submit
           </button>
@@ -64,3 +67,4 @@
     </div>
   </div>
 </div>
+

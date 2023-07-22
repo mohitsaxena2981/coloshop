@@ -1,6 +1,14 @@
 <button class="back" mat-raised-button color="primary" (click)="backToShop()">
   <mat-icon>keyboard_return</mat-icon>Back To Shop
 </button>
+
+<div class="welcome-banner">
+  <h1 class="centered">
+    <h2>{{ welcomeMessage }} {{ user?.name }}!</h2>
+    <h3>{{ currentTime }}</h3>
+    Explore your profile and check your order history.
+  </h1>
+</div>
 <div class="profile-container">
   <h2>User Profile</h2>
   <div class="profile-info">

@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
     this.userService.login(email, password).subscribe(
       (user:{token:string,user:string,isAdmin:boolean}) => {
         this.localStorage.setToken(user.token);
-        this.router.navigate(['/']); // Redirect to home page after successful login
+        this.router.navigate(['/']); 
       },
       (error) => {
         if (error.status === 400) {

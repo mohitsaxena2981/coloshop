@@ -5,7 +5,7 @@
   <h2>Previous Orders</h2>
   <div *ngIf="previousOrders.length === 0">No previous orders</div>
   <div *ngFor="let order of previousOrders" class="order">
-    <p>Order ID: {{ order._id }}</p>
+    <p class="order-info">Order Date: {{ order.timestamp | date:'medium' }}</p>
     <div class="order-items">
       <mat-card *ngFor="let cartItem of order.cartItems" class="example-card">
         <mat-card-title-group>

@@ -3,7 +3,6 @@
 </button>
 
 <div class="global">
-  
   <div class="image-container">
     <img [src]="item?.image" calass="item-image" />
   </div>
@@ -21,7 +20,7 @@
         </div>
 
         <button
-          mat-raised-button 
+          mat-raised-button
           *ngIf="item?.description.length > 20"
           (click)="toggleDescription()"
         >

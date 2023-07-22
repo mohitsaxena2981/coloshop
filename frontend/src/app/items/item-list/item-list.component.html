@@ -43,7 +43,7 @@
 </div>
 
 <div class="card-container">
-  <ng-container *ngIf="showList; else filteredItems" #filteredItems>
+  <ng-container *ngIf="showList; else noItems">
     <div *ngFor="let item of pagedItems" class="card-wrapper">
       <mat-card class="example-card">
         <mat-card-header>
@@ -57,7 +57,12 @@
         <img mat-card-image [src]="item.image" alt="image" />
         <mat-card-header>
           <div class="price-container">
-            <div class="example-header-text">Huge Discount!</div>
+            <ng-container *ngIf="item.price > 2000; else hugeDiscount">
+              <div class="example-header-text">Limited Time Offer!</div>
+            </ng-container>
+            <ng-template #hugeDiscount>
+              <div class="example-header-text">Huge Discount!</div>
+            </ng-template>
             <div class="original-price">₹ {{ getHikedPrice(item.price) }}</div>
             <div class="discounted-price">₹ {{ item.price }}</div>
           </div>
@@ -72,52 +77,18 @@
             See Details
           </button>
         </mat-card-actions>
-        
       </mat-card>
     </div>
   </ng-container>
 
-  <ng-template #filteredItems>
-    <div
-      *ngFor="let item of pagedItems"
-      class="card-wrapper"
-      [hidden]="item.category?.name !== filter"
-    >
-      <mat-card class="example-card">
-        <mat-card-header>
-          <div mat-card-avatar class="example-header-image"></div>
-          <mat-card-title>{{ item.name }}</mat-card-title>
-          <mat-card-subtitle>
-            {{ item.category?.name }}
-            <mat-icon>{{ item.category?.categoryType }}</mat-icon>
-          </mat-card-subtitle>
-        </mat-card-header>
-        <img mat-card-image [src]="item.image" alt="image" />
-        <mat-card-header>
-          <div class="price-container">
-            <div class="example-header-text">Huge Discount!</div>
-            <div class="original-price">₹ {{ getHikedPrice(item.price) }}</div>
-            <div class="discounted-price">₹ {{ item.price }}</div>
-          </div>
-        </mat-card-header>
-        <mat-card-actions>
-          <button
-            class="btn"
-            mat-raised-button
-            color="accent"
-            (click)="forwardToSingleItem(item._id)"
-          >
-            See Details
-          </button>
-        </mat-card-actions>
-      </mat-card>
-    </div>
+  <ng-template #noItems>
+    <div class="no-items-text">No items found.</div>
   </ng-template>
 </div>
 
 <mat-paginator
-  *ngIf="searchLaunch ? searchDataFiltered?.length : items?.length"
-  [length]="searchLaunch ? searchDataFiltered.length : items.length"
+  *ngIf="showList"
+  [length]="filteredItems.length"
   [pageSize]="pageSize"
   [pageSizeOptions]="[8, 16]"
   (page)="onPageChange($event)"

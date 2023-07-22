@@ -42,7 +42,7 @@ export class ItemFormComponent implements OnInit {
       price: ['', Validators.required],
       image: [''],
       category: ['', Validators.required],
-      newArrival: [false] // Default value is set to false
+      newArrival: [false] 
     });
   }
 
@@ -75,8 +75,8 @@ export class ItemFormComponent implements OnInit {
             name: item.name,
             description: item.description,
             price: item.price,
-            image: null, // Set to null as the image is not retrieved from the database
-            category: item.category._id, // Set the category value to the category ID
+            image: null, 
+            category: item.category._id, 
             newArrival: item.newArrival
           });
           this.imageDisplay = item.image;

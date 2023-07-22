@@ -6,9 +6,8 @@
 
   .cart-item{
     padding-right: 10px;
-    /* font-weight: 200; */
     color: black;
-
+    font-weight: bold;
   }
   .cart-item span{
     font-weight: bolder;
@@ -48,6 +47,22 @@
     background-color: #f8f8f8;
     padding: 20px;
     text-align: center;
+    margin-top: 40px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
+  }
+  
+  .shipping-banner h2 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .shipping-banner h3 {
+    font-size: 20px;
+    color: #666;
+    margin-bottom: 20px;
   }
   
   /* Centered text */

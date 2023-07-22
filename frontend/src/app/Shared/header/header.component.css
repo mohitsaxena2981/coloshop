@@ -40,6 +40,7 @@
 .navbar-auth {
   display: flex;
   gap: 10px;
+  align-items: center;
 }
 
 .navbar-cart {
@@ -128,6 +129,19 @@
 .navbar-brand a mat-icon {
   margin-right: 5px;
 }
+
+
+.user-name {
+  margin-right: 5px;
+}
+
+.admin-badge {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  margin-left: 5px;
+}
+
 
 @media (max-width: 768px) {
   .navbar {

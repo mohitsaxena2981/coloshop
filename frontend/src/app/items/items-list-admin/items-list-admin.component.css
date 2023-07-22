@@ -5,6 +5,7 @@ table {
 img {
   height: 150px;
   width: 150px;
+  object-fit: cover; 
 }
 
 #center {
@@ -16,18 +17,19 @@ img {
 .btn {
   text-align: center;
   margin: 15px;
+  margin-top: 100px;
 }
+
+
 
 button {
   background: linear-gradient(45deg, #007bff, #00c6ff);
+  background: #f5f5f5;
 }
 
-.back {
-  margin-top: 100px;
-  margin-left: 10px;
+.btn-new {
   background: linear-gradient(45deg, #007bff, #00c6ff);
 }
-
 
 .mat-table-container {
   max-width: 100%;
@@ -37,25 +39,24 @@ button {
   margin-bottom: 40px;
 }
 
-
 .name-column {
   width: 200px;
 }
-
 
 .category-column {
   word-break: break-word;
   width: 120px;
 }
 
-@media (max-width:767px) {
-  .back {
-    margin-top: 180px;
-  }
+@media (max-width: 767px) {
 
   img {
     width: 100px;
     height: 100px;
+  }
+
+  .btn{
+    margin-top: 180px;
   }
 
   .name-column {
@@ -64,6 +65,14 @@ button {
 
   .category-column {
     width: auto;
+  }
+
+  table {
+    width: 100%; 
+  }
+
+  td.mat-cell {
+    width: 33.333%;
   }
 }
 
@@ -82,11 +91,60 @@ button {
     font-size: 8px;
   }
 
+  td.mat-cell {
+    width: 50%;
+  }
 }
 
-@media(max-width: 330px) {
+@media (max-width: 330px) {
   img {
     height: 40px;
     width: 40px;
+  }
+
+  td.mat-cell {
+    width: 100%; 
+  }
+}
+
+@media (min-width: 1024px) {
+  table {
+    width: 100%;
+  }
+
+  td.mat-cell {
+    width: 25%; 
+  }
+}
+
+@media (min-width: 1200px) {
+  .mat-table-container {
+    max-height: 600px; 
+  }
+}
+
+@media (min-width: 1500px) {
+  td.mat-cell {
+    width: 20%;
+  }
+  .mat-table-container {
+    max-height: 1000px; 
+  }
+}
+
+@media (min-width: 2000px) {
+  td.mat-cell {
+    width: 16.666%; 
+  }
+  .mat-table-container {
+    max-height: 1400px; 
+  }
+}
+
+
+@media (min-width: 3000px) {
+
+  .mat-table-container {
+    max-height: 2000px; 
   }
 }

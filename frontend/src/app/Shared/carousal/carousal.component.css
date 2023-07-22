@@ -65,6 +65,20 @@
   font-size: 24px;
 }
 
+
+@media (min-width: 1700px){
+  .carousel {
+    height: 600px;
+  }
+}
+
+@media (min-width: 2000px){
+  .carousel {
+    height: 800px;
+  }
+}
+
+
 @media (max-width: 767px) {
   .carousel {
     height: 200px;

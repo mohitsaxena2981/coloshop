@@ -4,12 +4,13 @@ const Schema = mongoose.Schema;
 const cartSchema = new Schema({
   cartItems: [
     {
-      item: { type: Schema.Types.ObjectId, ref: 'Item' }, // This is a reference to the Item model using Schema.Types.ObjectId
+      item: { type: Schema.Types.ObjectId, ref: 'Item' },
       quantity: { type: Number, required: true }
     }
   ],
-  user: { type: Schema.Types.ObjectId, ref: 'User', required: true }, //The user field is a reference to the User model using Schema.Types.ObjectId
-  totalPrice: { type: Number, required: true }
+  user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+  totalPrice: { type: Number, required: true },
+  timestamp: { type: Date, default: Date.now }
 });
 
 module.exports = mongoose.model('Cart', cartSchema);

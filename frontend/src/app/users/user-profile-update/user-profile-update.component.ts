@@ -21,7 +21,7 @@ export class UserProfileUpdateComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private userService: UserServiceService,
-    private _snackBar: MatSnackBar,
+    private snackBar: MatSnackBar,
     private router: Router
   ) {}
 
@@ -51,23 +51,34 @@ export class UserProfileUpdateComponent implements OnInit {
           this.userForm.get('isAdmin').setValue(user.isAdmin);
           this.userForm.get('password').setValue(user.password);
         });
-      } 
+      }
     });
   }
 
   updateUser(user: User) {
-    this.userService.updateUser(user, user._id).subscribe((user) => {
-      this._snackBar.open(
-        user.name + ' Your profile is updated successfully 😄',
-        'OK',
-        {
-          horizontalPosition: 'right',
-          verticalPosition: 'top',
-          duration: 4000,
+    this.userService.updateUser(user, user._id).subscribe(
+      (user) => {
+        this.snackBar.open(
+          user.name + ' Your profile is updated successfully 😄',
+          'OK',
+          {
+            horizontalPosition: 'right',
+            verticalPosition: 'top',
+            duration: 4000,
+          }
+        );
+        this.navigateToHomePage();
+      },
+      (error) => {
+        if (error.status === 409) {
+          this.snackBar.open('User with this email already exists', 'OK', {
+            horizontalPosition: 'right',
+            verticalPosition: 'top',
+            duration: 4000,
+          });
         }
-      );
-      this.navigateToHomePage();
-    });
+      }
+    );
   }
   onSubmit() {
     this.isSubmitted = true;

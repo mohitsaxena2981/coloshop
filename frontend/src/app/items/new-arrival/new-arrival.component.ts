@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Category } from 'src/app/models/category';
 import { Item } from 'src/app/models/item';
-import { SearchPipe } from 'src/app/Pipes/search-pipe/search-pipe.component';
 import { CategoryService } from 'src/app/services/category.service';
 import { ItemsService } from 'src/app/services/items.service';
 import { PageEvent } from '@angular/material/paginator';
@@ -18,7 +17,6 @@ export class NewArrivalComponent implements OnInit {
   newArrivalItems!: Item[];
   categories!: Category[];
   filter!: string;
-  showList = true;
   searchLaunch = false;
   searchDataFiltered!: Item[];
   searchForm!: FormGroup;
@@ -26,12 +24,12 @@ export class NewArrivalComponent implements OnInit {
   pageSize = 16;
   pagedItems: Item[] = [];
   currentPage = 0;
+  filteredItems: Item[] = [];
 
   constructor(
     private itemsService: ItemsService,
     private categoryService: CategoryService,
     private formBuilder: FormBuilder,
-    private searchPipe: SearchPipe,
     private router: Router
   ) {
     this.filter = 'All';
@@ -46,6 +44,7 @@ export class NewArrivalComponent implements OnInit {
   ngOnInit(): void {
     this.getNewArrivalItems();
     this.getCategories();
+    this.priceFilterForm.get('maxPrice')?.setValue(this.getMaxPrice());
   }
 
   @ViewChild('categorySelect') categorySelect: MatSelect;
@@ -59,6 +58,8 @@ export class NewArrivalComponent implements OnInit {
     this.itemsService.getAllItems().subscribe(
       (items) => {
         this.newArrivalItems = items.filter((item) => item.newArrival === true);
+        this.priceFilterForm.get('maxPrice')?.setValue(this.getMaxPrice());
+      this.applyPriceFilter(); 
         this.paginateItems();
       },
       (error) => {
@@ -74,46 +75,35 @@ export class NewArrivalComponent implements OnInit {
   }
 
   changeClient(value: string) {
-    this.searchLaunch = false;
     this.filter = value;
-    this.showList = this.filter === 'All';
     this.priceFilterForm.reset();
     this.filterItems();
   }
   applyPriceFilter() {
-    const maxPrice = this.priceFilterForm.get('maxPrice')?.value;
-    if (maxPrice !== null) {
-      this.searchDataFiltered = this.newArrivalItems.filter(
-        (item) => item.price <= maxPrice
-      );
-      this.searchLaunch = true;
-      this.filterItems();
-    }
+    this.filterItems();
   }
 
   filterItems() {
-    if (this.filter === 'All') {
-      this.showList = true;
-      this.paginateItems();
-    } else {
-      this.showList = false;
-      this.searchDataFiltered = this.searchDataFiltered.filter(
-        (item) => item.category?.name === this.filter
-      );
-      this.paginateItems();
-    }
-  }
+    this.filteredItems = this.newArrivalItems.slice();
 
-  onSubmit() {
-    this.searchLaunch = true;
-    const term = this.searchForm.get('term')?.value;
-    this.searchDataFiltered = this.searchPipe.transform(
-      this.newArrivalItems,
-      term
-    );
+    const categoryFilter = this.filter !== 'All' ? this.filter : null;
+    const maxPrice = this.priceFilterForm.get('maxPrice')?.value;
+    const searchTerm = this.searchForm.get('term')?.value.toLowerCase();
+
+    this.filteredItems = this.filteredItems.filter((item) => {
+      const passCategoryFilter = !categoryFilter || item.category?.name === categoryFilter;
+      const passPriceFilter = maxPrice === null || item.price <= maxPrice;
+      const passSearchFilter = !searchTerm || item.name.toLowerCase().includes(searchTerm);
+
+      return passCategoryFilter && passPriceFilter && passSearchFilter;
+    });
+
     this.paginateItems();
   }
 
+  onSubmit() {
+    this.filterItems();
+  }
   forwardToSingleItem(itemId: string) {
     this.router.navigate(['/items/single-item/' + itemId]);
   }
@@ -124,20 +114,20 @@ export class NewArrivalComponent implements OnInit {
     this.paginateItems();
   }
 
+
   paginateItems() {
     const startIndex = this.currentPage * this.pageSize;
     const endIndex = startIndex + this.pageSize;
-    if (!this.searchLaunch) {
-      this.pagedItems = this.newArrivalItems.slice(startIndex, endIndex);
-    } else {
-      this.pagedItems = this.searchDataFiltered.slice(startIndex, endIndex);
-    }
+    this.pagedItems = this.filteredItems.slice(startIndex, endIndex);
   }
-
   getMaxPrice(): number {
-    const maxPrice = Math.max(
-      ...this.newArrivalItems.map((item) => item.price)
-    );
+    if (!this.newArrivalItems || this.newArrivalItems.length === 0) {
+      return 0;
+    }
+    const maxPrice = Math.max(...this.newArrivalItems.map((item) => item.price));
     return maxPrice;
+  }
+  get showList(): boolean {
+    return this.filteredItems.length > 0;
   }
 }

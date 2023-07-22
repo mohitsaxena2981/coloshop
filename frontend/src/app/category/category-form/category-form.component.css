@@ -26,8 +26,13 @@ a {
 /* Form container */
 .form {
   flex: 1;
-  margin: 0 20px;
+  margin: 0 40px;
 }
+
+form div{
+  margin-bottom: 10px;
+}
+
 
 /* Form fields */
 .example-form-field {

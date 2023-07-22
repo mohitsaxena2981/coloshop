@@ -50,13 +50,11 @@
       >Logout</a
     >
     <ng-container matColumnDef="delete">
-      <span
-        *ngIf="getLoggedStatus()"
-        class="nav-link"
-        (click)="openUserProfile(user)"
-        class="nav-link user-profile"
-        ><mat-icon>account_circle</mat-icon>{{ userName }}</span
-      >
+      <span *ngIf="getLoggedStatus()" class="nav-link" (click)="openUserProfile(user)" class="nav-link user-profile">
+        <mat-icon>account_circle</mat-icon>
+        {{ userName }} 
+        <span *ngIf="userIsAdmin" class="admin-badge"> (Admin)<mat-icon>verified_user</mat-icon></span>
+      </span>
     </ng-container>
   </div>
 
