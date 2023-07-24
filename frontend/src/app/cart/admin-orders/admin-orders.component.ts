@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Cart, CartItem } from 'src/app/models/cart';
 import { CartService } from 'src/app/services/cart.service';
 import { ItemsService } from 'src/app/services/items.service';
-import { UserServiceService } from '../../services/user-service.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-admin-orders',
   templateUrl: './admin-orders.component.html',
@@ -19,7 +18,6 @@ export class AdminOrdersComponent implements OnInit {
   constructor(
     private cartService: CartService,
     private itemService: ItemsService,
-    private userService: UserServiceService,
     private router: Router
   ) {}
 

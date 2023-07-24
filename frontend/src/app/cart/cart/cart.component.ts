@@ -4,7 +4,7 @@ import { Cart, CartItem } from 'src/app/models/cart';
 import { CartService } from 'src/app/services/cart.service';
 import { ItemsService } from 'src/app/services/items.service';
 import { UserServiceService } from '../../services/user-service.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
@@ -15,7 +15,7 @@ export class CartComponent implements OnInit {
   respCart: Cart;
   totalPrice: number;
   userName: string;
-  previousOrders: Cart[] = [];
+  // previousOrders: Cart[] = [];
 
   constructor(
     private cartService: CartService,
@@ -109,8 +109,7 @@ export class CartComponent implements OnInit {
     }
 
     cart.user = userId;
-    cart.timestamp = new Date(); // Set the current timestamp before saving the cart
-
+    cart.timestamp = new Date();
     this.cartService.saveCartToServer(cart).subscribe(
       (response) => {
         console.log('Cart saved to the server:', response);

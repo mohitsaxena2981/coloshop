@@ -1,9 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Cart } from 'src/app/models/cart';
+import { Router } from '@angular/router';
 import { CartService } from '../../services/cart.service';
 import { UserServiceService } from '../../services/user-service.service';
-import { User } from 'src/app/models/user';
 import { MatDialog } from '@angular/material/dialog';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';

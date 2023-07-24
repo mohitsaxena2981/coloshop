@@ -20,7 +20,7 @@ export class CategoryFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private categoryService: CategoryService,
-    private _snackBar: MatSnackBar,
+    private snackBar: MatSnackBar,
     private router: Router
   ) {}
 
@@ -32,7 +32,7 @@ export class CategoryFormComponent implements OnInit {
   initCategoryForm() {
     this.categoryForm = this.formBuilder.group({
       name: ['', Validators.required],
-      categoryType: ['',Validators.required],
+      categoryType: ['', Validators.required],
     });
   }
 
@@ -53,7 +53,7 @@ export class CategoryFormComponent implements OnInit {
 
   addCategory(category: Category) {
     this.categoryService.createCategory(category).subscribe((category) => {
-      this._snackBar.open(
+      this.snackBar.open(
         'You added ' + category.name + ' as new Category',
         'OK',
         {
@@ -67,7 +67,7 @@ export class CategoryFormComponent implements OnInit {
 
   updateCategory(category: Category) {
     this.categoryService.updateCategory(category).subscribe((category) => {
-      this._snackBar.open('You updated ' + category.name + ' Category', 'OK', {
+      this.snackBar.open('You updated ' + category.name + ' Category', 'OK', {
         horizontalPosition: 'right',
         verticalPosition: 'top',
         duration: 4000,

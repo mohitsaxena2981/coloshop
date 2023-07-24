@@ -46,33 +46,41 @@ router.post("/register", async (req, res) => {
 
   res.send(user);
 });
-
 router.put("/:id", async (req, res) => {
-  const existingUser = await User.findOne({ email: req.body.email });
-  if(existingUser){
-    return res.status(409).send("User with this email already exists");
-  }
-  let newPassword;
-  const user = await User.findByIdAndUpdate(
-    req.params.id,
-    {
-      name: req.body.name,
-      email: req.body.email,
-      passwordHash: newPassword,
-      address: req.body.address,
-      isAdmin: req.body.isAdmin,
-    },
-    {
-      new: true,
+  try {
+    const currentUser = await User.findById(req.params.id);
+    if (currentUser.email !== req.body.email) {
+      const existingUser = await User.findOne({ email: req.body.email });
+      if (existingUser) {
+        return res.status(409).send("User with this email already exists");
+      }
     }
-  );
+    let newPassword;
+    const updatedUser = await User.findByIdAndUpdate(
+      req.params.id,
+      {
+        name: req.body.name,
+        email: req.body.email,
+        passwordHash: newPassword, 
+        address: req.body.address,
+        isAdmin: req.body.isAdmin,
+      },
+      {
+        new: true,
+      }
+    );
 
-  if (!user) {
-    return res.status(400).send("No user found :/");
+    if (!updatedUser) {
+      return res.status(400).send("No user found :/");
+    }
+
+    res.send(updatedUser);
+  } catch (error) {
+    console.error("Error occurred while updating user:", error);
+    res.status(500).send("An error occurred while updating user.");
   }
-
-  res.send(user);
 });
+
 
 router.post("/login", async (req, res) => {
   const user = await User.findOne({ email: req.body.email });

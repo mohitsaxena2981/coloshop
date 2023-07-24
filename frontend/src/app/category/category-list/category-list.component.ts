@@ -26,7 +26,7 @@ export class CategoryListComponent implements OnInit {
     this.categoryService.getCategories().subscribe((categories) => {
       this.categories = categories;
     });
-    console.log(this.categories);
+    // console.log(this.categories);
   }
 
   onDeleteCategory(category: Category) {

@@ -48,6 +48,7 @@ import { UsersProfileUpdateComponent } from './users/users-profile-update/users-
 import { MatSliderModule } from '@angular/material/slider';
 import { UserProfileComponent } from './users/user-profile/user-profile.component';
 import { UserOrdersComponent } from './cart/user-orders/user-orders.component';
+import { PolicyComponent } from './About/policy/policy.component';
 const material = [
   MatIconModule,
   MatButtonModule,
@@ -159,6 +160,7 @@ const routes: Routes = [
       // About
       { path: 'about', component: AboutComponent },
       { path: 'contact', component: ContactComponent },
+      {path: 'policy', component: PolicyComponent},
     ],
   },
 ];
@@ -192,6 +194,7 @@ const routes: Routes = [
     UsersProfileUpdateComponent,
     UserProfileComponent,
     UserOrdersComponent,
+    PolicyComponent,
   ],
   imports: [
     ...material,

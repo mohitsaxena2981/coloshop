@@ -24,19 +24,31 @@
       tickInterval="auto"
     ></mat-slider>
 
-    <button mat-raised-button color="accent" (click)="applyPriceFilter()">Apply</button>
+    <button mat-raised-button color="accent" (click)="applyPriceFilter()">
+      Apply
+    </button>
     <span><h4>Price Filter</h4></span>
   </form>
 
   <form [formGroup]="searchForm" class="search-input">
     <mat-form-field appearance="fill">
       <mat-label for="searchTerm">Search</mat-label>
-      <input matInput placeholder="Items" formControlName="term" id="searchTerm" />
+      <input
+        matInput
+        placeholder="Items"
+        formControlName="term"
+        id="searchTerm"
+      />
       <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
       <mat-hint>Already know what you're looking for?</mat-hint>
     </mat-form-field>
 
-    <button mat-raised-button color="accent" (click)="onSubmit()" class="search-btn">
+    <button
+      mat-raised-button
+      color="accent"
+      (click)="onSubmit()"
+      class="search-btn"
+    >
       Search
     </button>
   </form>
