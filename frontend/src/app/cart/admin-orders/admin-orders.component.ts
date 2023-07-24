@@ -52,7 +52,6 @@ export class AdminOrdersComponent implements OnInit {
     this.cartService.getCartFromServer().subscribe(
       (previousOrders) => {
         this.previousOrders = previousOrders;
-        console.log(this.previousOrders);
       },
       (error) => {
         console.error(error);
