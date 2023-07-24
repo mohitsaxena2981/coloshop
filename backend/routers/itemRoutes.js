@@ -57,7 +57,7 @@ router.post("/", uploads.single("image"), async (req, res) => {
     price: price,
     image: `${path}${fileName}`,
     category: category,
-    newArrival: newArrival, // Convert string to boolean
+    newArrival: newArrival,
   });
 
   try {
@@ -103,9 +103,9 @@ router.put("/:id", uploads.single("image"), async (req, res) => {
       price: price,
       image: image,
       category: category,
-      newArrival: newArrival, // Convert string to boolean
+      newArrival: newArrival,
     },
-    { new: true } //  ensures that the updated item is returned.
+    { new: true } 
   );
 
   if (!modifiedItem) {

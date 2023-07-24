@@ -22,7 +22,7 @@ export class ItemsListAdminComponent implements OnInit {
   getItems() {
     this.itemService.getAllItems().subscribe((items) => {
       this.items = items;
-      console.log(items);
+      // console.log(items);
     });
   }
 

@@ -19,7 +19,7 @@ export class SignleItemComponent implements OnInit {
     private itemService: ItemsService,
     private router: Router,
     private cartService: CartService,
-    private _snackBar: MatSnackBar
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -52,7 +52,7 @@ export class SignleItemComponent implements OnInit {
 
     this.cartService.setCartItem(cartItem);
 
-    this._snackBar.open(
+    this.snackBar.open(
       'You added ' + cartItem.item.name + ' to the cart',
       'OK',
       {

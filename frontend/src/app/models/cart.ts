@@ -14,9 +14,3 @@ export class CartItem {
     quantity:number;
     user?:string;
 }
-
-export class CartItemDetailed {
-    _id?:string;
-    item:Item;
-    quantity:number;
-}
