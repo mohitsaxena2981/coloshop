@@ -3,7 +3,7 @@
 </button>
 <div class="previous-orders previous-orders-container">
   <div class="order" *ngFor="let order of previousOrders">
-    <p class="order-info">User: {{ order.user.name }}</p>
+    <p class="order-info">User: {{ order.user?.name }}</p>
     <p class="order-info">Order ID: {{ order._id }}</p>
     <p class="order-info">Order Date: {{ order.timestamp | date:'medium' }}</p>
     <div class="order-items">
