@@ -99,6 +99,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.cartService.resetCart();
     this.clearUserData();
     this.router.navigate(['/']);
+    window.scrollTo(0,0);
   }
 
   clearUserData(): void {
@@ -111,6 +112,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
   openUserProfile(): void {
     setTimeout(() => {
       this.router.navigate(['/user/profile']);
+      window.scrollTo(0, 0)
     }, 1000);
+  }
+
+  openCartPage() :void{
+    this.router.navigate(['/cart']);
+    window.scrollTo(0,0);
   }
 }

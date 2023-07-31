@@ -40,7 +40,7 @@ export class ItemFormComponent implements OnInit {
       name: ['', Validators.required],
       description: ['', Validators.required],
       price: ['', Validators.required],
-      image: [''],
+      image: ['',Validators.required],
       category: ['', Validators.required],
       newArrival: [false] 
     });
@@ -55,16 +55,33 @@ export class ItemFormComponent implements OnInit {
   onImageUpload(event: any): void {
     const file = event.target.files[0];
     if (file) {
-      this.itemForm.patchValue({ image: file });
-      this.itemForm.get('image')?.updateValueAndValidity();
-      const fileReader = new FileReader();
-      fileReader.onload = () => {
-        this.imageDisplay = fileReader.result;
-      };
-
-      fileReader.readAsDataURL(file);
+      const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+      const isValidFileType = allowedTypes.includes(file.type);
+      
+      if (isValidFileType) {
+        this.itemForm.patchValue({ image: file });
+        this.itemForm.get('image')?.updateValueAndValidity();
+        const fileReader = new FileReader();
+        fileReader.onload = () => {
+          this.imageDisplay = fileReader.result;
+        };
+        fileReader.readAsDataURL(file);
+      } else {
+        this.snackBar.open('You added an unsupported format image', 'OK', {
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+          duration: 4000
+        });
+        // Reset the selected image and form control
+        event.target.value = ''; 
+        this.itemForm.patchValue({ image: null });
+        this.itemForm.get('image')?.updateValueAndValidity();
+        this.imageDisplay = null;
+      }
     }
   }
+  
+  
   checkEditMode(): void {
     this.route.params.subscribe((params) => {
       if (params['id']) {

@@ -50,6 +50,9 @@
   .footer-links a:hover {
     color: #666;
   }
+  a{
+    cursor: pointer;
+  }
   
   .footer-bottom {
     background-color: #333;

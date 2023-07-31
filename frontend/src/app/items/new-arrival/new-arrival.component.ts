@@ -104,8 +104,10 @@ export class NewArrivalComponent implements OnInit {
   onSubmit() {
     this.filterItems();
   }
+  
   forwardToSingleItem(itemId: string) {
     this.router.navigate(['/items/single-item/' + itemId]);
+    window.scrollTo(0, 0)
   }
 
   onPageChange(event: PageEvent) {

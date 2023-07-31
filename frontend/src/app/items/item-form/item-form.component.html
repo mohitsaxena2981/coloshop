@@ -8,11 +8,10 @@
             <mat-label>Name</mat-label>
             <input type="text" matInput formControlName="name" />
             <mat-error
-              *ngIf="
-                itemForm.get('name').invalid && itemForm.get('name').touched
-              "
-              >*Name is required</mat-error
+              *ngIf="itemForm.get('name').invalid && itemForm.get('name').touched"
             >
+              *Name is required
+            </mat-error>
           </mat-form-field>
         </div>
         <div>
@@ -27,12 +26,10 @@
               formControlName="description"
             ></textarea>
             <mat-error
-              *ngIf="
-                itemForm.get('description').invalid &&
-                itemForm.get('description').touched
-              "
-              >*Description is required</mat-error
+              *ngIf="itemForm.get('description').invalid && itemForm.get('description').touched"
             >
+              *Description is required
+            </mat-error>
           </mat-form-field>
         </div>
         <div>
@@ -45,11 +42,10 @@
               placeholder="₹"
             />
             <mat-error
-              *ngIf="
-                itemForm.get('price').invalid && itemForm.get('price').touched
-              "
-              >*Price is required</mat-error
+              *ngIf="itemForm.get('price').invalid && itemForm.get('price').touched"
             >
+              *Price is required
+            </mat-error>
           </mat-form-field>
         </div>
         <div>
@@ -61,11 +57,10 @@
               (change)="onImageUpload($event)"
             />
             <mat-error
-              *ngIf="
-                itemForm.get('image').invalid && itemForm.get('image').touched
-              "
-              >*Image is required</mat-error
+              *ngIf="itemForm.get('image').invalid && itemForm.get('image').touched"
             >
+              *Image is required and should be a valid image (jpeg, jpg, or png).
+            </mat-error>
           </div>
         </div>
         <div>
@@ -80,12 +75,10 @@
               </mat-option>
             </mat-select>
             <mat-error
-              *ngIf="
-                itemForm.get('category').invalid &&
-                itemForm.get('category').touched
-              "
-              >*Category is required</mat-error
+              *ngIf="itemForm.get('category').invalid && itemForm.get('category').touched"
             >
+              *Category is required
+            </mat-error>
           </mat-form-field>
         </div>
         <div>
@@ -108,3 +101,4 @@
     </div>
   </div>
 </div>
+

@@ -18,7 +18,6 @@ export class UserOrdersComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // this.getItemDetails();
     this.getUserName();
     this.getPreviousOrders();
   }
