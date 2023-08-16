@@ -14,21 +14,17 @@
   margin-top: 75px;
   margin-bottom: 75px;
 }
-
-.order-info {
-  font-weight: bold;
-}
-
 .previous-orders-container h2 {
   text-align: center;
 }
-
-.cart-item {
+.previous-orders-container .order-info {
+  font-weight: bold;
+}
+.previous-orders-container .cart-item {
   font-weight: bolder;
   color: black;
 }
-
-.order {
+.previous-orders-container .order {
   margin-top: 20px;
   width: 100%;
   max-width: 800px;
@@ -37,13 +33,11 @@
   border: 1px solid #ccc;
   margin-bottom: 20px;
 }
-
-.mat-card {
+.previous-orders-container .mat-card {
   margin-bottom: 20px;
 }
-
 @media (max-width: 768px) {
-  .back {
+  .previous-orders-container .back {
     margin-top: 180px;
   }
-}
+}/*# sourceMappingURL=user-orders.component.css.map */

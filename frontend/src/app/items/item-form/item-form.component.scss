@@ -1,0 +1,78 @@
+/* Mixins */
+@mixin container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0px 20px;
+    background-color: #f8f8f8;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Variables */
+  $box-shadow: rgba(0, 0, 0, 0.1);
+  $primary-bg: #fff;
+  $accent-bg: #f8f8f8;
+  
+  /* Global container */
+  .global {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: $primary-bg;
+    margin-top: 60px;
+  
+    @media (max-width: 767px) {
+      margin-top: 100px;
+    }
+  }
+  
+  a {
+    text-decoration: none;
+  }
+  
+  /* Center content */
+  .center {
+    @include container;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px $box-shadow;
+  }
+  
+  /* Form container */
+  .form {
+    flex: 1;
+    margin: 0 40px;
+  }
+  
+  form div {
+    margin-bottom: 10px;
+  }
+  
+  /* Form fields */
+  .example-form-field {
+    width: 100%;
+  }
+  
+  /* Button container */
+  .btn {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  /* Links container */
+  .links {
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  /* Media query for small screens */
+  @media (max-width: 767px) {
+    .center {
+      flex-direction: column;
+    }
+  }
+  

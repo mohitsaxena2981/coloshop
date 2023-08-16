@@ -7,9 +7,9 @@
 }
 
 .back {
-  background: linear-gradient(45deg, #007bff, #00c6ff);
   margin-top: 100px;
   margin-left: 10px;
+  background: linear-gradient(45deg, #007bff, #00c6ff);
 }
 
 .global {
@@ -40,41 +40,43 @@
   max-width: 600px;
   padding: 20px;
 }
-.global .column .product-info {
+.global .product-info {
   border-bottom: 1px solid #ccc;
   padding-bottom: 20px;
   margin-bottom: 20px;
 }
-.global .column .product-info h2 {
+.global .product-info h2 {
   margin-bottom: 10px;
 }
-.global .column .description-container {
+.global .description-container {
   margin-bottom: 10px;
 }
-.global .column .description-container .description {
+.global .description-container .description {
   line-height: 1.5;
   overflow: hidden;
   max-height: 3em;
   text-overflow: ellipsis;
 }
-.global .column .description-container .description.expand {
+.global .description-container .expand {
   max-height: none;
 }
-.global .column .read-more-btn {
+.global .description-container .read-more-btn {
   display: block;
   margin-top: 10px;
   padding: 5px;
   border: 2px solid green;
 }
-.global .column .read-more-btn:hover {
-  background-color: green;
+.global .description-container .read-more-btn:hover {
+  cursor: pointer;
   transition: 0.5s;
-  background: transparent;
+  background-color: green;
 }
-.global .column .price, .global .column .category, .global .column .category-type {
+.global .price,
+.global .category,
+.global .category-type {
   margin-bottom: 5px;
 }
-.global .column .button-container {
+.global .button-container {
   margin-top: 20px;
 }
 
@@ -82,7 +84,7 @@
   .global {
     width: 90%;
   }
-  .back {
+  .global .back {
     margin-top: 180px;
   }
-}/*# sourceMappingURL=signle-item.component.css.map */
+}/*# sourceMappingURL=single-item.component.css.map */

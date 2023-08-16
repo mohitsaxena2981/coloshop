@@ -1,7 +1,14 @@
+$primary-color: #007bff;
+$secondary-color: #00c6ff;
+
+@mixin gradient-background($color1, $color2) {
+  background: linear-gradient(45deg, $color1, $color2);
+}
+
 .back {
   margin-top: 100px;
   margin-left: 10px;
-  background: linear-gradient(45deg, #007bff, #00c6ff);
+  @include gradient-background($primary-color, $secondary-color);
 }
 
 .content {
@@ -15,33 +22,38 @@
   padding: 0px 20px;
   background-color: #f8f8f8;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-.container .title {
-  text-align: center;
-  font-size: 24px;
-  margin-bottom: 20px;
-}
-.container .paragraph {
-  margin-bottom: 20px;
+
+  .title {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  .paragraph {
+    margin-bottom: 20px;
+  }
 }
 
 /* Media queries for responsive layout */
 @media (max-width: 767px) {
   .container {
     padding: 10px;
-  }
-  .container .back {
-    margin-top: 180px;
+
+    .back {
+      margin-top: 180px;
+    }
   }
 }
+
 @media (min-width: 768px) and (max-width: 991px) {
   .container {
     padding: 20px;
   }
 }
+
 @media (min-width: 992px) {
   .container {
     padding: 30px;
     margin-bottom: 20px;
   }
-}/*# sourceMappingURL=policy.component.css.map */
+}

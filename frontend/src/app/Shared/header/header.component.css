@@ -48,6 +48,10 @@
   margin-right: 30px;
 }
 
+.navbar-cart a{
+  cursor: pointer;
+}
+
 .cart-badge {
   position: absolute;
   top: -5px;

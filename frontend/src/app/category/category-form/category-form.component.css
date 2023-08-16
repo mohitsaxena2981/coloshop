@@ -6,9 +6,10 @@
   height: 100vh;
   background-color: #fff;
 }
-a {
+.global a {
   text-decoration: none;
 }
+
 /* Center content */
 .center {
   display: flex;
@@ -28,11 +29,9 @@ a {
   flex: 1;
   margin: 0 40px;
 }
-
-form div{
+.form div {
   margin-bottom: 10px;
 }
-
 
 /* Form fields */
 .example-form-field {
@@ -56,4 +55,4 @@ form div{
   .center {
     flex-direction: column;
   }
-}
+}/*# sourceMappingURL=category-form.component.css.map */

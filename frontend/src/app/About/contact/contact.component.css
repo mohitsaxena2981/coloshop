@@ -1,56 +1,48 @@
+.back {
+  margin-top: 100px;
+  margin-left: 10px;
+  background: linear-gradient(45deg, #007bff, #00c6ff);
+}
+
 .contact-container {
-    padding: 20px;
-    margin-top: 40px;
-    margin-bottom: 40px;
-    padding-top:80px;
-    padding-bottom: 80px;
+  padding: 20px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+.contact-container .contact-row {
+  display: flex;
+  flex-wrap: wrap;
+}
+.contact-container .contact-row .contact-col {
+  flex: 1;
+  margin-bottom: 20px;
+}
+.contact-container .contact-row .contact-col .contact-title {
+  font-size: 24px;
+  text-align: center;
+  margin-top: 0;
+}
+.contact-container .contact-row .contact-col .contact-info {
+  text-align: justify;
+}
+.contact-container .contact-row .contact-col .contact-info .contact-details {
+  margin-top: 20px;
+}
+.contact-container .contact-row .contact-col .contact-info .contact-details .contact-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.contact-container .contact-row .contact-col .contact-info .contact-details .contact-item .contact-icon {
+  margin-right: 10px;
+}
+@media (max-width: 768px) {
+  .contact-container .contact-col {
+    flex-basis: 100%;
   }
-  
-  .back{
-    margin-top: 100px;
-    margin-left: 10px;
-    background: linear-gradient(45deg, #007bff, #00c6ff);
+  .contact-container .back {
+    margin-top: 180px;
   }
-  .contact-row {
-    display: flex;
-    flex-wrap: wrap;
-  }
-  
-  .contact-col {
-    flex: 1;
-    margin-bottom: 20px;
-  }
-  
-  .contact-title {
-    font-size: 24px;
-    text-align: center;
-    margin-top: 0;
-  }
-  
-  .contact-info {
-    text-align: justify;
-  }
-  
-  .contact-details {
-    margin-top: 20px;
-  }
-  
-  .contact-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-  }
-  
-  .contact-icon {
-    margin-right: 10px;
-  }
-  
-  @media (max-width: 768px) {
-    .contact-col {
-      flex-basis: 100%;
-    }
-    .back{
-      margin-top: 180px;
-    }
-  }
-  
+}/*# sourceMappingURL=contact.component.css.map */

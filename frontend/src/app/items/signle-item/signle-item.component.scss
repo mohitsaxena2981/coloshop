@@ -1,0 +1,123 @@
+// Variables
+$primary-color: #007bff;
+$secondary-color: #00c6ff;
+$background-color: #f5f5f5;
+$green-color: green;
+$border-color: #ccc;
+
+// Mixins
+@mixin container-styles {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: $background-color;
+}
+
+@mixin gradient-button($color1, $color2) {
+  background: linear-gradient(45deg, $color1, $color2);
+}
+
+@mixin hover-gradient-button($color1, $color2) {
+  &:hover {
+    background-color: $color1;
+    transition: 0.5s;
+    background: $color2;
+  }
+}
+
+@mixin media-query-small {
+  @media (max-width: 767px) {
+    .global {
+      width: 90%;
+    }
+    .back {
+      margin-top: 180px;
+    }
+  }
+}
+
+// Nesting and Mixins
+.container {
+  @include container-styles;
+}
+
+.back {
+  @include gradient-button($primary-color, $secondary-color);
+  margin-top: 100px;
+  margin-left: 10px;
+}
+
+.global {
+  width: 80%;
+  max-width: 1000px;
+  border: 1px solid $border-color;
+  margin: 0 auto;
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  background-color: $background-color;
+  margin-bottom: 40px;
+
+  .image-container {
+    width: 50%;
+    max-width: 400px;
+    height: auto;
+    border-right: 1px solid $border-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .column {
+    width: 50%;
+    max-width: 600px;
+    padding: 20px;
+
+    .product-info {
+      border-bottom: 1px solid $border-color;
+      padding-bottom: 20px;
+      margin-bottom: 20px;
+
+      h2 {
+        margin-bottom: 10px;
+      }
+    }
+
+    .description-container {
+      margin-bottom: 10px;
+
+      .description {
+        line-height: 1.5;
+        overflow: hidden;
+        max-height: 3em;
+        text-overflow: ellipsis;
+
+        &.expand {
+          max-height: none;
+        }
+      }
+    }
+
+    .read-more-btn {
+      display: block;
+      margin-top: 10px;
+      padding: 5px;
+      border: 2px solid $green-color;
+      @include hover-gradient-button($green-color, transparent); // Use transparent background
+    }
+
+    .price, .category, .category-type {
+      margin-bottom: 5px;
+    }
+
+    .button-container {
+      margin-top: 20px;
+    }
+  }
+}
+
+@include media-query-small;

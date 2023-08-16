@@ -1,0 +1,148 @@
+/* Mixins */
+@mixin media-max-width($size) {
+    @media (max-width: #{$size}px) {
+      @content;
+    }
+  }
+  
+  @mixin media-min-width($size) {
+    @media (min-width: #{$size}px) {
+      @content;
+    }
+  }
+  
+  /* Variables */
+  $primary-bg: #f5f5f5;
+  $accent-bg: #007bff;
+  
+  /* Table styles */
+  table {
+    width: 75%;
+  
+    @include media-max-width(767) {
+      width: 100%;
+    }
+  }
+  
+  /* Image styles */
+  img {
+    height: 150px;
+    width: 150px;
+    object-fit: cover;
+  
+    @include media-max-width(767) {
+      height: 100px;
+      width: 100px;
+    }
+  
+    @include media-max-width(500) {
+      height: 60px;
+      width: 60px;
+    }
+  
+    @include media-max-width(330) {
+      height: 40px;
+      width: 40px;
+    }
+  }
+  
+  /* Center content */
+  #center {
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+  }
+  
+  /* Button styles */
+  .btn {
+    text-align: center;
+    margin: 15px;
+    margin-top: 100px;
+  
+    @include media-max-width(767) {
+      margin-top: 180px;
+    }
+  }
+  
+  button {
+    background: linear-gradient(45deg, $accent-bg, #00c6ff);
+    background: $primary-bg;
+  
+    &.btn-new {
+      background: linear-gradient(45deg, $accent-bg, #00c6ff);
+    }
+  }
+  
+  /* Table container */
+  .mat-table-container {
+    max-width: 100%;
+    overflow-x: auto;
+    max-height: 400px;
+    overflow-y: auto;
+    margin-bottom: 40px;
+  
+    @include media-min-width(1200) {
+      max-height: 600px;
+    }
+  
+    @include media-min-width(1500) {
+      max-height: 1000px;
+    }
+  
+    @include media-min-width(2000) {
+      max-height: 1400px;
+    }
+  
+    @include media-min-width(3000) {
+      max-height: 2000px;
+    }
+  }
+  
+  /* Column styles */
+  .name-column {
+    width: 200px;
+  
+    @include media-max-width(767) {
+      width: 60px;
+    }
+  }
+  
+  .category-column {
+    word-break: break-word;
+    width: 120px;
+  
+    @include media-max-width(767) {
+      width: auto;
+    }
+  }
+  
+  /* Cell styles */
+  td.mat-cell {
+    height: 60px;
+  
+    @include media-min-width(1024) {
+      width: 25%;
+    }
+  
+    @include media-min-width(1500) {
+      width: 20%;
+    }
+  
+    @include media-min-width(2000) {
+      width: 16.666%;
+    }
+  
+    @include media-max-width(767) {
+      height: 20px;
+      font-size: 10px;
+  
+      @include media-max-width(500) {
+        width: 50%;
+      }
+  
+      @include media-max-width(330) {
+        width: 100%;
+      }
+    }
+  }
+  

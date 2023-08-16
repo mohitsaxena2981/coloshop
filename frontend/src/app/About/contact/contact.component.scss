@@ -1,0 +1,65 @@
+$primary-color: #007bff;
+$secondary-color: #00c6ff;
+
+@mixin gradient-background($color1, $color2) {
+  background: linear-gradient(45deg, $color1, $color2);
+}
+
+.back {
+    margin-top: 100px;
+    margin-left: 10px;
+    @include gradient-background($primary-color, $secondary-color);
+  }
+
+.contact-container {
+  padding: 20px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  padding-top: 80px;
+  padding-bottom: 80px;
+
+
+  .contact-row {
+    display: flex;
+    flex-wrap: wrap;
+
+    .contact-col {
+      flex: 1;
+      margin-bottom: 20px;
+
+      .contact-title {
+        font-size: 24px;
+        text-align: center;
+        margin-top: 0;
+      }
+
+      .contact-info {
+        text-align: justify;
+
+        .contact-details {
+          margin-top: 20px;
+
+          .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+
+            .contact-icon {
+              margin-right: 10px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .contact-col {
+      flex-basis: 100%;
+    }
+
+    .back {
+      margin-top: 180px;
+    }
+  }
+}

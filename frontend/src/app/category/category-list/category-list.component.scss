@@ -1,3 +1,8 @@
+$primary-color: #007bff;
+$secondary-color: #00c6ff;
+$light-gray: #f5f5f5;
+
+
 table {
   width: 75%;
   margin: 15px;
@@ -17,26 +22,22 @@ table {
 }
 
 .btn-new {
-  background: linear-gradient(45deg, #007bff, #00c6ff);
+  background: linear-gradient(45deg, $primary-color, $secondary-color);
 }
 
 button {
-  background: #f5f5f5;
+  background: $light-gray;
 }
 
 th.mat-header-cell,
 td.mat-cell {
   height: 60px;
-}
-@media (min-width: 1200px) {
-  th.mat-header-cell,
-  td.mat-cell {
+
+  @media (min-width: 1200px) {
     height: 120px;
   }
-}
-@media (max-width: 767px) {
-  th.mat-header-cell,
-  td.mat-cell {
+
+  @media (max-width: 767px) {
     height: 20px;
     font-size: 10px;
   }
@@ -46,4 +47,4 @@ td.mat-cell {
   .btn {
     margin-top: 180px;
   }
-}/*# sourceMappingURL=category-list.component.css.map */
+}

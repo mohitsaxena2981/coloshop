@@ -1,48 +1,40 @@
-/* Mixins */
-/* Variables */
+$primary-bg-color: #fff;
+$accent-bg-color: #f8f8f8;
+$box-shadow-color: rgba(0, 0, 0, 0.1);
+
 /* Global container */
 .global {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #fff;
-  margin-top: 60px;
-}
-@media (max-width: 767px) {
-  .global {
-    margin-top: 100px;
+  background-color: $primary-bg-color;
+  a {
+    text-decoration: none;
   }
-}
-
-a {
-  text-decoration: none;
 }
 
 /* Center content */
 .center {
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 0px 20px;
-  background-color: #f8f8f8;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: $accent-bg-color;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 10px $box-shadow-color;
 }
 
 /* Form container */
 .form {
   flex: 1;
   margin: 0 40px;
-}
-
-form div {
-  margin-bottom: 10px;
+  div {
+    margin-bottom: 10px;
+  }
 }
 
 /* Form fields */
@@ -67,4 +59,4 @@ form div {
   .center {
     flex-direction: column;
   }
-}/*# sourceMappingURL=item-form.component.css.map */
+}
